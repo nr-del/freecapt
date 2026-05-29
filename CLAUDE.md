@@ -221,6 +221,8 @@ If something in this `CLAUDE.md` becomes stale because a decision changed, **upd
 **Migration workflow:** `pnpm db:generate` produces SQL offline; apply via the Supabase MCP `apply_migration` (no local DB password). `db:migrate` is bypassed for now. `citext` extension created in migration 0000; RLS enabled via a separate MCP migration (tracked in Supabase history, not the drizzle journal).
 **Stack notes:** Next 15→16 (current stable; uses `proxy.ts` not `middleware.ts`). Tailwind pinned to v3. UUIDv7 PKs app-side (`uuidv7` pkg); `citext` + `bytea` via Drizzle customType.
 **Last spec update:** v1.1 (2026-05-27) — added Data room (§5.26).
-**Next action:** Magic-link sign-in verified end-to-end (token_hash/verifyOtp flow, accounts row upserted). Service-role key rotated; email templates fixed. Remaining Week-1 milestone: **deploy to Vercel** (import repo, set 4 env vars incl. new secret key, set Supabase Site URL to the Vercel domain), then Prompt 5.
+**Deployed:** live at **https://freecapt.vercel.app** (Vercel project on a personal account scope, not the MCP-connected team — harmless). Verified in prod: landing 200, `/sign-in` 200, `/cap-table` 307→sign-in when unauth, and a real `verifyOtp` sign-in renders the seeded Acme cap table (DATABASE_URL session pooler reachable from Vercel, secret key authenticates). 4 env vars set in Vercel. Note: a stray `nr-del/freecapt-vercel` GitHub repo was created during a template-import misstep — safe to delete; the real repo is `nr-del/freecapt`.
+
+**Next action:** Set Supabase **Authentication → URL Configuration → Site URL** (+ Redirect URLs) to `https://freecapt.vercel.app` so real emailed magic links resolve in prod (currently localhost). Then Week-1 milestone is fully complete → start Prompt 5.
 
 When you complete a phase, update this status. When you ship to beta, this section becomes a release log.
