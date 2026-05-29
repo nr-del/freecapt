@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────
+   FreeCapT design tokens — docs/12_design_system.md §2
+   ────────────────────────────────────────────────────────────── */
+:root {
+  /* Neutrals — slate scale */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Brand — emerald scale */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669; /* PRIMARY ACTION */
+  --color-brand-700: #047857; /* HOVER */
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+
+  /* Warning / pending — amber */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+
+  /* Danger — red, used sparingly */
+  --color-red-50: #fef2f2;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+
+  /* Semantic surfaces */
+  --bg-app: var(--color-slate-50);
+  --bg-surface: #ffffff;
+  --bg-surface-2: var(--color-slate-50);
+  --bg-surface-dark: var(--color-slate-900);
+  --bg-input: #ffffff;
+  --bg-input-focus: #ffffff;
+  --bg-row-hover: var(--color-slate-50);
+  --bg-row-selected: var(--color-brand-50);
+
+  /* Semantic text */
+  --text-primary: var(--color-slate-900);
+  --text-secondary: var(--color-slate-600);
+  --text-tertiary: var(--color-slate-500);
+  --text-muted: var(--color-slate-400);
+  --text-inverse: #ffffff;
+  --text-brand: var(--color-brand-700);
+  --text-warning: var(--color-amber-700);
+  --text-danger: var(--color-red-700);
+
+  /* Semantic borders */
+  --border-subtle: var(--color-slate-200);
+  --border-default: var(--color-slate-300);
+  --border-strong: var(--color-slate-400);
+  --border-focus: var(--color-brand-500);
+  --border-danger: var(--color-red-500);
+
+  /* Chart colors — cap table donut, vest projections */
+  --chart-1: #047857; /* Founders (deepest emerald) */
+  --chart-2: #10b981;
+  --chart-3: #34d399;
+  --chart-4: #6ee7b7;
+  --chart-5: #f59e0b; /* Investors / SAFEs (amber pivot) */
+  --chart-6: #fbbf24;
+  --chart-7: #94a3b8; /* Pool / unissued (neutral) */
+  --chart-8: #cbd5e1;
+
+  /* Type scale (docs §2.2) */
+  --text-2xs: 10px;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
+  --text-4xl: 30px;
+  --text-5xl: 36px;
+  --text-6xl: 48px;
+  --text-7xl: 64px;
+
+  /* Border radius (docs §2.4) */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows (docs §2.5) */
+  --shadow-focus: 0 0 0 3px rgba(16, 185, 129, 0.35);
+
+  /* Motion (docs §2.6) */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 450ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ────────────────────────────────────────────────────────────
+     shadcn/ui semantic variables — mapped to FreeCapT palette.
+     Light theme only (dark mode is v2 per docs §12).
+     ──────────────────────────────────────────────────────────── */
+  --background: var(--bg-surface);
+  --foreground: var(--color-slate-900);
+  --card: var(--bg-surface);
+  --card-foreground: var(--color-slate-900);
+  --popover: var(--bg-surface);
+  --popover-foreground: var(--color-slate-900);
+  --primary: var(--color-brand-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-slate-100);
+  --secondary-foreground: var(--color-slate-900);
+  --muted: var(--color-slate-100);
+  --muted-foreground: var(--color-slate-500);
+  --accent: var(--color-slate-100);
+  --accent-foreground: var(--color-slate-900);
+  --destructive: var(--color-red-600);
+  --destructive-foreground: #ffffff;
+  --border: var(--color-slate-200);
+  --input: var(--color-slate-300);
+  --ring: var(--color-brand-500);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    /* Body default: 14px / 1.5 / weight 400, slate-700 on app bg (docs §2.2) */
+    min-height: 100%;
+    background-color: var(--bg-app);
+    color: var(--text-secondary);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

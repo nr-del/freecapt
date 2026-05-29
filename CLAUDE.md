@@ -88,7 +88,7 @@ These exist because we've made the decision once already. Don't re-litigate with
 |---|---|---|
 | Language | TypeScript (strict) | tsconfig: `strict: true`, `noUncheckedIndexedAccess: true` |
 | Runtime | Node.js 22 LTS | |
-| Framework | Next.js 15 (App Router) | One codebase for marketing + product + `/admin` |
+| Framework | **Next.js 16 (App Router)** | One codebase for marketing + product + `/admin`. Spec said 15; scaffolded on current stable 16 (create-next-app default). |
 | Database | **Supabase** (Postgres 16+, EU region) | Was Neon in original spec; pivoted to Supabase |
 | ORM | **Drizzle** | Use with Supabase Postgres connection string. Don't use the Supabase client for ORM-shaped queries. |
 | Auth | **Supabase Auth** (magic-link only) | Was Lucia in original spec; pivoted to Supabase. Disable password sign-up in dashboard. |
@@ -215,8 +215,10 @@ If something in this `CLAUDE.md` becomes stale because a decision changed, **upd
 
 ## Current build status
 
-**Phase:** Pre-build (waiting on Phase 0 setup per `11_kickoff.md`).
+**Phase:** Week 1 in progress — project scaffold complete (Prompt 1 of `docs/13_starter_prompts.md`).
+**Done:** Next.js 16 (App Router, TS strict + `noUncheckedIndexedAccess`), Tailwind v3 with design tokens (`docs/12_design_system.md` §2–3), Inter + JetBrains Mono via next/font, shadcn/ui (New York / slate) with FreeCapT button/input/badge overrides (§5), repo dir structure, coming-soon marketing page. `pnpm build` green.
+**Stack notes:** Next 15→16 (current stable). Tailwind pinned to v3 to match the v3-shaped design system config.
 **Last spec update:** v1.1 (2026-05-27) — added Data room (§5.26).
-**Next action:** Scaffold Next.js 15 + Supabase + Tailwind + shadcn/ui per `docs/11_kickoff.md` Week 1.
+**Next action:** Prompt 2 — connect Supabase + Drizzle, first four tables (accounts, companies, memberships, stakeholders) per `docs/05_data_model.md`.
 
 When you complete a phase, update this status. When you ship to beta, this section becomes a release log.
