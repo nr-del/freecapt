@@ -215,10 +215,12 @@ If something in this `CLAUDE.md` becomes stale because a decision changed, **upd
 
 ## Current build status
 
-**Phase:** Week 1 in progress — project scaffold complete (Prompt 1 of `docs/13_starter_prompts.md`).
-**Done:** Next.js 16 (App Router, TS strict + `noUncheckedIndexedAccess`), Tailwind v3 with design tokens (`docs/12_design_system.md` §2–3), Inter + JetBrains Mono via next/font, shadcn/ui (New York / slate) with FreeCapT button/input/badge overrides (§5), repo dir structure, coming-soon marketing page. `pnpm build` green.
-**Stack notes:** Next 15→16 (current stable). Tailwind pinned to v3 to match the v3-shaped design system config.
+**Phase:** Week 1 in progress — scaffold (Prompt 1) + initial schema (Prompt 2) complete.
+**Done:** Next.js 16 (App Router, TS strict + `noUncheckedIndexedAccess`), Tailwind v3 with design tokens (`docs/12_design_system.md` §2–3), Inter + JetBrains Mono via next/font, shadcn/ui (New York / slate) with FreeCapT button/input/badge overrides (§5), repo dir structure, coming-soon marketing page. Drizzle ORM wired to Supabase (`lib/db/index.ts`, `schema.ts`); first four tables (`accounts`, `companies`, `memberships`, `stakeholders`) live in the EU project per `docs/05_data_model.md` §2.1–2.4. `pnpm build` green.
+**Supabase:** project `freecapt` (ref `ucvjnhpytdwbbfoaxgzm`), region `eu-central-1`. URL + anon key in `.env.local`; DATABASE_URL + service-role key still need filling from the dashboard. **RLS is currently DISABLED on all four tables** — must be enabled with policies (§3) during Prompt 3 (auth) before any client uses the anon key.
+**Migration workflow:** `pnpm db:generate` produces SQL offline; apply via the Supabase MCP `apply_migration` (no local DB password). `db:migrate` is bypassed for now. `citext` extension is created in migration 0000.
+**Stack notes:** Next 15→16 (current stable). Tailwind pinned to v3 to match the v3-shaped design system config. UUIDv7 PKs generated app-side (`uuidv7` pkg); `citext` + `bytea` via Drizzle customType.
 **Last spec update:** v1.1 (2026-05-27) — added Data room (§5.26).
-**Next action:** Prompt 2 — connect Supabase + Drizzle, first four tables (accounts, companies, memberships, stakeholders) per `docs/05_data_model.md`.
+**Next action:** Prompt 3 — Supabase magic-link auth (`@supabase/ssr`), auth wall, `/cap-table` placeholder; enable RLS + policies (§3) as part of this.
 
 When you complete a phase, update this status. When you ship to beta, this section becomes a release log.
