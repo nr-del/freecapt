@@ -1,13 +1,17 @@
-// FreeCapT data model — first four core tables.
-// Source of truth: docs/05_data_model.md §1 (conventions) + §2.1–§2.4.
-// Securities, transactions, documents, audit_events and the rest land later.
+// FreeCapT data model.
+// Source of truth: docs/05_data_model.md §1 (conventions) + §2.1–§2.10.
 import { sql, type SQL } from "drizzle-orm";
 import {
+  bigint,
+  bigserial,
   boolean,
   char,
+  check,
   customType,
   date,
   index,
+  integer,
+  jsonb,
   numeric,
   pgEnum,
   pgTable,
@@ -31,6 +35,13 @@ const citext = customType<{ data: string }>({
 const bytea = customType<{ data: Buffer }>({
   dataType() {
     return "bytea";
+  },
+});
+
+// inet: IP address (audit log actor IP).
+const inet = customType<{ data: string }>({
+  dataType() {
+    return "inet";
   },
 });
 
@@ -62,6 +73,26 @@ export const stakeholderType = pgEnum("stakeholder_type", [
   "entity",
   "other",
 ]);
+export const securityCategory = pgEnum("security_category", [
+  "equity_unit",
+  "option_like",
+  "convertible",
+]);
+export const transactionType = pgEnum("transaction_type", [
+  "incorporation",
+  "share_issuance",
+  "option_grant",
+  "safe_issuance",
+  "convertible_issuance",
+  "exercise",
+  "cancellation",
+  "transfer",
+  "conversion",
+  "pool_reservation",
+  "pool_topup",
+  "authorized_capital_change",
+]);
+export const billingPlan = pgEnum("billing_plan", ["free", "pro", "growth"]);
 
 // --- §2.1 accounts — authenticated humans (or service accounts) ---
 export const accounts = pgTable(
@@ -198,3 +229,224 @@ export const stakeholders = pgTable(
       .where(sql`${t.email} IS NOT NULL AND ${t.deletedAt} IS NULL`),
   ],
 );
+
+// --- §2.5 securities — issued instruments ---
+export const securities = pgTable(
+  "securities",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .references(() => companies.id),
+    stakeholderId: uuid()
+      .notNull()
+      .references(() => stakeholders.id),
+    category: securityCategory().notNull(),
+    subtype: text().notNull(),
+    packVersion: text().notNull(),
+    quantity: numeric({ precision: 20, scale: 0 }),
+    monetaryAmount: numeric({ precision: 20, scale: 4 }),
+    monetaryCurrency: char({ length: 3 }),
+    strikePrice: numeric({ precision: 20, scale: 6 }),
+    strikeCurrency: char({ length: 3 }),
+    capAmount: numeric({ precision: 20, scale: 4 }),
+    capCurrency: char({ length: 3 }),
+    discountPercent: numeric({ precision: 5, scale: 2 }),
+    shareClass: text(),
+
+    vestingStartDate: date(),
+    vestingTotalMonths: integer(),
+    vestingCliffMonths: integer(),
+    vestingFrequency: text(),
+
+    taxScheme: text(),
+    taxSchemeMetadata: jsonb().default({}),
+
+    status: text().notNull().default("active"),
+    statusChangedAt: timestamp({ withTimezone: true }),
+    statusReason: text(),
+
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdByAccountId: uuid().references(() => accounts.id),
+    updatedByAccountId: uuid().references(() => accounts.id),
+    deletedAt: timestamp({ withTimezone: true }),
+  },
+  (t) => [
+    check("ck_securities_quantity", sql`(${t.category} = 'convertible') OR (${t.quantity} IS NOT NULL)`),
+    check(
+      "ck_securities_monetary",
+      sql`(${t.category} != 'convertible') OR (${t.monetaryAmount} IS NOT NULL)`,
+    ),
+    index("idx_securities_company")
+      .on(t.companyId)
+      .where(sql`${t.deletedAt} IS NULL`),
+    index("idx_securities_stakeholder")
+      .on(t.stakeholderId)
+      .where(sql`${t.deletedAt} IS NULL`),
+    index("idx_securities_company_status")
+      .on(t.companyId, t.status)
+      .where(sql`${t.deletedAt} IS NULL`),
+  ],
+);
+
+// --- §2.6 transactions — events on the ledger ---
+export const transactions = pgTable(
+  "transactions",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .references(() => companies.id),
+    type: transactionType().notNull(),
+    packVersion: text().notNull(),
+    effectiveDate: date().notNull(),
+    recordedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+
+    securityId: uuid().references(() => securities.id),
+    sourceSecurityId: uuid().references((): AnyPgColumn => securities.id),
+    stakeholderId: uuid().references(() => stakeholders.id),
+
+    quantity: numeric({ precision: 20, scale: 0 }),
+    monetaryAmount: numeric({ precision: 20, scale: 4 }),
+    monetaryCurrency: char({ length: 3 }),
+
+    note: text(),
+    founderPersonalNote: text(),
+    metadata: jsonb().default({}),
+
+    approvalStatus: text().notNull().default("recorded"),
+    approvedByAccountId: uuid().references(() => accounts.id),
+    approvedAt: timestamp({ withTimezone: true }),
+
+    fxRateToCompanyPrimary: numeric({ precision: 20, scale: 8 }),
+    fxRateDate: date(),
+
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdByAccountId: uuid().references(() => accounts.id),
+    updatedByAccountId: uuid().references(() => accounts.id),
+    deletedAt: timestamp({ withTimezone: true }),
+  },
+  (t) => [
+    index("idx_transactions_company_date")
+      .on(t.companyId, t.effectiveDate.desc())
+      .where(sql`${t.deletedAt} IS NULL`),
+    index("idx_transactions_security")
+      .on(t.securityId)
+      .where(sql`${t.securityId} IS NOT NULL`),
+    index("idx_transactions_stakeholder")
+      .on(t.stakeholderId)
+      .where(sql`${t.stakeholderId} IS NOT NULL`),
+    index("idx_transactions_type").on(t.companyId, t.type),
+  ],
+);
+
+// --- §2.7 documents ---
+export const documents = pgTable(
+  "documents",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .references(() => companies.id),
+    filename: text().notNull(),
+    storageKey: text().notNull(),
+    storageRegion: dataRegion().notNull(),
+    contentType: text().notNull(),
+    byteSize: bigint({ mode: "number" }).notNull(),
+    sha256Hash: bytea().notNull(),
+    templateUsed: text(),
+
+    signed: boolean().notNull().default(false),
+    signedAt: timestamp({ withTimezone: true }),
+    signedBy: text(),
+
+    transactionId: uuid().references(() => transactions.id),
+    stakeholderId: uuid().references(() => stakeholders.id),
+
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdByAccountId: uuid().references(() => accounts.id),
+    updatedByAccountId: uuid().references(() => accounts.id),
+    deletedAt: timestamp({ withTimezone: true }),
+  },
+  (t) => [
+    index("idx_documents_company")
+      .on(t.companyId)
+      .where(sql`${t.deletedAt} IS NULL`),
+    index("idx_documents_transaction")
+      .on(t.transactionId)
+      .where(sql`${t.transactionId} IS NOT NULL`),
+    index("idx_documents_template")
+      .on(t.templateUsed)
+      .where(sql`${t.templateUsed} IS NOT NULL`),
+  ],
+);
+
+// --- §2.8 audit_events — tamper-evident log (append-only) ---
+export const auditEvents = pgTable(
+  "audit_events",
+  {
+    id: bigserial({ mode: "number" }).primaryKey(),
+    companyId: uuid().references(() => companies.id),
+    accountId: uuid().references(() => accounts.id),
+    occurredAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    action: text().notNull(),
+    entityType: text(),
+    entityId: uuid(),
+    beforeData: jsonb(),
+    afterData: jsonb(),
+    ipAddress: inet(),
+    userAgent: text(),
+    sessionId: uuid(),
+
+    isStaffAction: boolean().notNull().default(false),
+    staffReason: text(),
+    impersonatingAccountId: uuid().references(() => accounts.id),
+  },
+  (t) => [
+    index("idx_audit_company_time")
+      .on(t.companyId, t.occurredAt.desc())
+      .where(sql`${t.companyId} IS NOT NULL`),
+    index("idx_audit_account_time").on(t.accountId, t.occurredAt.desc()),
+    index("idx_audit_action_time").on(t.action, t.occurredAt.desc()),
+    index("idx_audit_staff")
+      .on(t.occurredAt.desc())
+      .where(sql`${t.isStaffAction}`),
+  ],
+);
+
+// --- §2.9 subscriptions — billing state ---
+export const subscriptions = pgTable(
+  "subscriptions",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .unique()
+      .references(() => companies.id),
+    plan: billingPlan().notNull().default("free"),
+    stakeholderLimit: integer().notNull().default(10),
+    bonusSlots: integer().notNull().default(0),
+    stripeSubscriptionId: text(),
+    stripeCustomerId: text(),
+    currentPeriodStart: timestamp({ withTimezone: true }),
+    currentPeriodEnd: timestamp({ withTimezone: true }),
+    cancelAtPeriodEnd: boolean().notNull().default(false),
+
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("idx_subscriptions_stripe_sub").on(t.stripeSubscriptionId)],
+);
+
+// --- §2.10 vesting_schedules — custom (non-standard) vesting only ---
+export const vestingSchedules = pgTable("vesting_schedules", {
+  id: primaryId(),
+  securityId: uuid()
+    .notNull()
+    .references(() => securities.id),
+  events: jsonb().notNull(),
+  createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+});
