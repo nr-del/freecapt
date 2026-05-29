@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FreeCapT — v1.1 Wireframes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#ECFDF5', 100: '#D1FAE5', 200: '#A7F3D0',
+            500: '#10B981', 600: '#059669', 700: '#047857', 900: '#064E3B',
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif; }
+  .wf-donut {
+    width: 220px; height: 220px; border-radius: 50%;
+    background: conic-gradient(
+      #047857 0% 30.7%, #10b981 30.7% 61.4%, #34d399 61.4% 79.8%,
+      #f59e0b 79.8% 82.3%, #fbbf24 82.3% 83.2%,
+      #94a3b8 83.2% 95.2%, #e2e8f0 95.2% 100%
+    );
+    position: relative;
+  }
+  .wf-donut::after { content: ""; position: absolute; inset: 22%; background: white; border-radius: 50%; }
+  .wf-vest-bar { background: linear-gradient(to right, #059669 var(--p, 30%), #e2e8f0 var(--p, 30%)); height: 8px; border-radius: 4px; }
+  .wf-tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  .wf-screen { display: none; }
+  .wf-screen.active { display: block; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; cursor: pointer; color: #475569; font-weight: 500; font-size: 14px; }
+  .nav-item:hover { background: #f1f5f9; }
+  .nav-item.active { background: #ecfdf5; color: #047857; }
+  .nav-item .paid-badge { margin-left: auto; font-size: 9px; background: #064e3b; color: white; padding: 1px 5px; border-radius: 3px; font-weight: 600; letter-spacing: 0.05em; }
+  .modal-backdrop { background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(2px); }
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .bulk-grid input { padding: 6px 8px; font-size: 13px; border: 1px solid transparent; border-radius: 4px; background: transparent; width: 100%; }
+  .bulk-grid input:focus { outline: none; border-color: #059669; background: white; }
+  .bulk-grid tr:hover input { background: white; }
+  .tab-btn { padding: 10px 16px; font-size: 14px; font-weight: 500; color: #64748b; border-bottom: 2px solid transparent; cursor: pointer; }
+  .tab-btn.active { color: #047857; border-color: #059669; }
+  .trust-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #64748b; padding: 4px 10px; background: white; border: 1px solid #e2e8f0; border-radius: 6px; }
+  .folder-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; color: #475569; }
+  .folder-item:hover { background: #f1f5f9; }
+  .folder-item.active { background: #ecfdf5; color: #047857; font-weight: 500; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<!-- ============================================================== -->
+<!-- WIREFRAME CONTROL BAR                                            -->
+<!-- ============================================================== -->
+<div class="bg-slate-900 text-slate-200 text-xs px-4 py-2 flex items-center justify-between flex-wrap gap-2">
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="font-mono text-slate-400">[wireframe controls]</span>
+    <span class="ml-2">View:</span>
+    <button onclick="switchView('admin')" id="view-admin-btn" class="px-2 py-1 rounded bg-brand-600 text-white">Admin</button>
+    <button onclick="switchView('stakeholder-portfolio')" id="view-portfolio-btn" class="px-2 py-1 rounded bg-slate-700">Portfolio (multi)</button>
+    <button onclick="switchView('stakeholder')" id="view-stakeholder-btn" class="px-2 py-1 rounded bg-slate-700">Stakeholder (single)</button>
+    <span class="ml-3">Jurisdiction:</span>
+    <select onchange="switchJurisdiction(this.value)" class="bg-slate-800 text-slate-200 border border-slate-700 rounded px-2 py-1 text-xs">
+      <option value="us">🇺🇸 US Delaware</option>
+      <option value="dk">🇩🇰 DK ApS</option>
+      <option value="no">🇳🇴 NO AS</option>
+      <option value="se">🇸🇪 SE AB</option>
+      <option value="de">🇩🇪 DE GmbH</option>
+      <option value="ch">🇨🇭 CH AG</option>
+      <option value="uk">🇬🇧 UK Ltd.</option>
+    </select>
+    <span class="ml-3">Lang:</span>
+    <select onchange="switchLanguage(this.value)" class="bg-slate-800 text-slate-200 border border-slate-700 rounded px-2 py-1 text-xs">
+      <option value="en">🇬🇧 English</option>
+      <option value="da">🇩🇰 Dansk</option>
+      <option value="no">🇳🇴 Norsk</option>
+      <option value="sv">🇸🇪 Svenska</option>
+      <option value="de">🇩🇪 Deutsch</option>
+    </select>
+    <span class="ml-3">Currency:</span>
+    <select onchange="switchCurrency(this.value)" class="bg-slate-800 text-slate-200 border border-slate-700 rounded px-2 py-1 text-xs">
+      <option value="USD">USD ($)</option>
+      <option value="DKK">DKK (kr)</option>
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="NOK">NOK</option>
+      <option value="SEK">SEK</option>
+      <option value="CHF">CHF</option>
+    </select>
+    <span class="ml-3">Plan:</span>
+    <select id="plan-selector" onchange="switchPlan(this.value)" class="bg-slate-800 text-slate-200 border border-slate-700 rounded px-2 py-1 text-xs">
+      <option value="free">Free</option>
+      <option value="paid">Paid ($15/mo)</option>
+    </select>
+  </div>
+  <div class="flex items-center gap-3 text-slate-400">
+    <span>Demo: <span class="text-slate-200 font-medium" id="demo-company-name">Acme, Inc.</span></span>
+    <span>·</span>
+    <span><span id="counter-label">7 stakeholders</span></span>
+    <span>·</span>
+    <span class="font-mono text-[10px]">v1.1 wireframes</span>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ADMIN VIEW                                                       -->
+<!-- ============================================================== -->
+<div id="admin-view">
+
+<!-- Top nav -->
+<header class="bg-white border-b border-slate-200">
+  <div class="flex items-center justify-between px-6 py-3">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="font-bold text-xl tracking-tight">Free<span class="text-brand-600">C</span>apT</div>
+      </div>
+      <div class="ml-4">
+        <details class="relative">
+          <summary class="flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-md text-sm font-medium hover:bg-slate-200">
+            <span id="company-switch-label">Acme, Inc.</span>
+            <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="absolute left-0 mt-1 w-72 bg-white border border-slate-200 rounded-md shadow-lg z-10 p-2">
+            <div class="text-xs text-slate-500 px-2 py-1 uppercase tracking-wide">Your companies (3)</div>
+            <div class="px-2 py-2 rounded hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+              <div class="w-6 h-6 rounded bg-brand-100 text-brand-700 text-xs flex items-center justify-center font-bold">A</div>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Acme, Inc.</div>
+                <div class="text-xs text-slate-500">Admin · US Delaware C-Corp · Paid</div>
+              </div>
+              <span class="text-brand-600 text-xs">●</span>
+            </div>
+            <div class="px-2 py-2 rounded hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+              <div class="w-6 h-6 rounded bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">B</div>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Bifrost Holdings ApS</div>
+                <div class="text-xs text-slate-500">Admin · DK ApS · Free</div>
+              </div>
+            </div>
+            <div class="px-2 py-2 rounded hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+              <div class="w-6 h-6 rounded bg-slate-200 text-slate-700 text-xs flex items-center justify-center font-bold">C</div>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Client Co Ltd.</div>
+                <div class="text-xs text-slate-500">Editor · UK Ltd. · Paid</div>
+              </div>
+            </div>
+            <div class="border-t border-slate-100 mt-1 pt-1">
+              <div class="px-2 py-1.5 text-sm text-brand-700 hover:bg-slate-50 rounded cursor-pointer">+ Add a company</div>
+            </div>
+            <p class="text-[11px] text-slate-400 px-2 mt-2 leading-relaxed">▸ Switcher only appears with 2+ companies. Multi-company is always Free.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="openModal('ai')" class="text-sm text-slate-600 hover:text-brand-700 flex items-center gap-1.5">
+        <span>✦</span> Ask your cap table
+      </button>
+      <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-semibold">N</div>
+    </div>
+  </div>
+</header>
+
+<div class="flex">
+
+  <!-- Side nav -->
+  <aside class="w-56 bg-white border-r border-slate-200 min-h-[calc(100vh-101px)] p-3 flex flex-col">
+    <div class="space-y-1">
+      <div class="nav-item active" onclick="showScreen('cap-table', event)">
+        <span class="w-4 text-center">◐</span> Cap table
+      </div>
+      <div class="nav-item" onclick="showScreen('stakeholders', event)">
+        <span class="w-4 text-center">◯</span> Stakeholders
+      </div>
+      <div class="nav-item" onclick="showScreen('transactions', event)">
+        <span class="w-4 text-center">⇆</span> Transactions
+      </div>
+      <div class="nav-item" onclick="showScreen('simulate', event)">
+        <span class="w-4 text-center">∿</span> Simulate
+      </div>
+      <div class="nav-item" onclick="showScreen('data-room', event)">
+        <span class="w-4 text-center">📁</span> Data room
+      </div>
+    </div>
+    <div class="mt-8 pt-4 border-t border-slate-100 space-y-1">
+      <div class="text-[11px] text-slate-400 px-3 py-1 uppercase tracking-wide font-semibold">Settings</div>
+      <div class="nav-item" onclick="showScreen('members', event)">
+        <span class="w-4 text-center">◍</span> Members
+      </div>
+      <div class="nav-item" onclick="showScreen('security', event)">
+        <span class="w-4 text-center">⛨</span> Security
+      </div>
+      <div class="nav-item" onclick="showScreen('referrals', event)">
+        <span class="w-4 text-center">✦</span> Refer friends
+      </div>
+      <div class="nav-item" onclick="showScreen('billing', event)">
+        <span class="w-4 text-center">$</span> Plan & billing
+      </div>
+    </div>
+    <div class="mt-6">
+      <button onclick="openModal('grant')" class="w-full bg-brand-600 text-white text-sm font-medium py-2 rounded-md hover:bg-brand-700">
+        + New transaction
+      </button>
+    </div>
+
+    <!-- Plan footer -->
+    <div class="mt-auto pt-6 border-t border-slate-100">
+      <div id="plan-badge-free" class="bg-slate-100 rounded-lg p-3 mb-3">
+        <div class="text-xs text-slate-500 mb-1">Current plan</div>
+        <div class="text-sm font-semibold text-slate-900">Free</div>
+        <div class="text-xs text-slate-500 mt-1">Personal cap table</div>
+        <button onclick="openModal('upgrade')" class="mt-2 w-full text-xs bg-brand-600 text-white py-1.5 rounded font-medium hover:bg-brand-700">Upgrade to Paid →</button>
+      </div>
+      <div id="plan-badge-paid" class="hidden bg-brand-50 border border-brand-100 rounded-lg p-3 mb-3">
+        <div class="text-xs text-brand-700 mb-1">Current plan</div>
+        <div class="text-sm font-semibold text-brand-900">Paid · $15/mo</div>
+        <div class="text-xs text-brand-700 mt-1">All features</div>
+      </div>
+      <div class="flex flex-wrap gap-1 mb-2">
+        <span class="trust-badge">🇪🇺 GDPR</span>
+        <span class="trust-badge">🔒 SOC 2 →</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-8 max-w-6xl">
+
+    <!-- =================================================== -->
+    <!-- SCREEN 1: CAP TABLE                                  -->
+    <!-- =================================================== -->
+    <section id="screen-cap-table" class="wf-screen active">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Your cap table</h1>
+          <p class="text-sm text-slate-500 mt-1">Who owns Acme today.</p>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <div class="inline-flex rounded-md border border-slate-200 overflow-hidden">
+            <button class="px-3 py-1.5 bg-white text-slate-900 font-medium border-r border-slate-200">Outstanding</button>
+            <button class="px-3 py-1.5 bg-slate-50 text-slate-500">Fully diluted</button>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded-md bg-white">
+            <span class="text-slate-500">As of</span>
+            <span class="font-medium">Today</span>
+            <span class="text-slate-400">▾</span>
+          </div>
+          <!-- Multi-currency display -->
+          <div class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded-md bg-white">
+            <span class="text-slate-500">In</span>
+            <span class="font-medium" id="display-currency">USD</span>
+            <span class="text-slate-400">▾</span>
+          </div>
+          <!-- Export dropdown -->
+          <details class="relative">
+            <summary class="px-3 py-1.5 border border-slate-200 rounded-md bg-white hover:bg-slate-50 font-medium flex items-center gap-1">
+              Export <span class="text-slate-400">▾</span>
+            </summary>
+            <div class="absolute right-0 mt-1 w-72 bg-white border border-slate-200 rounded-md shadow-lg z-10 p-1">
+              <div class="px-3 py-2 hover:bg-slate-50 rounded cursor-pointer">
+                <div class="text-sm font-medium">Basic CSV</div>
+                <div class="text-xs text-slate-500">Free · plain data, no formatting</div>
+              </div>
+              <div class="px-3 py-2 hover:bg-brand-50 rounded cursor-pointer border-t border-slate-100" onclick="openModal('upgrade')">
+                <div class="text-sm font-medium flex items-center gap-1">📊 Rich Excel <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded">PAID</span></div>
+                <div class="text-xs text-slate-500">Multi-sheet, live formulas, embedded chart</div>
+              </div>
+              <div class="px-3 py-2 hover:bg-brand-50 rounded cursor-pointer border-t border-slate-100" onclick="openModal('upgrade')">
+                <div class="text-sm font-medium flex items-center gap-1">📄 Legal-grade PDF <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded">PAID</span></div>
+                <div class="text-xs text-slate-500">PDF/A, jurisdiction-specific layout</div>
+              </div>
+              <div class="px-3 py-2 hover:bg-brand-50 rounded cursor-pointer border-t border-slate-100" onclick="openModal('upgrade')">
+                <div class="text-sm font-medium flex items-center gap-1">📝 Word for lawyer <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded">PAID</span></div>
+                <div class="text-xs text-slate-500">Same content, redlineable</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Equity-left banner -->
+      <div class="bg-brand-50 border border-brand-100 rounded-lg p-4 mb-6 flex items-center justify-between">
+        <div>
+          <div class="text-sm text-brand-900"><strong>You have 18.5% of Acme left to grant.</strong></div>
+          <div class="text-xs text-brand-700 mt-0.5">12% unallocated option pool · 6.5% unissued shares</div>
+        </div>
+        <button onclick="openModal('grant')" class="text-sm font-medium text-brand-700 hover:text-brand-900">Grant equity →</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-slate-200 rounded-lg p-6 flex flex-col items-center justify-center">
+          <div class="wf-donut mb-4"></div>
+          <div class="text-xs text-slate-500">Ownership distribution (outstanding)</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-lg p-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <div class="text-xs text-slate-500">Total stakeholders</div>
+              <div class="text-2xl font-semibold text-slate-900 mt-1">7</div>
+              <div class="text-xs text-slate-400 mt-0.5">3 fdrs · 2 emp · 1 inv · 1 adv</div>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500">Authorized <span class="instr-label-shares">shares</span></div>
+              <div class="text-2xl font-semibold text-slate-900 mt-1">10,000,000</div>
+              <div class="text-xs text-slate-400 mt-0.5">8,150,000 issued</div>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500">Option pool</div>
+              <div class="text-2xl font-semibold text-slate-900 mt-1">1,500,000</div>
+              <div class="text-xs text-slate-400 mt-0.5">300k granted · 1.2M reserved</div>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500">Outstanding SAFEs</div>
+              <div class="text-2xl font-semibold text-slate-900 mt-1"><span class="currency-symbol">$</span>250k</div>
+              <div class="text-xs text-slate-400 mt-0.5">1 SAFE · <span class="currency-symbol">$</span>5M cap</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cap table -->
+      <div class="bg-white border border-slate-200 rounded-lg overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="text-left px-4 py-2.5 font-medium">Stakeholder</th>
+              <th class="text-left px-4 py-2.5 font-medium">Type</th>
+              <th class="text-right px-4 py-2.5 font-medium"><span class="instr-label-shares">Shares</span></th>
+              <th class="text-right px-4 py-2.5 font-medium">Options</th>
+              <th class="text-right px-4 py-2.5 font-medium">%</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#047857"></span>Anna Karlsen <span class="text-slate-400 text-xs">— Founder, CEO</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Founder</span></td>
+              <td class="px-4 py-3 text-right tabular-nums">2,500,000</td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right font-medium">30.7%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#10b981"></span>Ben Madsen <span class="text-slate-400 text-xs">— Founder, CTO</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Founder</span></td>
+              <td class="px-4 py-3 text-right tabular-nums">2,500,000</td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right font-medium">30.7%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#34d399"></span>Chris Hansen <span class="text-slate-400 text-xs">— Founder, COO</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Founder</span></td>
+              <td class="px-4 py-3 text-right tabular-nums">1,500,000</td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right font-medium">18.4%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#f59e0b"></span>Dana Wei <span class="text-slate-400 text-xs">— Engineer</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Employee</span></td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right tabular-nums">200,000</td>
+              <td class="px-4 py-3 text-right font-medium">2.5%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#fbbf24"></span>Erik Olsen <span class="text-slate-400 text-xs">— Engineer</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Employee</span></td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right tabular-nums">75,000</td>
+              <td class="px-4 py-3 text-right font-medium">0.9%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#94a3b8"></span>Frank Vinter <span class="text-slate-400 text-xs">— Angel</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-amber-50 text-amber-700">SAFE</span></td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400 italic">on conversion</td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right font-medium text-slate-400">~5%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3"><span class="swatch" style="background:#cbd5e1"></span>Grace Lin <span class="text-slate-400 text-xs">— Advisor</span></td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Advisor</span></td>
+              <td class="px-4 py-3 text-right tabular-nums text-slate-400">—</td>
+              <td class="px-4 py-3 text-right tabular-nums">25,000</td>
+              <td class="px-4 py-3 text-right font-medium">0.3%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Ask your cap table — Paid feature -->
+      <div class="bg-white border border-slate-200 rounded-lg p-4 flex items-center gap-3">
+        <span class="text-brand-600">✦</span>
+        <input type="text" placeholder="Ask your cap table — e.g. 'what if I raise $2M at $10M post?' (Paid)" class="flex-1 text-sm bg-transparent outline-none placeholder:text-slate-400" />
+        <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded font-semibold">PAID</span>
+        <button onclick="openModal('upgrade')" class="text-sm text-brand-700 font-medium">Ask →</button>
+      </div>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 2: STAKEHOLDERS                               -->
+    <!-- =================================================== -->
+    <section id="screen-stakeholders" class="wf-screen">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Stakeholders</h1>
+          <p class="text-sm text-slate-500 mt-1">Everyone with equity in Acme. Unlimited on all plans.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="openModal('bulk')" class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-brand-700 flex items-center gap-2">
+            <span>⬚</span> Bulk add stakeholders
+          </button>
+          <button class="border border-slate-200 bg-white text-slate-700 text-sm font-medium px-4 py-2 rounded-md hover:bg-slate-50">
+            + Add one
+          </button>
+        </div>
+      </div>
+
+      <div class="flex gap-1 mb-4 text-sm">
+        <button class="px-3 py-1.5 bg-slate-900 text-white rounded-md font-medium">All · 7</button>
+        <button class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 rounded-md">Founders · 3</button>
+        <button class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 rounded-md">Employees · 2</button>
+        <button class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 rounded-md">Investors · 1</button>
+        <button class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 rounded-md">Advisors · 1</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="text-left px-4 py-2.5 font-medium">Name</th>
+              <th class="text-left px-4 py-2.5 font-medium">Email</th>
+              <th class="text-left px-4 py-2.5 font-medium">Type</th>
+              <th class="text-right px-4 py-2.5 font-medium">Grants</th>
+              <th class="text-right px-4 py-2.5 font-medium">%</th>
+              <th class="text-left px-4 py-2.5 font-medium">Portal</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50 cursor-pointer">
+              <td class="px-4 py-3 font-medium">Anna Karlsen</td>
+              <td class="px-4 py-3 text-slate-600">anna@acme.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Founder</span></td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-right font-medium">30.7%</td>
+              <td class="px-4 py-3"><span class="text-brand-700 text-xs">● Active</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 cursor-pointer">
+              <td class="px-4 py-3 font-medium">Ben Madsen</td>
+              <td class="px-4 py-3 text-slate-600">ben@acme.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Founder</span></td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-right font-medium">30.7%</td>
+              <td class="px-4 py-3"><span class="text-brand-700 text-xs">● Active</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 cursor-pointer">
+              <td class="px-4 py-3 font-medium">Dana Wei</td>
+              <td class="px-4 py-3 text-slate-600">dana@acme.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Employee</span></td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-right font-medium">2.5%</td>
+              <td class="px-4 py-3"><span class="text-amber-600 text-xs">● Invite Paid →</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 cursor-pointer">
+              <td class="px-4 py-3 font-medium">Frank Vinter</td>
+              <td class="px-4 py-3 text-slate-600">frank@vinter.dk</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-amber-50 text-amber-700">SAFE</span></td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-right font-medium text-slate-400">~5%</td>
+              <td class="px-4 py-3"><span class="text-amber-600 text-xs">● Invite Paid →</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs text-slate-400 mt-3 font-mono">▸ "Invite Paid" appears when portal access requires the Paid plan. Click → upgrade flow.</p>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 3: TRANSACTIONS                               -->
+    <!-- =================================================== -->
+    <section id="screen-transactions" class="wf-screen">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Transactions</h1>
+          <p class="text-sm text-slate-500 mt-1">Every event that created, transferred, or extinguished equity. Multi-currency.</p>
+        </div>
+        <button onclick="openModal('grant')" class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-brand-700">+ New transaction</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="text-left px-4 py-2.5 font-medium">Date</th>
+              <th class="text-left px-4 py-2.5 font-medium">Type</th>
+              <th class="text-left px-4 py-2.5 font-medium">Stakeholder</th>
+              <th class="text-left px-4 py-2.5 font-medium">Security</th>
+              <th class="text-right px-4 py-2.5 font-medium">Quantity / Amount</th>
+              <th class="text-left px-4 py-2.5 font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 font-mono text-[13px]">
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 text-slate-600">2026-04-12</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Option grant</span></td>
+              <td class="px-4 py-3">Erik Olsen</td>
+              <td class="px-4 py-3">NSO · strike $0.85</td>
+              <td class="px-4 py-3 text-right tabular-nums">75,000 options</td>
+              <td class="px-4 py-3"><span class="text-amber-600">Awaiting sig.</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 bg-amber-50/30">
+              <td class="px-4 py-3 text-slate-600">2026-02-14</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-amber-50 text-amber-700">SAFE issuance</span></td>
+              <td class="px-4 py-3">Frank Vinter</td>
+              <td class="px-4 py-3">YC post-money · $5M cap</td>
+              <td class="px-4 py-3 text-right tabular-nums">
+                NOK 1,750,000<br/>
+                <span class="text-slate-400 text-[11px]">≈ $250,000 @ 0.143 (2026-02-14)</span>
+              </td>
+              <td class="px-4 py-3"><span class="text-brand-700">Signed</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 text-slate-600">2026-03-01</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Option grant</span></td>
+              <td class="px-4 py-3">Dana Wei</td>
+              <td class="px-4 py-3">ISO · strike $0.50</td>
+              <td class="px-4 py-3 text-right tabular-nums">200,000 options</td>
+              <td class="px-4 py-3"><span class="text-brand-700">Signed</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 text-slate-600">2025-09-15</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Share issuance</span></td>
+              <td class="px-4 py-3">Anna, Ben, Chris</td>
+              <td class="px-4 py-3">Common stock (3x)</td>
+              <td class="px-4 py-3 text-right tabular-nums">6,500,000 shares</td>
+              <td class="px-4 py-3"><span class="text-brand-700">Signed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-400 mt-3 font-mono">▸ Highlighted row shows multi-currency: SAFE recorded in NOK with FX rate snapshotted at transaction date.</p>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 4: SIMULATE — with Round modeling             -->
+    <!-- =================================================== -->
+    <section id="screen-simulate" class="wf-screen">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Simulate</h1>
+          <p class="text-sm text-slate-500 mt-1">Model rounds, scenarios, and dilution.</p>
+        </div>
+      </div>
+
+      <!-- Mode toggle -->
+      <div class="flex border-b border-slate-200 mb-6">
+        <button onclick="switchSimTab('basic')" id="sim-tab-basic" class="tab-btn active">Basic round</button>
+        <button onclick="switchSimTab('modeling')" id="sim-tab-modeling" class="tab-btn">
+          Round modeling
+          <span class="ml-1 text-[9px] bg-slate-900 text-white px-1.5 py-0.5 rounded font-semibold">PAID</span>
+        </button>
+      </div>
+
+      <!-- Basic round (free) -->
+      <div id="sim-pane-basic">
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bg-white border border-slate-200 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-slate-900 mb-4">Round terms</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Round size</label>
+                <div class="flex">
+                  <span class="px-3 py-2 bg-slate-50 border border-r-0 border-slate-200 rounded-l-md text-slate-500 text-sm">$</span>
+                  <input type="text" value="2,000,000" class="flex-1 px-3 py-2 border border-slate-200 rounded-r-md text-sm" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Pre-money valuation</label>
+                <div class="flex">
+                  <span class="px-3 py-2 bg-slate-50 border border-r-0 border-slate-200 rounded-l-md text-slate-500 text-sm">$</span>
+                  <input type="text" value="10,000,000" class="flex-1 px-3 py-2 border border-slate-200 rounded-r-md text-sm" />
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Post-money: $12,000,000</p>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Top up pool to</label>
+                <div class="flex">
+                  <input type="text" value="15" class="flex-1 px-3 py-2 border border-slate-200 rounded-l-md text-sm" />
+                  <span class="px-3 py-2 bg-slate-50 border border-l-0 border-slate-200 rounded-r-md text-slate-500 text-sm">% post</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-slate-900 mb-1">Today</h3>
+            <div class="flex justify-center mb-4 mt-2"><div class="wf-donut" style="width:140px;height:140px;"></div></div>
+            <table class="w-full text-xs">
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="py-1.5">Anna</td><td class="text-right tabular-nums">30.7%</td></tr>
+                <tr><td class="py-1.5">Ben</td><td class="text-right tabular-nums">30.7%</td></tr>
+                <tr><td class="py-1.5">Chris</td><td class="text-right tabular-nums">18.4%</td></tr>
+                <tr><td class="py-1.5">Options</td><td class="text-right tabular-nums">3.4%</td></tr>
+                <tr><td class="py-1.5 text-slate-500">Pool</td><td class="text-right tabular-nums text-slate-500">12.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-brand-50 border border-brand-200 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-brand-900 mb-1">After this round</h3>
+            <div class="flex justify-center mb-4 mt-2">
+              <div class="wf-donut" style="width:140px;height:140px; background: conic-gradient(#047857 0% 22%, #10b981 22% 44%, #34d399 44% 57%, #f59e0b 57% 65%, #fbbf24 65% 80%, #064e3b 80% 95%, #94a3b8 95% 100%);"></div>
+            </div>
+            <table class="w-full text-xs">
+              <tbody class="divide-y divide-brand-100">
+                <tr><td class="py-1.5">Anna</td><td class="text-right tabular-nums">22.0% <span class="text-red-600">(-8.7)</span></td></tr>
+                <tr><td class="py-1.5">Ben</td><td class="text-right tabular-nums">22.0% <span class="text-red-600">(-8.7)</span></td></tr>
+                <tr><td class="py-1.5">Chris</td><td class="text-right tabular-nums">13.2% <span class="text-red-600">(-5.2)</span></td></tr>
+                <tr><td class="py-1.5 font-medium">New investor</td><td class="text-right tabular-nums text-brand-700">16.7%</td></tr>
+                <tr><td class="py-1.5 font-medium">Frank (converted)</td><td class="text-right tabular-nums text-brand-700">5.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Round modeling (Paid) -->
+      <div id="sim-pane-modeling" class="hidden">
+        <div class="bg-brand-50 border border-brand-200 rounded-lg p-4 mb-6 flex items-start gap-3">
+          <span class="text-brand-600 text-xl">✦</span>
+          <div class="flex-1">
+            <div class="text-sm font-semibold text-brand-900 mb-1">Allocate your raise across multiple investors</div>
+            <div class="text-xs text-brand-700">Drop in your interested investors with their commitment amounts. See who fits, who scales back, what the cap table looks like after.</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+          <!-- Round terms -->
+          <div class="col-span-3 bg-white border border-slate-200 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-slate-900 mb-4">Round terms</h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Round size</label>
+                <div class="flex">
+                  <span class="px-3 py-2 bg-slate-50 border border-r-0 border-slate-200 rounded-l-md text-slate-500 text-sm">DKK</span>
+                  <input type="text" value="2,000,000" class="flex-1 px-3 py-2 border border-slate-200 rounded-r-md text-sm" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Pre-money</label>
+                <div class="flex">
+                  <span class="px-3 py-2 bg-slate-50 border border-r-0 border-slate-200 rounded-l-md text-slate-500 text-sm">DKK</span>
+                  <input type="text" value="8,000,000" class="flex-1 px-3 py-2 border border-slate-200 rounded-r-md text-sm" />
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Post: 10M DKK · 20% to new</p>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-500 mb-1">Pool top-up</label>
+                <div class="flex">
+                  <input type="text" value="0" class="flex-1 px-3 py-2 border border-slate-200 rounded-l-md text-sm" />
+                  <span class="px-3 py-2 bg-slate-50 border border-l-0 border-slate-200 rounded-r-md text-slate-500 text-sm">%</span>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-100">
+                <div class="text-xs text-slate-500 mb-1">Validation</div>
+                <div class="text-sm font-medium text-amber-600">⚠ Oversubscribed by 350k</div>
+                <div class="text-xs text-slate-500 mt-1">Investors want 2.35M; round is 2M</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Investor list -->
+          <div class="col-span-9">
+            <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+              <div class="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                <h3 class="text-sm font-semibold text-slate-900">Interested investors</h3>
+                <button class="text-xs text-brand-700 font-medium">+ Add investor</button>
+              </div>
+              <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+                  <tr>
+                    <th class="text-left px-4 py-2 font-medium">Investor</th>
+                    <th class="text-left px-4 py-2 font-medium">Commitment</th>
+                    <th class="text-right px-4 py-2 font-medium">Min</th>
+                    <th class="text-right px-4 py-2 font-medium">Target</th>
+                    <th class="text-right px-4 py-2 font-medium">Max</th>
+                    <th class="text-right px-4 py-2 font-medium">% of round</th>
+                    <th class="text-right px-4 py-2 font-medium">% post</th>
+                    <th class="text-left px-4 py-2 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-[13px]">
+                  <tr class="bg-emerald-50/40">
+                    <td class="px-4 py-2.5 font-medium">Maria Holm</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-brand-50 text-brand-700">Fixed</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">500,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">25.0%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">5.0%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Allocated</td>
+                  </tr>
+                  <tr class="bg-emerald-50/40">
+                    <td class="px-4 py-2.5 font-medium">Jonas Berg</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-brand-50 text-brand-700">Fixed</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">250,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">12.5%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">2.5%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Allocated</td>
+                  </tr>
+                  <tr class="bg-emerald-50/40">
+                    <td class="px-4 py-2.5 font-medium">Erica Lund</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-brand-50 text-brand-700">Fixed</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">250,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">12.5%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">2.5%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Allocated</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2.5 font-medium">Lars Nielsen</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-amber-50 text-amber-700">Range</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">200,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">200,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">10.0%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">2.0%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Allocated</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2.5 font-medium">Mette Sørensen</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-amber-50 text-amber-700">Range</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">150,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">200,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">7.5%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">1.5%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Allocated</td>
+                  </tr>
+                  <tr class="bg-amber-50/30">
+                    <td class="px-4 py-2.5 font-medium">Olaf Petersen</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-amber-50 text-amber-700">Range</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">50,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">150,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">5.0%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">1.0%</td>
+                    <td class="px-4 py-2.5 text-amber-700 text-xs">● Scaled back</td>
+                  </tr>
+                  <tr class="bg-red-50/40">
+                    <td class="px-4 py-2.5 font-medium">Pia Rasmussen</td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-slate-100 text-slate-700">Range</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">50,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-red-600 text-xs">● Cut</td>
+                  </tr>
+                  <tr class="bg-emerald-50/40">
+                    <td class="px-4 py-2.5 font-medium">Frank Vinter <span class="text-[10px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded ml-1">pro-rata</span></td>
+                    <td class="px-4 py-2.5"><span class="wf-tag bg-brand-50 text-brand-700">Pro-rata</span></td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums font-medium">100,000</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums text-slate-400">—</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">5.0%</td>
+                    <td class="px-4 py-2.5 text-right tabular-nums">1.0%</td>
+                    <td class="px-4 py-2.5 text-brand-700 text-xs">● Exercised</td>
+                  </tr>
+                </tbody>
+                <tfoot class="bg-slate-50 text-sm font-semibold border-t-2 border-slate-200">
+                  <tr>
+                    <td colspan="3" class="px-4 py-3">Allocated</td>
+                    <td class="px-4 py-3 text-right tabular-nums">2,000,000 DKK</td>
+                    <td colspan="2" class="px-4 py-3 text-right text-slate-500">100.0% of round</td>
+                    <td class="px-4 py-3 text-right tabular-nums">20.0%</td>
+                    <td class="px-4 py-3"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-xs text-slate-500">8 investors interested · 2M DKK fits · 1 cut · 1 scaled back</div>
+              <div class="flex gap-2">
+                <button class="px-4 py-2 text-sm border border-slate-200 rounded-md bg-white">Save scenario</button>
+                <button class="px-4 py-2 text-sm bg-brand-600 text-white rounded-md font-medium">Generate term sheet →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 5: DATA ROOM (new in v1.1)                    -->
+    <!-- =================================================== -->
+    <section id="screen-data-room" class="wf-screen">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Data room</h1>
+          <p class="text-sm text-slate-500 mt-1">Every legally-relevant document Acme has. Generate or upload.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-sm">
+            <span class="text-slate-500">Readiness:</span>
+            <span class="font-semibold text-slate-900 ml-1">7 / 14 documents complete</span>
+            <div class="inline-block w-32 h-2 bg-slate-200 rounded-full ml-3 overflow-hidden align-middle">
+              <div class="h-full bg-brand-600" style="width: 50%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6">
+        <!-- Folder tree -->
+        <div class="col-span-3 bg-white border border-slate-200 rounded-lg p-3">
+          <div class="folder-item active">
+            <span>📁</span><span>All documents</span><span class="ml-auto text-xs text-slate-400">14</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>1. Formation</span><span class="ml-auto text-xs text-slate-400">3</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>2. Equity register</span><span class="ml-auto text-xs text-brand-700">●</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>3. Share transactions</span><span class="ml-auto text-xs text-slate-400">3</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>4. Options & equity</span><span class="ml-auto text-xs text-slate-400">3</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>5. Convertibles</span><span class="ml-auto text-xs text-slate-400">1</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>6. Investor agreements</span><span class="ml-auto text-xs text-amber-600">⚠ 0/2</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>7. Governance</span><span class="ml-auto text-xs text-slate-400">2</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>8. Founder agreements</span><span class="ml-auto text-xs text-amber-600">⚠ 0/3</span>
+          </div>
+          <div class="folder-item">
+            <span>📁</span><span>9. Other</span><span class="ml-auto text-xs text-slate-400">0</span>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-slate-100">
+            <button class="w-full text-xs text-slate-500 hover:text-slate-700 text-left flex items-center justify-between px-2 py-1.5">
+              <span>Share with investor (DD) →</span>
+              <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded">v2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Slot list -->
+        <div class="col-span-9">
+          <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+            <div class="p-4 border-b border-slate-100">
+              <h3 class="font-semibold text-slate-900">All documents</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Click a slot to view, replace, or generate.</p>
+            </div>
+
+            <!-- Folder 1: Formation -->
+            <div class="px-4 py-3 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-semibold">📁 1. Formation</div>
+
+            <div class="px-4 py-3 border-t border-slate-100 flex items-center gap-3 hover:bg-slate-50 cursor-pointer">
+              <span class="text-xl">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Certificate of Incorporation</div>
+                <div class="text-xs text-slate-500">Uploaded · 2025-09-01 · cert-of-inc.pdf</div>
+              </div>
+              <span class="text-xs text-brand-700">● Present</span>
+            </div>
+
+            <div class="px-4 py-3 border-t border-slate-100 flex items-center gap-3 hover:bg-slate-50 cursor-pointer">
+              <span class="text-xl">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Articles of Association / Bylaws <span class="text-[10px] text-slate-400 ml-1">(jurisdiction-specific)</span></div>
+                <div class="text-xs text-slate-500">Generated from template · 2025-09-15 · bylaws.docx + bylaws.pdf</div>
+              </div>
+              <span class="text-xs text-brand-700">● Present</span>
+            </div>
+
+            <div class="px-4 py-3 border-t border-slate-100 flex items-center gap-3 hover:bg-slate-50 cursor-pointer">
+              <span class="text-xl">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Initial registry filing confirmation</div>
+                <div class="text-xs text-slate-500">Uploaded · 2025-09-01 · de-state-confirmation.pdf</div>
+              </div>
+              <span class="text-xs text-brand-700">● Present</span>
+            </div>
+
+            <!-- Folder 2: Equity register -->
+            <div class="px-4 py-3 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-semibold">📁 2. Equity register · auto-generated</div>
+
+            <div class="px-4 py-3 border-t border-slate-100 flex items-center gap-3 hover:bg-slate-50 cursor-pointer bg-brand-50/30">
+              <span class="text-xl">📋</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium">Shareholder Register <span class="text-[10px] bg-brand-600 text-white px-1.5 py-0.5 rounded ml-1">AUTO</span></div>
+                <div class="text-xs text-slate-500">Live · regenerated on every cap table change · always current</div>
+              </div>
+              <span class="text-xs text-brand-700">● Live</span>
+            </div>
+
+            <!-- Folder 6: Investor agreements (MISSING examples) -->
+            <div class="px-4 py-3 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-semibold">📁 6. Investor agreements · 2 missing</div>
+
+            <div class="px-4 py-3 border-t border-slate-100 border-dashed border-2 flex items-center gap-3 hover:bg-amber-50/30 cursor-pointer bg-amber-50/20">
+              <span class="text-xl opacity-40">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-slate-600">Shareholders Agreement</div>
+                <div class="text-xs text-slate-500">Recommended for SMB with 2+ founders or angel investors</div>
+              </div>
+              <button onclick="openModal('add-doc')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded font-medium hover:bg-brand-700">+ Add</button>
+            </div>
+
+            <div class="px-4 py-3 border-t border-slate-100 border-dashed border-2 flex items-center gap-3 hover:bg-amber-50/30 cursor-pointer bg-amber-50/20">
+              <span class="text-xl opacity-40">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-slate-600">Investment Agreement</div>
+                <div class="text-xs text-slate-500">For priced rounds. Not needed for SAFEs.</div>
+              </div>
+              <button onclick="openModal('add-doc')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded font-medium hover:bg-brand-700">+ Add</button>
+            </div>
+
+            <!-- Folder 8: Founder agreements (MISSING) -->
+            <div class="px-4 py-3 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-semibold">📁 8. Founder & key employee agreements · 3 missing</div>
+
+            <div class="px-4 py-3 border-t border-slate-100 border-dashed border-2 flex items-center gap-3 hover:bg-amber-50/30 cursor-pointer bg-amber-50/20">
+              <span class="text-xl opacity-40">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-slate-600">Founder Employment Agreements (Anna, Ben, Chris)</div>
+                <div class="text-xs text-slate-500">With vesting + IP assignment + non-compete language</div>
+              </div>
+              <button onclick="openModal('add-doc')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded font-medium hover:bg-brand-700">+ Add</button>
+            </div>
+
+            <div class="px-4 py-3 border-t border-slate-100 border-dashed border-2 flex items-center gap-3 hover:bg-amber-50/30 cursor-pointer bg-amber-50/20">
+              <span class="text-xl opacity-40">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-slate-600">IP Assignment Agreements</div>
+                <div class="text-xs text-slate-500">For every founder and key employee</div>
+              </div>
+              <button onclick="openModal('add-doc')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded font-medium hover:bg-brand-700">+ Add</button>
+            </div>
+
+            <div class="px-4 py-3 border-t border-slate-100 border-dashed border-2 flex items-center gap-3 hover:bg-amber-50/30 cursor-pointer bg-amber-50/20">
+              <span class="text-xl opacity-40">📄</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-slate-600">Restrictive Covenants</div>
+                <div class="text-xs text-slate-500">Non-compete, non-solicit (where enforceable)</div>
+              </div>
+              <button onclick="openModal('add-doc')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded font-medium hover:bg-brand-700">+ Add</button>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-400 mt-3 font-mono">▸ Dashed borders + amber tint = canonical slots missing. Clicking + Add opens the generate-or-upload modal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 6: MEMBERS                                    -->
+    <!-- =================================================== -->
+    <section id="screen-members" class="wf-screen">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-semibold text-slate-900">Members</h1>
+          <p class="text-sm text-slate-500 mt-1">Cofounders, advisors with access. Free on every plan.</p>
+        </div>
+        <button onclick="openModal('invite')" class="bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-brand-700">+ Invite member</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="text-left px-4 py-2.5 font-medium">Name</th>
+              <th class="text-left px-4 py-2.5 font-medium">Email</th>
+              <th class="text-left px-4 py-2.5 font-medium">Role</th>
+              <th class="text-left px-4 py-2.5 font-medium">2FA</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="px-4 py-3 font-medium">Nicolai <span class="text-xs text-slate-500 font-normal">(you)</span></td>
+              <td class="px-4 py-3 text-slate-600">nr@bifroststudios.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Admin</span></td>
+              <td class="px-4 py-3 text-brand-700 text-xs">● On</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Anna Karlsen</td>
+              <td class="px-4 py-3 text-slate-600">anna@acme.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-brand-50 text-brand-700">Admin</span></td>
+              <td class="px-4 py-3 text-brand-700 text-xs">● On</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Ben Madsen</td>
+              <td class="px-4 py-3 text-slate-600">ben@acme.com</td>
+              <td class="px-4 py-3"><span class="wf-tag bg-slate-100 text-slate-700">Editor</span></td>
+              <td class="px-4 py-3 text-slate-400 text-xs">○ Off</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4">
+        <h3 class="text-sm font-semibold text-slate-900 mb-2">Role quick reference</h3>
+        <div class="grid grid-cols-4 gap-3 text-xs">
+          <div><strong class="text-brand-700">Admin</strong><br/><span class="text-slate-600">Everything</span></div>
+          <div><strong class="text-slate-700">Editor</strong><br/><span class="text-slate-600">Cap table + grants. No billing.</span></div>
+          <div><strong class="text-slate-700">Viewer</strong><br/><span class="text-slate-600">Read-only.</span></div>
+          <div><strong class="text-slate-700">Stakeholder</strong><br/><span class="text-slate-600">Their own slice.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 7: SECURITY                                   -->
+    <!-- =================================================== -->
+    <section id="screen-security" class="wf-screen">
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-slate-900">Security</h1>
+        <p class="text-sm text-slate-500 mt-1">Your account, your company, and our security posture. Free.</p>
+      </div>
+
+      <div class="bg-slate-900 text-white rounded-xl p-6 mb-6">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="text-xs text-brand-500 uppercase tracking-wide font-semibold">Acme's data is hosted in</div>
+            <div class="text-2xl font-semibold mt-1">🇪🇺 EU region (Frankfurt)</div>
+            <p class="text-sm text-slate-300 mt-1">GDPR-compliant. Supabase EU project. AES-256 at rest.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-800">
+          <span class="bg-slate-800 text-brand-400 text-xs px-3 py-1 rounded">✓ TLS 1.3</span>
+          <span class="bg-slate-800 text-brand-400 text-xs px-3 py-1 rounded">✓ AES-256</span>
+          <span class="bg-slate-800 text-brand-400 text-xs px-3 py-1 rounded">✓ GDPR</span>
+          <span class="bg-slate-800 text-brand-400 text-xs px-3 py-1 rounded">✓ Magic-link only</span>
+          <span class="bg-slate-800 text-brand-400 text-xs px-3 py-1 rounded">✓ Audit log</span>
+          <span class="bg-slate-800 text-amber-400 text-xs px-3 py-1 rounded">⧗ SOC 2 Type I (Q3 2026)</span>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg p-5 mb-6">
+        <h3 class="text-sm font-semibold text-slate-900 mb-4">Your data is yours</h3>
+        <p class="text-sm text-slate-600 mb-4">Export every record — ledger, transactions, documents, audit log — as a ZIP. No questions asked.</p>
+        <button class="px-4 py-2 border border-brand-600 text-brand-700 rounded-md text-sm font-medium hover:bg-brand-50">⬇ Export all data (ZIP)</button>
+      </div>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 8: REFER FRIENDS                              -->
+    <!-- =================================================== -->
+    <section id="screen-referrals" class="wf-screen">
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-slate-900">Refer friends</h1>
+        <p class="text-sm text-slate-500 mt-1">Invite a founder friend. When they create a company, you both get <strong>1 free month of Paid</strong>.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="bg-white border border-slate-200 rounded-lg p-5 col-span-2">
+          <div class="text-sm text-slate-500 mb-2">Your referral link</div>
+          <div class="flex gap-2">
+            <input type="text" value="freecapt.com/r/nr-bf24x" class="flex-1 px-3 py-2.5 border border-slate-200 rounded-md text-sm font-mono bg-slate-50" readonly />
+            <button class="px-4 py-2.5 bg-brand-600 text-white rounded-md text-sm font-medium">Copy</button>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Each successful referral = 1 free month of Paid. Stackable up to 12 months.</p>
+        </div>
+        <div class="bg-brand-50 border border-brand-100 rounded-lg p-5">
+          <div class="text-xs text-brand-700 uppercase tracking-wide font-semibold">Your credit</div>
+          <div class="text-3xl font-semibold text-brand-900 mt-1">2 mo. <span class="text-base font-normal text-brand-700">free</span></div>
+          <div class="text-xs text-brand-700 mt-1">From 2 referrals · 10 more possible</div>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-400 font-mono">▸ Refer mechanic reframed from "+5 stakeholder slots" (old count-based pricing) to "free months of Paid" — matches new pricing model.</p>
+    </section>
+
+    <!-- =================================================== -->
+    <!-- SCREEN 9: PLAN & BILLING                             -->
+    <!-- =================================================== -->
+    <section id="screen-billing" class="wf-screen">
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-slate-900">Plan & billing</h1>
+        <p class="text-sm text-slate-500 mt-1">One plan. One price. No usage cliffs.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 max-w-4xl">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="text-xl font-semibold">Free</h3>
+            <div class="text-2xl font-bold tabular-nums">$0</div>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Personal cap table. Forever.</p>
+          <button class="block w-full text-center py-2.5 border border-slate-300 rounded-md font-medium hover:bg-slate-50 mb-4">Current plan</button>
+          <ul class="space-y-2 text-sm">
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Full cap table — unlimited stakeholders</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Bulk add (spreadsheet paste)</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> AI onboarding (one-time)</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Basic CSV export</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Cofounders as Admin/Editor</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Multi-company switcher</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> All 7 country packs</li>
+            <li class="flex gap-2"><span class="text-brand-600">✓</span> Multi-currency, 5 languages</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900 text-white border border-slate-900 rounded-2xl p-6 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Recommended</div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="text-xl font-semibold">Paid</h3>
+            <div><span class="text-2xl font-bold tabular-nums">$15</span><span class="text-slate-400 text-sm">/mo</span></div>
+          </div>
+          <p class="text-sm text-slate-400 mb-4">Everything + the value moments.</p>
+          <button class="block w-full text-center py-2.5 bg-brand-600 hover:bg-brand-700 rounded-md font-medium mb-4">Upgrade</button>
+          <ul class="space-y-2 text-sm">
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Everything in Free</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Ongoing AI chat</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> "Explain this" buttons</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> AI-driven bulk add</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Rich Excel + legal PDF + Word</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Stakeholder portal access</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Round modeling</li>
+            <li class="flex gap-2"><span class="text-brand-500">✓</span> Data room templates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<!-- ============================================================== -->
+<!-- STAKEHOLDER PORTFOLIO VIEW (multi-company)                      -->
+<!-- ============================================================== -->
+<div id="stakeholder-portfolio-view" class="hidden min-h-screen bg-slate-50">
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="font-bold text-lg">Free<span class="text-brand-600">C</span>apT</div>
+        <span class="text-xs text-slate-400 ml-2">Portfolio</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <select class="text-xs border border-slate-200 rounded px-2 py-1">
+          <option>🇬🇧 EN</option><option>🇩🇰 DA</option>
+        </select>
+        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-semibold">D</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <div class="mb-8">
+      <div class="text-xs text-slate-500 mb-1">Welcome, Dana</div>
+      <h1 class="text-3xl font-semibold text-slate-900">You have stakes in <span class="text-brand-700">3 companies</span>.</h1>
+      <p class="text-slate-600 mt-2">Worth approximately <strong class="text-slate-900">~$340,000</strong> at latest known valuations.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-white border border-slate-200 rounded-xl p-5 hover:border-brand-300 cursor-pointer transition">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded bg-brand-100 text-brand-700 flex items-center justify-center font-bold">A</div>
+            <div>
+              <div class="font-semibold">Acme, Inc.</div>
+              <div class="text-xs text-slate-500">US Delaware C-Corp</div>
+            </div>
+          </div>
+          <span class="text-xs text-slate-500">Employee</span>
+        </div>
+        <div class="border-t border-slate-100 pt-3 grid grid-cols-3 gap-3 text-sm">
+          <div>
+            <div class="text-xs text-slate-500">Your stake</div>
+            <div class="font-semibold mt-0.5">200,000 ISO</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Vested</div>
+            <div class="font-semibold mt-0.5">15,278</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Est. value</div>
+            <div class="font-semibold mt-0.5">~$250k</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-xl p-5 hover:border-brand-300 cursor-pointer transition">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded bg-amber-100 text-amber-700 flex items-center justify-center font-bold">O</div>
+            <div>
+              <div class="font-semibold">Octo Labs ApS</div>
+              <div class="text-xs text-slate-500">Danish ApS</div>
+            </div>
+          </div>
+          <span class="text-xs text-slate-500">Angel investor</span>
+        </div>
+        <div class="border-t border-slate-100 pt-3 grid grid-cols-3 gap-3 text-sm">
+          <div>
+            <div class="text-xs text-slate-500">Your stake</div>
+            <div class="font-semibold mt-0.5">SAFE · 50k DKK</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Status</div>
+            <div class="font-semibold mt-0.5">Outstanding</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Est. value</div>
+            <div class="font-semibold mt-0.5">~$75k</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-xl p-5 hover:border-brand-300 cursor-pointer transition">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded bg-slate-200 text-slate-700 flex items-center justify-center font-bold">N</div>
+            <div>
+              <div class="font-semibold">Nordic AB</div>
+              <div class="text-xs text-slate-500">Swedish AB</div>
+            </div>
+          </div>
+          <span class="text-xs text-slate-500">Advisor</span>
+        </div>
+        <div class="border-t border-slate-100 pt-3 grid grid-cols-3 gap-3 text-sm">
+          <div>
+            <div class="text-xs text-slate-500">Your stake</div>
+            <div class="font-semibold mt-0.5">15,000 QESO</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Vested</div>
+            <div class="font-semibold mt-0.5">7,500</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500">Est. value</div>
+            <div class="font-semibold mt-0.5">~$15k</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-brand-50 border border-brand-100 rounded-xl p-5 mb-8">
+      <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">Insights</div>
+      <ul class="text-sm space-y-1.5">
+        <li class="flex gap-2"><span class="text-brand-600">●</span> 2 of your grants reach a vesting milestone this quarter.</li>
+        <li class="flex gap-2"><span class="text-brand-600">●</span> Acme's latest 409A was Q1 2026.</li>
+        <li class="flex gap-2"><span class="text-brand-600">●</span> You'll be fully vested at Nordic AB on 2028-06-15.</li>
+      </ul>
+    </div>
+
+    <div class="text-center text-xs text-slate-400 py-6 border-t border-slate-200 space-y-2">
+      <div class="flex justify-center gap-1 flex-wrap">
+        <span class="trust-badge">🇪🇺 GDPR</span>
+        <span class="trust-badge">🔒 AES-256</span>
+      </div>
+      <p class="pt-2">Each of these companies manages their cap table with FreeCapT.</p>
+      <p>Starting a company? <a href="#" class="text-brand-700 hover:underline">Manage your own cap table for free →</a></p>
+    </div>
+  </main>
+</div>
+
+<!-- ============================================================== -->
+<!-- STAKEHOLDER SINGLE-COMPANY VIEW                                 -->
+<!-- ============================================================== -->
+<div id="stakeholder-view" class="hidden min-h-screen bg-slate-50">
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded bg-slate-900 text-brand-500 flex items-center justify-center text-sm font-bold">A</div>
+        <div>
+          <div class="text-sm font-semibold text-slate-900">Acme, Inc.</div>
+          <div class="text-xs text-slate-500">Your equity portal</div>
+        </div>
+      </div>
+      <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-semibold">D</div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-10">
+    <div class="mb-8">
+      <div class="text-xs text-slate-500 mb-1">Welcome, Dana</div>
+      <h1 class="text-3xl font-semibold text-slate-900">Here's what you own at Acme.</h1>
+      <p class="text-slate-600 mt-2">You hold <strong>200,000 stock options</strong> — roughly <strong>2.5% of Acme today</strong>. They vest over 4 years.</p>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <div class="text-xs text-slate-500">Grant · ISO option grant</div>
+          <div class="text-2xl font-semibold text-slate-900 mt-1">200,000 options</div>
+          <div class="text-sm text-slate-500 mt-1">Strike price $0.50 · Granted 2026-03-01</div>
+        </div>
+        <button class="px-3 py-1.5 border border-brand-200 text-brand-700 rounded-md text-sm font-medium hover:bg-brand-50">
+          ✦ Explain my grant
+        </button>
+      </div>
+      <div class="border-t border-slate-100 pt-4">
+        <div class="flex items-center justify-between text-sm mb-2">
+          <span class="text-slate-600">Vesting progress</span>
+          <span class="font-medium text-slate-900">15,278 / 200,000 vested</span>
+        </div>
+        <div class="wf-vest-bar mb-2" style="--p: 7.6%"></div>
+      </div>
+    </div>
+
+    <!-- Exit-value modeling (new in v0.8) -->
+    <div class="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+      <h3 class="text-sm font-semibold text-slate-900 mb-4">What could it be worth?</h3>
+      <div class="space-y-3">
+        <div>
+          <div class="flex items-center justify-between text-sm mb-1">
+            <span class="text-slate-600">If Acme exits at $50M</span>
+            <span class="font-semibold tabular-nums">~$1.05M</span>
+          </div>
+          <input type="range" min="10" max="500" value="50" class="w-full" />
+        </div>
+        <p class="text-xs text-slate-400">Educational estimate only. Talk to your tax advisor.</p>
+      </div>
+    </div>
+
+    <div class="text-center text-xs text-slate-400 py-6 border-t border-slate-200 space-y-2">
+      <p>Acme manages their cap table with FreeCapT.</p>
+      <p>Starting a company? <a href="#" class="text-brand-700 hover:underline">Manage your own cap table for free →</a></p>
+    </div>
+  </main>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODALS                                                          -->
+<!-- ============================================================== -->
+
+<!-- Add document modal (data room) -->
+<div id="modal-add-doc" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl w-full max-w-xl shadow-2xl">
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+      <div>
+        <h2 class="text-lg font-semibold text-slate-900">Add: Shareholders Agreement</h2>
+        <p class="text-xs text-slate-500 mt-0.5">Investor agreements · 6.1</p>
+      </div>
+      <button onclick="closeModal('add-doc')" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">×</button>
+    </div>
+    <div class="p-5 space-y-3">
+      <label class="flex items-start gap-3 p-4 border-2 border-brand-600 bg-brand-50 rounded-lg cursor-pointer">
+        <input type="radio" name="add-method" checked class="mt-1" />
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-brand-900">Generate from template</span>
+            <span class="text-[10px] bg-slate-900 text-white px-1.5 py-0.5 rounded font-semibold">PAID</span>
+          </div>
+          <div class="text-xs text-brand-700 mt-1">A jurisdiction-appropriate SHA for SMB-stage companies. Single share class, no preferred-stock provisions. Word format for lawyer review.</div>
+          <div class="text-xs text-brand-700 mt-2 italic">"Sensible starting point. Have it reviewed by counsel before signing."</div>
+        </div>
+      </label>
+      <label class="flex items-start gap-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:border-brand-300">
+        <input type="radio" name="add-method" class="mt-1" />
+        <div class="flex-1">
+          <div class="font-medium">Upload existing</div>
+          <div class="text-xs text-slate-500 mt-1">PDF or Word. We'll attach it to the Shareholders Agreement slot.</div>
+        </div>
+      </label>
+    </div>
+    <div class="p-5 border-t border-slate-100 flex items-center justify-end gap-2 bg-slate-50 rounded-b-xl">
+      <button onclick="closeModal('add-doc')" class="px-4 py-2 text-sm border border-slate-200 rounded-md bg-white">Cancel</button>
+      <button onclick="closeModal('add-doc')" class="px-4 py-2 text-sm bg-brand-600 text-white rounded-md font-medium">Next: configure →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Upgrade prompt (feature-based, not stakeholder-count) -->
+<div id="modal-upgrade" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl w-full max-w-lg shadow-2xl">
+    <div class="p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mx-auto mb-4">✦</div>
+      <h2 class="text-2xl font-bold mb-2">Upgrade to Paid · $15/mo</h2>
+      <p class="text-sm text-slate-600 mb-6">You're trying to use a Paid feature — ongoing AI, polished exports, stakeholder portal access, round modeling, document templates.</p>
+      <div class="text-left bg-slate-50 rounded-lg p-4 mb-6 text-sm">
+        <div class="font-semibold mb-2">All Paid features:</div>
+        <ul class="space-y-1 text-slate-600">
+          <li>✓ Ongoing AI chat ("ask your cap table")</li>
+          <li>✓ "Explain this" buttons everywhere</li>
+          <li>✓ AI-driven bulk add (prompt + doc upload)</li>
+          <li>✓ Rich Excel + legal-grade PDF + Word exports</li>
+          <li>✓ Document template generation</li>
+          <li>✓ Stakeholder portal access</li>
+          <li>✓ Round modeling — multi-investor allocation</li>
+        </ul>
+      </div>
+      <button onclick="closeModal('upgrade')" class="w-full py-3 bg-brand-600 text-white rounded-md font-medium hover:bg-brand-700 mb-2">Upgrade — $15/month →</button>
+      <button onclick="closeModal('upgrade')" class="w-full py-2 text-sm text-slate-500 hover:text-slate-700">Not now</button>
+      <p class="text-xs text-slate-400 mt-3">Cancel anytime. Your data stays yours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Bulk add modal (existing) -->
+<div id="modal-bulk" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+      <div>
+        <h2 class="text-lg font-semibold text-slate-900">Add stakeholders in bulk</h2>
+        <p class="text-xs text-slate-500 mt-0.5">Three modes. Paste is Free; AI prompt + Upload are Paid (Claude cost).</p>
+      </div>
+      <button onclick="closeModal('bulk')" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">×</button>
+    </div>
+    <div class="px-5 border-b border-slate-100 flex">
+      <button class="tab-btn active">⬚ Paste from spreadsheet · Free</button>
+      <button class="tab-btn">✦ Type it out <span class="ml-1 text-[9px] bg-slate-900 text-white px-1 py-0.5 rounded">PAID</span></button>
+      <button class="tab-btn">📄 Upload documents <span class="ml-1 text-[9px] bg-slate-900 text-white px-1 py-0.5 rounded">PAID</span></button>
+    </div>
+    <div class="p-5">
+      <div class="bg-slate-50 border border-slate-200 rounded-md p-3 mb-3 text-xs text-slate-600">
+        <strong class="text-slate-900">Paste from Excel/Sheets.</strong> Columns auto-detect. Free on every plan.
+      </div>
+      <div class="border border-slate-200 rounded-md overflow-hidden bulk-grid">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600 text-xs uppercase">
+            <tr><th class="text-left px-3 py-2">Name</th><th class="text-left px-3 py-2">Email</th><th class="text-left px-3 py-2">Type</th><th class="text-right px-3 py-2">Qty</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td><input value="Anna Karlsen" /></td><td><input value="anna@acme.com" /></td><td><input value="Founder" /></td><td><input value="2,500,000" class="text-right" /></td></tr>
+            <tr><td><input value="Ben Madsen" /></td><td><input value="ben@acme.com" /></td><td><input value="Founder" /></td><td><input value="2,500,000" class="text-right" /></td></tr>
+            <tr><td><input value="Chris Hansen" /></td><td><input value="chris@acme.com" /></td><td><input value="Founder" /></td><td><input value="1,500,000" class="text-right" /></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-xl flex justify-end gap-2">
+      <button onclick="closeModal('bulk')" class="px-4 py-2 text-sm border border-slate-200 rounded-md bg-white">Cancel</button>
+      <button onclick="closeModal('bulk')" class="px-4 py-2 text-sm bg-brand-600 text-white rounded-md font-medium">Create 3 stakeholders →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Grant modal (simplified version) -->
+<div id="modal-grant" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl w-full max-w-xl shadow-2xl">
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+      <h2 class="text-lg font-semibold">New transaction</h2>
+      <button onclick="closeModal('grant')" class="text-slate-400 text-2xl leading-none">×</button>
+    </div>
+    <div class="p-5 text-sm text-slate-600">
+      <p>Standard new-transaction flow per spec §5.3 — choose type, stakeholder, quantity, vesting, optional personal note. Multi-currency support: enter amount in any currency, FX rate snapshotted at transaction date.</p>
+    </div>
+    <div class="p-5 border-t border-slate-100 flex justify-end gap-2 bg-slate-50 rounded-b-xl">
+      <button onclick="closeModal('grant')" class="px-4 py-2 text-sm bg-brand-600 text-white rounded-md font-medium">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Invite member modal -->
+<div id="modal-invite" class="hidden fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Invite a member</h2>
+      <button onclick="closeModal('invite')" class="text-slate-400 text-2xl leading-none">×</button>
+    </div>
+    <div class="p-5 text-sm text-slate-600 space-y-3">
+      <p>Members (Admin / Editor / Viewer) are <strong>free</strong> on every plan. Adding cofounders or advisors with access to your cap table doesn't trigger Paid.</p>
+      <p class="text-xs text-slate-400">Only stakeholder portal access (the employees/advisors/investors viewing their own grants) is gated to Paid.</p>
+    </div>
+    <div class="p-5 border-t border-slate-100 flex justify-end gap-2 bg-slate-50 rounded-b-xl">
+      <button onclick="closeModal('invite')" class="px-4 py-2 text-sm bg-brand-600 text-white rounded-md font-medium">Send invite</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI helper -->
+<div id="modal-ai" class="hidden fixed top-0 right-0 bottom-0 w-[420px] bg-white border-l border-slate-200 shadow-2xl z-50 flex flex-col">
+  <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center">✦</div>
+      <div>
+        <div class="text-sm font-semibold">FreeCapT AI</div>
+        <div class="text-xs text-slate-500">Powered by Claude · EU region</div>
+      </div>
+    </div>
+    <button onclick="closeModal('ai')" class="text-slate-400 text-2xl leading-none">×</button>
+  </div>
+  <div class="flex-1 p-4">
+    <div class="bg-brand-50 border border-brand-100 rounded-lg p-3 text-sm">
+      <p>Hi! I can answer questions about your cap table, model what-ifs, and explain anything.</p>
+      <p class="text-xs text-slate-500 mt-2">Ongoing AI chat is a <strong>Paid</strong> feature. AI onboarding (first-time setup) was free.</p>
+      <button onclick="closeModal('ai'); openModal('upgrade');" class="mt-3 w-full text-xs bg-brand-600 text-white py-2 rounded font-medium">Upgrade to ask questions →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showScreen(name, evt) {
+  document.querySelectorAll('.wf-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (evt && evt.currentTarget && evt.currentTarget.classList.contains('nav-item')) {
+    evt.currentTarget.classList.add('active');
+  }
+  window.scrollTo(0, 0);
+}
+function openModal(name) { document.getElementById('modal-' + name).classList.remove('hidden'); }
+function closeModal(name) { document.getElementById('modal-' + name).classList.add('hidden'); }
+function switchView(view) {
+  const admin = document.getElementById('admin-view');
+  const portfolio = document.getElementById('stakeholder-portfolio-view');
+  const single = document.getElementById('stakeholder-view');
+  [admin, portfolio, single].forEach(el => el.classList.add('hidden'));
+  if (view === 'admin') admin.classList.remove('hidden');
+  else if (view === 'stakeholder-portfolio') portfolio.classList.remove('hidden');
+  else single.classList.remove('hidden');
+
+  ['admin', 'portfolio', 'stakeholder'].forEach(v => {
+    const btn = document.getElementById('view-' + v + '-btn');
+    if (btn) btn.className = 'px-2 py-1 rounded ' + (
+      (v === 'admin' && view === 'admin') || (v === 'portfolio' && view === 'stakeholder-portfolio') || (v === 'stakeholder' && view === 'stakeholder')
+        ? 'bg-brand-600 text-white' : 'bg-slate-700');
+  });
+}
+function switchJurisdiction(j) {
+  const labels = document.querySelectorAll('.instr-label-shares');
+  const map = { us:'shares', dk:'anparter', no:'aksjer', se:'aktier', de:'Geschäftsanteile', ch:'Aktien', uk:'shares' };
+  const nameMap = { us:'Acme, Inc.', dk:'Acme ApS', no:'Acme AS', se:'Acme AB', de:'Acme GmbH', ch:'Acme AG', uk:'Acme Ltd.' };
+  labels.forEach(l => l.textContent = map[j] || 'shares');
+  document.getElementById('demo-company-name').textContent = nameMap[j];
+  document.getElementById('company-switch-label').textContent = nameMap[j];
+}
+function switchLanguage(lang) { document.documentElement.setAttribute('lang', lang); }
+function switchCurrency(c) {
+  const map = { USD:'$', DKK:'kr', EUR:'€', GBP:'£', NOK:'kr', SEK:'kr', CHF:'CHF' };
+  document.getElementById('display-currency').textContent = c;
+  document.querySelectorAll('.currency-symbol').forEach(s => s.textContent = map[c] || '$');
+}
+function switchPlan(p) {
+  document.getElementById('plan-badge-free').classList.toggle('hidden', p !== 'free');
+  document.getElementById('plan-badge-paid').classList.toggle('hidden', p !== 'paid');
+}
+function switchSimTab(tab) {
+  ['basic', 'modeling'].forEach(t => {
+    document.getElementById('sim-tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('sim-pane-' + t).classList.toggle('hidden', t !== tab);
+  });
+}
+</script>
+
+</body>
+</html>

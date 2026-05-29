@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FreeCapT — the free cap table for European founders</title>
+<meta name="description" content="The free cap table for bootstrapped founders, family businesses, and small SaaS. Built for Denmark, Norway, Sweden, Germany, Switzerland, the UK, and US. AI-native. $15/month when you're ready to share." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#ECFDF5',
+            100: '#D1FAE5',
+            200: '#A7F3D0',
+            500: '#10B981',
+            600: '#059669',
+            700: '#047857',
+            900: '#064E3B',
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .wf-donut {
+    width: 280px; height: 280px; border-radius: 50%;
+    background: conic-gradient(
+      #047857 0% 30.7%,
+      #10b981 30.7% 61.4%,
+      #34d399 61.4% 79.8%,
+      #f59e0b 79.8% 82.3%,
+      #fbbf24 82.3% 83.2%,
+      #94a3b8 83.2% 95.2%,
+      #e2e8f0 95.2% 100%
+    );
+    position: relative;
+  }
+  .wf-donut::after {
+    content: ""; position: absolute; inset: 22%;
+    background: white; border-radius: 50%;
+  }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+<!-- ============================================================== -->
+<!-- TOP NAV                                                          -->
+<!-- ============================================================== -->
+<header class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="font-display font-bold text-xl tracking-tight">
+        Free<span class="text-brand-600">C</span>apT
+      </div>
+    </div>
+    <nav class="hidden md:flex items-center gap-7 text-sm text-slate-600">
+      <a href="#features" class="hover:text-slate-900">Features</a>
+      <a href="#countries" class="hover:text-slate-900">Countries</a>
+      <a href="#pricing" class="hover:text-slate-900">Pricing</a>
+      <a href="#security" class="hover:text-slate-900">Security</a>
+      <a href="#faq" class="hover:text-slate-900">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <select class="text-xs border border-slate-200 rounded-md px-2 py-1.5 bg-white">
+        <option>🇬🇧 EN</option>
+        <option>🇩🇰 DA</option>
+        <option>🇳🇴 NO</option>
+        <option>🇸🇪 SV</option>
+        <option>🇩🇪 DE</option>
+      </select>
+      <a href="#" class="text-sm font-medium text-slate-700 hover:text-slate-900">Sign in</a>
+      <a href="#cta" class="hidden sm:inline-block px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-md hover:bg-brand-700">Get started — free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================== -->
+<!-- HERO                                                              -->
+<!-- ============================================================== -->
+<section class="relative grid-bg">
+  <div class="max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200 rounded-full text-xs font-medium text-brand-700 mb-6">
+        <span>●</span> Now in private beta — DK · NO · SE · DE · CH · UK · US
+      </div>
+      <h1 class="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
+        The free cap table for <span class="text-brand-600">European founders</span>.
+      </h1>
+      <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
+        Built for bootstrapped startups, family businesses, agencies, and small SaaS. In five languages. Under your country's rules. AI-native. <strong class="text-slate-900">$15/month</strong> when you want to share with stakeholders.
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="#cta" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white text-base font-medium rounded-md hover:bg-brand-700 shadow-sm">
+          Get started — free
+          <span>→</span>
+        </a>
+        <a href="#pricing" class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-slate-700 hover:text-slate-900">
+          See pricing
+        </a>
+      </div>
+      <p class="text-xs text-slate-500 mt-6">No credit card. Set up in 15 minutes. Unlimited stakeholders on the free plan.</p>
+    </div>
+
+    <!-- Hero illustration — cap table preview -->
+    <div class="relative">
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="text-xs text-slate-500">Acme ApS · Your cap table</div>
+            <div class="text-lg font-semibold">Who owns Acme today.</div>
+          </div>
+          <div class="text-xs text-brand-700 bg-brand-50 px-2 py-1 rounded font-medium">7 stakeholders</div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="wf-donut shrink-0" style="width:160px;height:160px;"></div>
+          <div class="flex-1 text-sm space-y-1.5">
+            <div class="flex justify-between"><span><span class="swatch" style="background:#047857"></span>Anna (Founder)</span><span class="font-medium tabular-nums">30.7%</span></div>
+            <div class="flex justify-between"><span><span class="swatch" style="background:#10b981"></span>Ben (Founder)</span><span class="font-medium tabular-nums">30.7%</span></div>
+            <div class="flex justify-between"><span><span class="swatch" style="background:#34d399"></span>Chris (Founder)</span><span class="font-medium tabular-nums">18.4%</span></div>
+            <div class="flex justify-between"><span><span class="swatch" style="background:#f59e0b"></span>Dana + Erik (Options)</span><span class="font-medium tabular-nums">3.4%</span></div>
+            <div class="flex justify-between"><span><span class="swatch" style="background:#94a3b8"></span>Frank (SAFE)</span><span class="font-medium tabular-nums">~5%</span></div>
+            <div class="flex justify-between text-slate-500"><span>Pool</span><span class="tabular-nums">12.0%</span></div>
+          </div>
+        </div>
+        <div class="border-t border-slate-100 mt-4 pt-3 flex items-center gap-2 text-sm">
+          <span class="text-brand-600">✦</span>
+          <span class="text-slate-500 italic">"What if I raise 2M DKK at 8M DKK pre-money?"</span>
+        </div>
+      </div>
+      <!-- Floating badges -->
+      <div class="absolute -top-3 -right-3 bg-white border border-slate-200 rounded-lg shadow-md px-3 py-2 text-xs font-medium text-slate-700 flex items-center gap-2">
+        🇪🇺 GDPR
+      </div>
+      <div class="absolute -bottom-3 -left-3 bg-white border border-slate-200 rounded-lg shadow-md px-3 py-2 text-xs font-medium text-brand-700 flex items-center gap-2">
+        Free up to forever — for personal use
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- THREE VALUE PROPS                                                -->
+<!-- ============================================================== -->
+<section id="features" class="border-t border-slate-200 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">What you get</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-2xl mx-auto">Cap tables shouldn't take a lawyer, a Carta sales call, or a Tuesday.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-5">◐</div>
+        <h3 class="text-lg font-semibold mb-2">Free for your personal cap table</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">Build it, see it, model rounds, export the raw data. No stakeholder count limits. No credit card. No asterisks. Pay $15/month only when you want to share with employees, generate legal docs, or use AI features.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-5">⌖</div>
+        <h3 class="text-lg font-semibold mb-2">Built for seven jurisdictions</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">Danish ApS · Norwegian AS · Swedish AB · German GmbH · Swiss AG · UK Ltd. · US Delaware C-Corp + LLC. Each with its own instruments, templates, and tax-favorable schemes (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests).</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-5">✦</div>
+        <h3 class="text-lg font-semibold mb-2">AI-native, not bolted-on</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">Upload your formation docs — AI extracts your cap table in 90 seconds. Ask in plain English: "What if I raise 2M at 8M pre-money?" Click "explain this" on any number. Powered by Claude, in your region.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- COUNTRY PACKS                                                    -->
+<!-- ============================================================== -->
+<section id="countries" class="border-t border-slate-200">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">Country packs</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-3xl mx-auto">Free in your country, under your country's rules.</h2>
+      <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Every pack ships with the local entity types, instruments, validation, and document templates. No US-first hand-waving.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇩🇰</div>
+        <div class="font-semibold">Denmark</div>
+        <div class="text-xs text-slate-500 mt-0.5">ApS · A/S</div>
+        <div class="text-xs text-brand-700 mt-3">§ 7P · Tegningsoptioner · Ejerbog</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇳🇴</div>
+        <div class="font-semibold">Norway</div>
+        <div class="text-xs text-slate-500 mt-0.5">AS · ASA</div>
+        <div class="text-xs text-brand-700 mt-3">Opsjonsskatteordningen · Aksjeeierbok</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇸🇪</div>
+        <div class="font-semibold">Sweden</div>
+        <div class="text-xs text-slate-500 mt-0.5">AB privat · publikt</div>
+        <div class="text-xs text-brand-700 mt-3">QESO · Aktiebok · Teckningsoptioner</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇩🇪</div>
+        <div class="font-semibold">Germany</div>
+        <div class="text-xs text-slate-500 mt-0.5">GmbH · AG</div>
+        <div class="text-xs text-brand-700 mt-3">VSOP · Notary workflow · § 19a</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇨🇭</div>
+        <div class="font-semibold">Switzerland</div>
+        <div class="text-xs text-slate-500 mt-0.5">AG · GmbH</div>
+        <div class="text-xs text-brand-700 mt-3">Sperrfrist · Mitarbeiteroptionen</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇬🇧</div>
+        <div class="font-semibold">United Kingdom</div>
+        <div class="text-xs text-slate-500 mt-0.5">Ltd.</div>
+        <div class="text-xs text-brand-700 mt-3">EMI · Register of Members · ASA</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-5 hover:border-brand-300 transition">
+        <div class="text-2xl mb-2">🇺🇸</div>
+        <div class="font-semibold">United States</div>
+        <div class="text-xs text-slate-500 mt-0.5">DE C-Corp · DE LLC</div>
+        <div class="text-xs text-brand-700 mt-3">ISO · NSO · SAFE · Profits interests</div>
+      </div>
+      <div class="border border-dashed border-slate-300 rounded-lg p-5 text-slate-500">
+        <div class="text-2xl mb-2 opacity-50">➕</div>
+        <div class="font-semibold">France · NL · ES · FI · CA</div>
+        <div class="text-xs mt-0.5">Coming as country packs</div>
+        <div class="text-xs mt-3 italic">One sprint per new country.</div>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-slate-500 mt-10">UI available in Dansk · Norsk · Svenska · Deutsch · English. Language is independent of jurisdiction — pick what works for you.</p>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- PRODUCT PREVIEW: WHAT'S IN IT                                    -->
+<!-- ============================================================== -->
+<section class="border-t border-slate-200 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">The product</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-3xl mx-auto">Six screens. Not thirty.</h2>
+      <p class="text-slate-600 mt-4 max-w-2xl mx-auto">FreeCapT is built around one question: who owns this company? Everything else is in service of answering that, clearly, in 15 minutes or less.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Cap table</div>
+        <h3 class="text-lg font-semibold mb-2">Who owns this company today.</h3>
+        <p class="text-sm text-slate-600">Donut chart and table side by side. Outstanding or fully-diluted toggle. As-of-date for historical views. Click "You have 18.5% left to grant" to issue equity.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Stakeholders</div>
+        <h3 class="text-lg font-semibold mb-2">Everyone, added in 30 seconds.</h3>
+        <p class="text-sm text-slate-600">Paste from spreadsheet. Or type in plain English: "Anna and Ben at 30% each, Dana has 200k options vested over 4 years." AI parses, you confirm.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Round modeling <span class="text-brand-700 ml-1">— Paid</span></div>
+        <h3 class="text-lg font-semibold mb-2">Allocate your raise across real investors.</h3>
+        <p class="text-sm text-slate-600">Raising 2M at 8M pre? Drop in your 10 interested investors with their commitment amounts. See who fits, who scales back, what the cap table looks like after.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Stakeholder portal <span class="text-brand-700 ml-1">— Paid</span></div>
+        <h3 class="text-lg font-semibold mb-2">Your team sees what they own, in plain English.</h3>
+        <p class="text-sm text-slate-600">Magic-link sign-in (no passwords). Their vesting schedule. AI "explain my grant" button. Angels and advisors with multiple grants get a free portfolio dashboard.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Documents <span class="text-brand-700 ml-1">— Paid for legal-grade</span></div>
+        <h3 class="text-lg font-semibold mb-2">Per-jurisdiction templates that lawyers respect.</h3>
+        <p class="text-sm text-slate-600">Generate your Danish ejerbog, your German Gesellschafterliste, your UK Register of Members, your US capitalization table for 409A. PDF/A archival format. Word for redlining.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-xl p-7">
+        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Simulator</div>
+        <h3 class="text-lg font-semibold mb-2">"What if I raise 2M at 8M post?"</h3>
+        <p class="text-sm text-slate-600">Side-by-side before/after cap tables with per-stakeholder dilution. SAFEs auto-convert. Save scenarios, share read-only links with your cofounders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- PRICING                                                          -->
+<!-- ============================================================== -->
+<section id="pricing" class="border-t border-slate-200">
+  <div class="max-w-5xl mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">Pricing</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">Two plans. One price.</h2>
+      <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Carta starts at $2,400/year for a tiny company. We're $180/year — and only when you're ready.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <!-- Free -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-8">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="text-xl font-semibold">Free</h3>
+          <div class="text-3xl font-bold tabular-nums">$0</div>
+        </div>
+        <p class="text-sm text-slate-500 mb-6">For your personal cap table. Forever.</p>
+        <a href="#cta" class="block w-full text-center py-3 border border-slate-300 rounded-md font-medium hover:bg-slate-50 mb-6">Get started — free</a>
+
+        <ul class="space-y-3 text-sm">
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Full cap table — unlimited stakeholders</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Bulk add via spreadsheet paste</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> AI onboarding helper (one-time)</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Round simulator (single-investor)</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Basic CSV export</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Cofounders as Admin / Editor / Viewer</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Multi-company switcher</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> All 7 country packs</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> 5 UI languages</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Multi-currency, multi-timezone</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> 2FA, audit log, GDPR data export</li>
+          <li class="flex gap-2"><span class="text-brand-600">✓</span> Magic-link sign-in</li>
+        </ul>
+      </div>
+
+      <!-- Paid -->
+      <div class="bg-slate-900 text-white border border-slate-900 rounded-2xl p-8 relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">When you're ready</div>
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="text-xl font-semibold">Paid</h3>
+          <div><span class="text-3xl font-bold tabular-nums">$15</span><span class="text-slate-400 text-sm">/month</span></div>
+        </div>
+        <p class="text-sm text-slate-400 mb-6">Everything in Free, plus the value moments.</p>
+        <a href="#cta" class="block w-full text-center py-3 bg-brand-600 hover:bg-brand-700 rounded-md font-medium mb-6">Start paid plan</a>
+
+        <ul class="space-y-3 text-sm">
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Everything in Free</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Ongoing AI chat — "ask your cap table"</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> "Explain this" buttons on every number</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> AI-driven bulk add (prompt + document upload)</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Rich Excel export — multi-sheet, live formulas, embedded chart</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Legal-grade PDF + Word exports — per jurisdiction</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Document template generation</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Stakeholder portal access for your team</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Round modeling — multi-investor allocation</li>
+          <li class="flex gap-2"><span class="text-brand-500">✓</span> Term-sheet draft generation</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-slate-500 mt-10">No usage cliffs. No per-stakeholder fees. Cancel in one click; your data stays yours.</p>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- SECURITY / TRUST                                                  -->
+<!-- ============================================================== -->
+<section id="security" class="border-t border-slate-200 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="text-center mb-12">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">Security & trust</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-2xl mx-auto">A cap table is the most sensitive document a private company owns.</h2>
+      <p class="text-slate-600 mt-4 max-w-2xl mx-auto">We treat it that way.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">🇪🇺</div>
+        <div>
+          <div class="font-semibold text-sm">GDPR-compliant. EU and US regions.</div>
+          <div class="text-xs text-slate-500 mt-1">EU customers' data hosted in Frankfurt; US customers in us-east. Your choice at company creation, immutable thereafter.</div>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">🔒</div>
+        <div>
+          <div class="font-semibold text-sm">AES-256 encrypted. TLS 1.3.</div>
+          <div class="text-xs text-slate-500 mt-1">Per-tenant encryption keys. SOC 2 Type I attestation in progress (target Q3 2026). ISO 27001 on the roadmap.</div>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">📋</div>
+        <div>
+          <div class="font-semibold text-sm">Append-only audit log.</div>
+          <div class="text-xs text-slate-500 mt-1">Every state change recorded with actor, IP, before/after. 7-year retention. Tamper-evident replication to immutable storage.</div>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">💾</div>
+        <div>
+          <div class="font-semibold text-sm">Your data is yours.</div>
+          <div class="text-xs text-slate-500 mt-1">One-click export of everything — ledger, documents, audit log — as a ZIP. Account deletion within 30 days, full purge under GDPR.</div>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">🪄</div>
+        <div>
+          <div class="font-semibold text-sm">Magic-link only. No passwords.</div>
+          <div class="text-xs text-slate-500 mt-1">Lower attack surface than password databases. Optional TOTP 2FA for the paranoid. Device-trust prompts on new sign-ins.</div>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-3">
+        <div class="text-2xl">🛡️</div>
+        <div>
+          <div class="font-semibold text-sm">Bug bounty + public security page.</div>
+          <div class="text-xs text-slate-500 mt-1">Researchers welcome. Status page at <span class="font-mono text-slate-700">status.freecapt.com</span>. Public changelog with every release.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="#" class="text-sm font-medium text-brand-700 hover:text-brand-900">Read the full security posture →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- FAQ                                                              -->
+<!-- ============================================================== -->
+<section id="faq" class="border-t border-slate-200">
+  <div class="max-w-3xl mx-auto px-6 py-24">
+    <div class="text-center mb-12">
+      <div class="text-xs font-semibold text-brand-700 uppercase tracking-wider mb-3">Questions, anticipated</div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">FAQ</h2>
+    </div>
+
+    <div class="space-y-2">
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>Is it really free?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">Yes. The free plan is the full personal cap table — build it, see it, model rounds, export the data, switch between companies if you manage multiple. There are no stakeholder limits, no time limits, no credit card. You pay $15/month only when you want to share with stakeholders, use AI features beyond setup, or generate legal-grade documents.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>What jurisdictions do you support?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">Seven at launch: Denmark (ApS + A/S), Norway (AS + ASA), Sweden (AB privat + publikt), Germany (GmbH + AG), Switzerland (AG + GmbH), United Kingdom (Ltd.), and United States Delaware (C-Corp + LLC). Each comes with the local instrument types, validation rules, document templates, and tax-favorable schemes (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests). More countries are sprint-sized additions.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>Do I need a lawyer to use FreeCapT?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">No. FreeCapT is built for founders who don't have a Cooley partner on speed-dial. Onboarding is conversational. Defaults are sensible. The AI explains anything in plain English. You'll still want a lawyer for actual fundraises, tax-scheme elections, and notary appointments — we make those moments cheaper and faster by generating the right document for your lawyer to review.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>How is this different from Carta?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">Carta is built for venture-backed US scaleups and prices accordingly — $2,400+/year for a tiny company. It's the right tool for that audience. FreeCapT is built for the 95% of private companies that aren't VC-backed unicorns — bootstrapped founders, family businesses, agencies, small SaaS. We have first-class support for European jurisdictions (Carta's weak spot), AI-native UX (Carta's bolted-on), and a free plan that's actually usable.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>Is my data safe?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">A cap table is the most sensitive document a private company owns. We treat it that way — AES-256 encryption at rest, TLS 1.3 in transit, per-tenant encryption keys, append-only audit log, GDPR-compliant. EU customers' data is hosted in Frankfurt; US in us-east. SOC 2 Type I attestation is in progress, with Type II following ~12 months later. Full security posture is public at <span class="font-mono text-xs">freecapt.com/security</span>.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>What about GDPR?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">EU data stays in the EU (Frankfurt region). DPA available. One-click data export (you own your data). Account deletion triggers a 30-day grace period then full purge. Data subject access requests handled within 30 days. Privacy policy in plain English, not legalese.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>What languages do you support?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">UI is available in English, Dansk, Norsk, Svenska, and Deutsch. Language is independent of jurisdiction — a Danish founder running a UK Ltd. can use the Danish UI. Legal-grade exports stay in the jurisdiction's regulatory language (a Danish ejerbog is in Danish; a US capitalization table is in English) regardless of UI preference. French and Italian for Swiss customers are post-launch.</p>
+      </details>
+      <details class="border-b border-slate-200 py-5 group">
+        <summary class="flex items-center justify-between font-medium">
+          <span>Can I import from Carta or another tool?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">Yes. Export a CSV from Carta, Pulley, or any spreadsheet and paste into our bulk-add screen — columns auto-map. Or upload your formation documents and grant agreements; our AI will extract the entire cap table to a draft you confirm. Either path is typically a 5-minute migration.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- FINAL CTA                                                         -->
+<!-- ============================================================== -->
+<section id="cta" class="border-t border-slate-200 bg-slate-900 text-white">
+  <div class="max-w-4xl mx-auto px-6 py-24 text-center">
+    <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight mb-6">See your cap table in 15 minutes.</h2>
+    <p class="text-slate-300 max-w-2xl mx-auto mb-10 text-lg">No credit card. No sales call. No lawyer. Paste your existing spreadsheet, type it in plain English, or upload your formation docs.</p>
+
+    <form class="max-w-md mx-auto flex gap-3 mb-4">
+      <input type="email" placeholder="you@yourcompany.com" class="flex-1 px-4 py-3 rounded-md bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-500" />
+      <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 rounded-md font-medium">Get started →</button>
+    </form>
+    <p class="text-xs text-slate-500">Available in Dansk · Norsk · Svenska · Deutsch · English</p>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- FOOTER                                                            -->
+<!-- ============================================================== -->
+<footer class="bg-slate-900 text-slate-400 border-t border-slate-800">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-5 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="font-display font-bold text-xl text-white mb-3">Free<span class="text-brand-500">C</span>apT</div>
+        <p class="text-sm leading-relaxed max-w-xs">The free cap table for European founders. Built by <a href="#" class="text-slate-300 hover:text-white">Bifrost Studios</a> in Copenhagen.</p>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">Product</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#features" class="hover:text-white">Features</a></li>
+          <li><a href="#countries" class="hover:text-white">Country packs</a></li>
+          <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+          <li><a href="#" class="hover:text-white">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">Trust</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#security" class="hover:text-white">Security</a></li>
+          <li><a href="#" class="hover:text-white">Privacy</a></li>
+          <li><a href="#" class="hover:text-white">Terms</a></li>
+          <li><a href="#" class="hover:text-white">Status</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">Company</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-white">About</a></li>
+          <li><a href="#" class="hover:text-white">Contact</a></li>
+          <li><a href="#" class="hover:text-white">Press</a></li>
+          <li><a href="mailto:hello@freecapt.com" class="hover:text-white">hello@freecapt.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
+      <div>© 2026 Bifrost Studios. All rights reserved.</div>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="px-2 py-1 border border-slate-800 rounded">🇪🇺 GDPR</span>
+        <span class="px-2 py-1 border border-slate-800 rounded">EU + US regions</span>
+        <span class="px-2 py-1 border border-slate-800 rounded">SOC 2 in progress</span>
+        <span class="px-2 py-1 border border-slate-800 rounded">Status: ●</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
