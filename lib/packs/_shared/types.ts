@@ -40,7 +40,26 @@ export type RegistryIdFormat = {
 export type ValidationLevel = "error" | "warning";
 export type ValidationIssue = { level: ValidationLevel; code: string; message: string };
 
+// The typed result the app consumes at a validation boundary (Prompt 7).
+// `ok: false` carries flattened error + warning message lists; `ok: true` means
+// no blocking errors (there may still be advisory warnings — see `warnings`).
+export type ValidationResult =
+  | { ok: true; warnings: string[] }
+  | { ok: false; errors: string[]; warnings: string[] };
+
+// Fold a list of issues into the typed result. Errors block (ok: false);
+// warnings alone don't.
+export function toValidationResult(issues: ValidationIssue[]): ValidationResult {
+  const errors = issues.filter((i) => i.level === "error").map((i) => i.message);
+  const warnings = issues.filter((i) => i.level === "warning").map((i) => i.message);
+  return errors.length > 0 ? { ok: false, errors, warnings } : { ok: true, warnings };
+}
+
 // Favorable employee-equity tax scheme metadata + a live eligibility check (§2.4).
+// Fields beyond the first block are optional company/employee inputs the
+// jurisdiction schemes need (NO opsjonsskatteordningen, UK EMI, US ISO). Checks
+// that depend on a field are skipped when it's absent — we don't fail what we
+// can't see — except the always-known core checks (employee status, instrument).
 export type TaxSchemeInput = {
   subtype: string; // instrument being granted
   grantValue: number; // value of the grant at grant date, in pack currency
@@ -48,6 +67,34 @@ export type TaxSchemeInput = {
   isEmployee: boolean; // employee/consultant (CEO counts if also employed)
   broadBased?: boolean; // offered to >80% of employees (raises the cap 10% → 20%)
   optedInAgreement?: boolean; // grant agreement references the scheme
+
+  // Company-level eligibility inputs (NO opsjonsskatteordningen, UK EMI).
+  companyAgeYears?: number; // NO: < 10 years
+  avgEmployees?: number; // NO: < 50; UK FTE: < 250
+  balanceSheet?: number; // NO: < 80M NOK
+  revenue?: number; // NO: < 80M NOK
+  grossAssets?: number; // UK: < £30M
+  excludedIndustry?: boolean; // NO/UK: non-qualifying trade
+  independent?: boolean; // UK: not majority-controlled by another company
+
+  // Employee work commitment.
+  weeklyHours?: number; // NO ≥ 25; UK ≥ 25
+  workingTimePercent?: number; // UK alt: ≥ 75% of working time
+  monthsEmployed?: number; // NO: ≥ 12
+
+  // Lifetime / company-wide scheme caps.
+  lifetimeGrantsSoFar?: number; // prior scheme grant value for this employee
+  companyOutstandingSchemeValue?: number; // total outstanding under the scheme
+
+  // FMV / valuation discipline (UK EMI valuation, US ISO strike ≥ FMV / 409A).
+  strikePrice?: number;
+  fmvAtGrant?: number;
+  firstYearVestValue?: number; // US ISO $100k annual vest limit
+  hurdleValue?: number; // US LLC profits-interest hurdle (Rev. Proc. 93-27)
+  electionFiled?: boolean; // US § 83(b) / profits-interest election filed
+  valuationReference?: string; // UK HMRC EMI ref / US 409A ref
+  valuationDate?: string; // YYYY-MM-DD
+  grantDate?: string; // YYYY-MM-DD
 };
 
 export type TaxScheme = {

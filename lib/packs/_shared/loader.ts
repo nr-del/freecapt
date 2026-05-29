@@ -2,20 +2,26 @@
 // app uses to turn a company row into its jurisdiction bundle. Adding a pack =
 // importing it and adding one registry entry (no other code changes).
 import { dkPack } from "@/lib/packs/dk/pack";
+import { noPack } from "@/lib/packs/no/pack";
+import { ukPack } from "@/lib/packs/uk/pack";
 import { usPack } from "@/lib/packs/us/pack";
 import type { CountryPack, EquityUnitNoun, SecurityCategory } from "@/lib/packs/_shared/types";
 
-// Keyed by entity type (== the value stored on companies.entityType). DK's one
-// pack covers both of its entity types.
+// Keyed by entity type (== the value stored on companies.entityType). Packs that
+// cover multiple entity types (DK ApS/AS, NO AS/ASA, US C-Corp/LLC) appear once
+// per type.
 const REGISTRY: Record<string, CountryPack> = {
   "dk-aps": dkPack,
   "dk-as": dkPack,
+  "no-as": noPack,
+  "no-asa": noPack,
+  "uk-ltd": ukPack,
   "us-de-ccorp": usPack,
+  "us-de-llc": usPack,
 };
 
-// Fallback for jurisdictions whose packs haven't shipped yet (NO/UK, us-de-llc).
-// Keeps the cap table rendering with plain-English labels until the real pack
-// lands — see docs/13_starter_prompts.md Prompt 7.
+// Fallback for any entity type without a registered pack. Keeps the cap table
+// rendering with plain-English labels — see docs/13_starter_prompts.md Prompt 7.
 const FALLBACK_PACK: CountryPack = {
   code: "generic",
   version: "0.0.0",
@@ -43,8 +49,8 @@ const FALLBACK_PACK: CountryPack = {
   validateTransactionDate: () => [],
 };
 
-// All packs available for the jurisdiction switcher (deduped — DK appears once).
-export const AVAILABLE_PACKS: CountryPack[] = [usPack, dkPack];
+// All packs available for the jurisdiction switcher (deduped — each pack once).
+export const AVAILABLE_PACKS: CountryPack[] = [usPack, dkPack, noPack, ukPack];
 
 export function getPackByEntityType(entityType: string): CountryPack {
   return REGISTRY[entityType] ?? FALLBACK_PACK;
