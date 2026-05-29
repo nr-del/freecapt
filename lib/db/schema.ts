@@ -109,6 +109,8 @@ export const accounts = pgTable(
     referredByAccountId: uuid().references((): AnyPgColumn => accounts.id),
     emailVerifiedAt: timestamp({ withTimezone: true }),
     lastSignedInAt: timestamp({ withTimezone: true }),
+    // The AI onboarding helper is free ONE time per account (docs/13 Prompt 9).
+    hasUsedAiOnboarding: boolean().notNull().default(false),
 
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),

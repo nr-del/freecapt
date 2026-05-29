@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { AiHelperLauncher } from "@/components/freecapt/ai-helper-launcher";
 import { createServerClient } from "@/lib/auth/supabase-server";
 
 const NAV = [
@@ -43,6 +44,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         </div>
       </nav>
       {children}
+      <AiHelperLauncher />
     </div>
   );
 }

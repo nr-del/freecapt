@@ -15,6 +15,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { ExtractResponse } from "@/lib/ai/extract";
 import {
   COLUMNS,
   emptyRow,
@@ -42,15 +43,64 @@ export function BulkAddModal({
   startRows?: number;
 }) {
   const router = useRouter();
+  const [tab, setTab] = useState("paste");
   const [rows, setRows] = useState<BulkRow[]>(() =>
     Array.from({ length: Math.max(1, startRows) }, emptyRow),
   );
   const [pasteText, setPasteText] = useState("");
+  const [aiText, setAiText] = useState("");
+  const [extracting, setExtracting] = useState(false);
+  const [assumptions, setAssumptions] = useState<string[]>([]);
   const [pending, startTransition] = useTransition();
 
   const reset = () => {
+    setTab("paste");
     setRows(Array.from({ length: Math.max(1, startRows) }, emptyRow));
     setPasteText("");
+    setAiText("");
+    setAssumptions([]);
+    setExtracting(false);
+  };
+
+  // AI "type it out" → server extraction → editable grid (free one time per
+  // account; a 402 means the free use is spent and routes to the paywall).
+  const extractWithAi = async () => {
+    const text = aiText.trim();
+    if (text.length < 3) {
+      toast.error("Describe your cap table first.");
+      return;
+    }
+    setExtracting(true);
+    try {
+      const res = await fetch("/api/ai/extract", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const data = (await res.json()) as ExtractResponse;
+      if (!data.ok) {
+        if (data.paywall) {
+          onUpgrade("AI “type it out” bulk add");
+        } else {
+          toast.error(data.error);
+        }
+        return;
+      }
+      if (data.rows.length === 0) {
+        toast.error("Couldn't find any stakeholders in that. Try adding more detail.");
+        return;
+      }
+      setRows(data.rows);
+      setAssumptions(data.assumptions);
+      setTab("paste");
+      toast.success(
+        `Drafted ${data.rows.length} ${data.rows.length === 1 ? "stakeholder" : "stakeholders"} — review and edit below.`,
+      );
+    } catch {
+      toast.error("The AI helper isn't available right now. Try Paste instead.");
+    } finally {
+      setExtracting(false);
+    }
   };
 
   const handleOpenChange = (next: boolean) => {
@@ -107,11 +157,14 @@ export function BulkAddModal({
           </DialogDescription>
         </DialogHeader>
 
-        <Tabs defaultValue="paste" className="p-5">
+        <Tabs value={tab} onValueChange={setTab} className="p-5">
           <TabsList className="mb-4">
             <TabsTrigger value="paste">Paste from spreadsheet</TabsTrigger>
             <TabsTrigger value="type" className="gap-1.5">
-              Type it out <Badge variant="paid">Paid</Badge>
+              Type it out
+              <Badge variant="paid" className="bg-brand-100 text-brand-700">
+                AI
+              </Badge>
             </TabsTrigger>
             <TabsTrigger value="upload" className="gap-1.5">
               Upload documents <Badge variant="paid">Paid</Badge>
@@ -120,6 +173,16 @@ export function BulkAddModal({
 
           {/* --- Paste (Free) --- */}
           <TabsContent value="paste" className="space-y-4">
+            {assumptions.length > 0 && (
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-3 text-xs text-brand-800">
+                <div className="mb-1 font-semibold">What the AI assumed — double-check these:</div>
+                <ul className="list-disc space-y-0.5 pl-4">
+                  {assumptions.map((a, i) => (
+                    <li key={i}>{a}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="space-y-2">
               <textarea
                 value={pasteText}
@@ -194,13 +257,32 @@ export function BulkAddModal({
             </Button>
           </TabsContent>
 
-          {/* --- Type it out (Paid stub) --- */}
-          <TabsContent value="type">
-            <PaidStub
-              title="Describe your cap table in plain words"
-              body="Just type it out — “Anna and Ben are cofounders at 30% each, Dana has 200k options” — and AI turns it into a draft you can edit. Available on Paid."
-              onUpgrade={() => onUpgrade("AI “type it out” bulk add")}
-            />
+          {/* --- Type it out (AI extraction; free one time per account) --- */}
+          <TabsContent value="type" className="space-y-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
+              <h3 className="text-sm font-semibold text-slate-900">
+                Describe your cap table in plain words
+              </h3>
+              <p className="mt-0.5 text-xs text-slate-500">
+                Type it out — “Anna and Ben are cofounders at 30% each, Dana has 200k options” —
+                and AI turns it into a draft you can review and edit. Free once.
+              </p>
+              <textarea
+                value={aiText}
+                onChange={(e) => setAiText(e.target.value)}
+                rows={5}
+                placeholder="Anna 30%, Ben 30%, Chris 18%, Dana has 200k options vesting 4y/1y…"
+                className="mt-3 w-full resize-y rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 placeholder:text-slate-300 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+              />
+              <div className="mt-3 flex items-center justify-between">
+                <p className="text-xs text-slate-400">
+                  Percentages become notes — we won&apos;t invent share counts.
+                </p>
+                <Button type="button" onClick={extractWithAi} disabled={extracting}>
+                  {extracting ? "Reading…" : "Draft with AI →"}
+                </Button>
+              </div>
+            </div>
           </TabsContent>
 
           {/* --- Upload (Paid stub) --- */}

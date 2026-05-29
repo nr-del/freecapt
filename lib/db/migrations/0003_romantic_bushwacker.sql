@@ -1,0 +1,1 @@
+ALTER TABLE "accounts" ADD COLUMN "has_used_ai_onboarding" boolean DEFAULT false NOT NULL;
