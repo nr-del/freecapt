@@ -7,6 +7,7 @@ import { createServerClient } from "@/lib/auth/supabase-server";
 const NAV = [
   { href: "/cap-table", label: "Cap table" },
   { href: "/stakeholders", label: "Stakeholders" },
+  { href: "/settings", label: "Settings" },
 ];
 
 // Server-side auth wall — CLAUDE.md auth rules. No session ⇒ /sign-in.

@@ -2,13 +2,8 @@ import { and, eq, isNull } from "drizzle-orm";
 
 import { db, schema } from "@/lib/db";
 import { getActiveCompany } from "@/lib/db/queries";
-import {
-  SUBTYPE_LABEL,
-  TYPE_LABEL,
-  colorForType,
-  intFmt,
-  moneyFmt,
-} from "@/lib/cap-table/display";
+import { getPackForCompany, securityLabel } from "@/lib/packs/_shared/loader";
+import { TYPE_LABEL, colorForType, intFmt, moneyFmt } from "@/lib/cap-table/display";
 
 import { StakeholdersClient, type StakeholderRow } from "./stakeholders-client";
 
@@ -30,6 +25,7 @@ export default async function StakeholdersPage() {
   }
 
   const currency = company.currency.trim();
+  const pack = getPackForCompany(company);
 
   const people = await db
     .select({
@@ -73,7 +69,7 @@ export default async function StakeholdersPage() {
     let ownedUnits = 0;
     const parts: string[] = [];
     for (const h of list) {
-      const label = SUBTYPE_LABEL[h.subtype] ?? h.subtype;
+      const label = securityLabel(pack, h.category, h.subtype, company.entityType);
       if (h.category === "convertible") {
         const amount = Number(h.monetaryAmount ?? 0);
         const cur = (h.monetaryCurrency ?? currency).trim();

@@ -1,4 +1,4 @@
-import { and, eq, isNull } from "drizzle-orm";
+import { and, desc, eq, isNull } from "drizzle-orm";
 
 import { createServerClient } from "@/lib/auth/supabase-server";
 
@@ -9,12 +9,15 @@ const { accounts, companies } = schema;
 export type ActiveCompany = typeof companies.$inferSelect;
 
 // Resolve the company the current build operates on. Until full
-// membership/company wiring lands (later prompt), this is the seeded Acme demo.
+// membership/company wiring lands (later prompt), this is the seeded Acme demo —
+// the most recently created one, so `pnpm db:seed dk` swaps the active company
+// to the Danish ApS variant (both share displayName "Acme").
 export async function getActiveCompany(): Promise<ActiveCompany | null> {
   const [company] = await db
     .select()
     .from(companies)
-    .where(and(eq(companies.legalName, "Acme Inc."), isNull(companies.deletedAt)))
+    .where(and(eq(companies.displayName, "Acme"), isNull(companies.deletedAt)))
+    .orderBy(desc(companies.createdAt))
     .limit(1);
   return company ?? null;
 }

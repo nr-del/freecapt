@@ -2,9 +2,9 @@ import { and, eq, isNull } from "drizzle-orm";
 
 import { db, schema } from "@/lib/db";
 import { getActiveCompany } from "@/lib/db/queries";
+import { getPackForCompany, securityLabel } from "@/lib/packs/_shared/loader";
 import {
   POOL_COLOR,
-  SUBTYPE_LABEL,
   TYPE_COLOR,
   TYPE_LABEL,
   TYPE_RANK,
@@ -33,6 +33,8 @@ export default async function CapTablePage() {
 
   const currency = company.currency.trim();
   const authorized = Number(company.authorizedUnits ?? 0);
+  const pack = getPackForCompany(company);
+  const unitNoun = pack.equityUnitNoun(company.entityType);
 
   const holdings = await db
     .select({
@@ -71,7 +73,7 @@ export default async function CapTablePage() {
     .map((h) => {
       const qty = Number(h.quantity ?? 0);
       const color = TYPE_COLOR[h.stakeholderType] ?? POOL_COLOR;
-      const securityLabel = SUBTYPE_LABEL[h.subtype] ?? h.subtype;
+      const label = securityLabel(pack, h.category, h.subtype, company.entityType);
 
       if (h.category === "convertible") {
         const amount = Number(h.monetaryAmount ?? 0);
@@ -89,7 +91,7 @@ export default async function CapTablePage() {
           id: h.securityId,
           name: h.stakeholderName,
           typeLabel: TYPE_LABEL[h.stakeholderType] ?? "Other",
-          securityLabel,
+          securityLabel: label,
           securitySub: sub,
           color,
           quantityLabel: "—",
@@ -103,7 +105,7 @@ export default async function CapTablePage() {
         id: h.securityId,
         name: h.stakeholderName,
         typeLabel: TYPE_LABEL[h.stakeholderType] ?? "Other",
-        securityLabel,
+        securityLabel: label,
         color,
         quantityLabel: intFmt.format(qty),
         outstandingPct: isEquity && totalOutstanding > 0 ? (qty / totalOutstanding) * 100 : null,
@@ -146,7 +148,7 @@ export default async function CapTablePage() {
       outstandingSlices={groupSlices("outstanding")}
       fullyDilutedSlices={groupSlices("fd")}
       leftToGrantPct={leftToGrantPct}
-      leftToGrantLabel={`${intFmt.format(unallocatedPool)} of ${intFmt.format(authorized)} authorized shares`}
+      leftToGrantLabel={`${intFmt.format(unallocatedPool)} of ${intFmt.format(authorized)} authorized ${unitNoun.plural}`}
       outstandingTotalLabel={intFmt.format(totalOutstanding)}
       fullyDilutedTotalLabel={intFmt.format(fullyDilutedTotal)}
     />
