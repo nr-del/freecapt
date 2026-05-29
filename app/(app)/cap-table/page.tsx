@@ -1,59 +1,23 @@
 import { and, eq, isNull } from "drizzle-orm";
 
 import { db, schema } from "@/lib/db";
+import { getActiveCompany } from "@/lib/db/queries";
+import {
+  POOL_COLOR,
+  SUBTYPE_LABEL,
+  TYPE_COLOR,
+  TYPE_LABEL,
+  TYPE_RANK,
+  intFmt,
+  moneyFmt,
+} from "@/lib/cap-table/display";
 
 import { CapTableClient, type CapRow, type Slice } from "./cap-table-client";
 
-const { companies, securities, stakeholders } = schema;
-
-// Color semantics (§6.1 / globals.css --chart-*): founders deepest emerald,
-// employees/advisors mid emerald, investors amber, pool/unissued neutral gray.
-const TYPE_COLOR: Record<string, string> = {
-  founder: "#047857",
-  entity: "#10b981",
-  employee: "#34d399",
-  advisor: "#6ee7b7",
-  investor: "#f59e0b",
-  other: "#94a3b8",
-};
-const POOL_COLOR = "#94a3b8";
-
-const TYPE_LABEL: Record<string, string> = {
-  founder: "Founder",
-  employee: "Employee",
-  advisor: "Advisor",
-  investor: "Investor",
-  entity: "Entity",
-  other: "Other",
-};
-
-const SUBTYPE_LABEL: Record<string, string> = {
-  common_stock: "Common stock",
-  iso: "ISO options",
-  nso: "NSO options",
-  safe: "SAFE",
-};
-
-const TYPE_RANK: Record<string, number> = {
-  founder: 0,
-  employee: 1,
-  advisor: 2,
-  entity: 3,
-  other: 4,
-  investor: 5,
-};
-
-const intFmt = new Intl.NumberFormat("en-US");
-const pctFmt = (n: number) => `${n.toFixed(2)}%`;
-const moneyFmt = (n: number, currency: string) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(n);
+const { securities, stakeholders } = schema;
 
 export default async function CapTablePage() {
-  const [company] = await db
-    .select()
-    .from(companies)
-    .where(and(eq(companies.legalName, "Acme Inc."), isNull(companies.deletedAt)))
-    .limit(1);
+  const company = await getActiveCompany();
 
   if (!company) {
     return (

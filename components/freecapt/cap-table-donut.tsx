@@ -4,13 +4,14 @@
 export type Slice = { label: string; pct: number; color: string };
 
 export function CapTableDonut({ slices, size = 220 }: { slices: Slice[]; size?: number }) {
-  let cumulative = 0;
+  // Build cumulative gradient stops without mutating across the map callback
+  // (keeps the render pure — react-hooks/immutability).
+  const offsets = slices.reduce<number[]>((acc, { pct }, i) => {
+    acc.push((acc[i - 1] ?? 0) + pct);
+    return acc;
+  }, []);
   const gradient = slices
-    .map(({ color, pct }) => {
-      const start = cumulative;
-      cumulative += pct;
-      return `${color} ${start}% ${cumulative}%`;
-    })
+    .map(({ color, pct }, i) => `${color} ${(offsets[i] ?? 0) - pct}% ${offsets[i] ?? 0}%`)
     .join(", ");
 
   return (
