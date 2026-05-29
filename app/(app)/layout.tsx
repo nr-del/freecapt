@@ -7,6 +7,7 @@ import { createServerClient } from "@/lib/auth/supabase-server";
 const NAV = [
   { href: "/cap-table", label: "Cap table" },
   { href: "/stakeholders", label: "Stakeholders" },
+  { href: "/simulate", label: "Simulate" },
   { href: "/settings", label: "Settings" },
 ];
 

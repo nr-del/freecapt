@@ -450,3 +450,29 @@ export const vestingSchedules = pgTable("vesting_schedules", {
   events: jsonb().notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });
+
+// --- scenarios — saved simulator scenarios (data-model §2, "scenarios") ---
+// `inputs` holds the round parameters (size, pre-money, pool top-up) plus a
+// frozen snapshot of the cap table so a shared link renders identically even if
+// the live cap table changes later. `shareToken` is the unguessable key for the
+// public read-only view.
+export const scenarios = pgTable(
+  "scenarios",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .references(() => companies.id),
+    name: text().notNull(),
+    inputs: jsonb().notNull(),
+    shareToken: text().unique(),
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdByAccountId: uuid().references(() => accounts.id),
+  },
+  (t) => [
+    index("idx_scenarios_company").on(t.companyId),
+    index("idx_scenarios_share_token")
+      .on(t.shareToken)
+      .where(sql`${t.shareToken} IS NOT NULL`),
+  ],
+);
