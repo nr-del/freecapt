@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { BulkAddModal } from "@/components/freecapt/bulk-add-modal";
+import {
+  AddStakeholderModal,
+  type InstrumentOption,
+} from "@/components/freecapt/add-stakeholder-modal";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -35,22 +40,23 @@ const fmtPct = (n: number | null) => (n == null ? "-" : `${n.toFixed(2)}%`);
 export function StakeholdersClient({
   companyName,
   rows,
+  instruments,
+  shareClassNames,
+  currency,
 }: {
   companyName: string;
   rows: StakeholderRow[];
+  instruments: InstrumentOption[];
+  shareClassNames: string[];
+  currency: string;
 }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [startRows, setStartRows] = useState(3);
+  const router = useRouter();
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [singleOpen, setSingleOpen] = useState(false);
   const [paywall, setPaywall] = useState<string | null>(null);
 
-  const openBulk = () => {
-    setStartRows(3);
-    setModalOpen(true);
-  };
-  const openSingle = () => {
-    setStartRows(1);
-    setModalOpen(true);
-  };
+  const openBulk = () => setBulkOpen(true);
+  const openSingle = () => setSingleOpen(true);
 
   const isEmpty = rows.length === 0;
 
@@ -105,6 +111,17 @@ export function StakeholdersClient({
               onClick={() => setPaywall("AI document extraction")}
             />
           </div>
+          <p className="mt-6 text-sm text-slate-500">
+            or{" "}
+            <button
+              type="button"
+              onClick={openSingle}
+              className="font-medium text-brand-700 underline-offset-2 hover:underline"
+            >
+              add one by hand
+            </button>
+            .
+          </p>
         </div>
       ) : (
         <div className="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white">
@@ -119,7 +136,11 @@ export function StakeholdersClient({
             </thead>
             <tbody className="divide-y divide-slate-100">
               {rows.map((r) => (
-                <tr key={r.id} className="hover:bg-slate-50">
+                <tr
+                  key={r.id}
+                  onClick={() => router.push(`/stakeholders/${r.id}`)}
+                  className="cursor-pointer hover:bg-slate-50"
+                >
                   <td className="px-4 py-2.5">
                     <span className="flex items-center">
                       <Swatch color={r.color} />
@@ -139,14 +160,22 @@ export function StakeholdersClient({
         </div>
       )}
 
+      <AddStakeholderModal
+        open={singleOpen}
+        onOpenChange={setSingleOpen}
+        instruments={instruments}
+        shareClassNames={shareClassNames}
+        currency={currency}
+      />
+
       <BulkAddModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
+        open={bulkOpen}
+        onOpenChange={setBulkOpen}
         onUpgrade={(feature) => {
-          setModalOpen(false);
+          setBulkOpen(false);
           setPaywall(feature);
         }}
-        startRows={startRows}
+        startRows={3}
       />
 
       {/* Paywall modal (§6.6) */}

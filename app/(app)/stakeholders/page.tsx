@@ -3,9 +3,19 @@ import { and, eq, isNull } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { getActiveCompany } from "@/lib/db/queries";
 import { getPackForCompany, securityLabel } from "@/lib/packs/_shared/loader";
+import { getShareClassNames } from "@/lib/share-classes/queries";
 import { TYPE_LABEL, colorForType, intFmt, moneyFmt } from "@/lib/cap-table/display";
 
+import type { InstrumentOption } from "@/components/freecapt/add-stakeholder-modal";
 import { StakeholdersClient, type StakeholderRow } from "./stakeholders-client";
+
+// Generic catalog when a company's entity type has no built pack yet.
+const GENERIC_INSTRUMENTS: InstrumentOption[] = [
+  { subtype: "common_stock", label: "Common stock", category: "equity_unit" },
+  { subtype: "iso", label: "ISO options", category: "option_like" },
+  { subtype: "nso", label: "NSO options", category: "option_like" },
+  { subtype: "safe", label: "SAFE", category: "convertible" },
+];
 
 const { securities, stakeholders } = schema;
 
@@ -26,6 +36,15 @@ export default async function StakeholdersPage() {
 
   const currency = company.currency.trim();
   const pack = getPackForCompany(company);
+
+  // Jurisdiction-aware security options for the add form (catalog filtered to
+  // this entity type; generic fallback when the pack has no instruments yet).
+  const packInstruments: InstrumentOption[] = pack.instruments
+    .filter((i) => i.allowedEntityTypes.includes(company.entityType))
+    .map((i) => ({ subtype: i.subtype, label: i.localName, category: i.category }));
+  const instruments = packInstruments.length > 0 ? packInstruments : GENERIC_INSTRUMENTS;
+
+  const shareClassNames = await getShareClassNames(company.id);
 
   const people = await db
     .select({
@@ -94,5 +113,13 @@ export default async function StakeholdersPage() {
   // Founders first, then by ownership desc.
   rows.sort((a, b) => (b.fullyDilutedPct ?? -1) - (a.fullyDilutedPct ?? -1));
 
-  return <StakeholdersClient companyName={company.displayName} rows={rows} />;
+  return (
+    <StakeholdersClient
+      companyName={company.displayName}
+      rows={rows}
+      instruments={instruments}
+      shareClassNames={shareClassNames}
+      currency={currency}
+    />
+  );
 }
