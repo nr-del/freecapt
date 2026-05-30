@@ -1,5 +1,8 @@
 // tailwind.config.ts — FreeCapT design system (docs/12_design_system.md §3)
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate'; // shadcn/ui animations (dialog, accordion, sheet)
+import typography from '@tailwindcss/typography'; // for AI-generated content like "explain my grant"
+import forms from '@tailwindcss/forms'; // baseline form reset
 
 export default {
   content: [
@@ -122,9 +125,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'), // shadcn/ui animations (dialog, accordion, sheet)
-    require('@tailwindcss/typography'), // for AI-generated content like "explain my grant"
-    require('@tailwindcss/forms'), // baseline form reset
-  ],
+  plugins: [tailwindcssAnimate, typography, forms],
 } satisfies Config;

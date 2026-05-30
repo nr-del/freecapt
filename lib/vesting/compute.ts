@@ -129,7 +129,12 @@ export function computeVesting(input: VestingInput): VestingResult {
   let nextVestQty = 0;
   if (!fullyVested) {
     nextVestDate = vestDate(k + 1);
-    nextVestQty = cumulative(quantity, k + 1, n) - vestedQty;
+    // Several periods can share one vest date — every pre-cliff period lands on
+    // the cliff. Count all upcoming periods on `nextVestDate` so the reported
+    // amount is the whole jump (e.g. 12/48 at the cliff), not a single period.
+    let m = k + 1;
+    while (m < n && vestDate(m + 1).getTime() === nextVestDate.getTime()) m++;
+    nextVestQty = cumulative(quantity, m, n) - vestedQty;
   }
 
   return {

@@ -59,7 +59,6 @@ export async function renderRegisterPdf(reg: ShareholderRegister): Promise<Uint8
   // --- pagination state ---
   let page = pdf.addPage([PAGE_W, PAGE_H]);
   let y = PAGE_H - MARGIN;
-  let pageNo = 1;
   const pages: PDFPage[] = [page];
 
   const text = (
@@ -157,7 +156,6 @@ export async function renderRegisterPdf(reg: ShareholderRegister): Promise<Uint8
   const newPage = () => {
     page = pdf.addPage([PAGE_W, PAGE_H]);
     pages.push(page);
-    pageNo += 1;
     y = PAGE_H - MARGIN;
     drawTableHeader();
   };

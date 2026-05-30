@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { MarketingShell, PageHeader } from "@/components/marketing/site-chrome";
 import { alternatesFor } from "@/i18n/metadata";
+import { Link } from "@/i18n/navigation";
 
 type Params = { params: Promise<{ locale: string }> };
 
@@ -68,9 +69,9 @@ export default async function ContactPage({ params }: Params) {
             <div className="flex gap-2">
               <dt className="w-28 shrink-0 font-medium text-slate-500">{t("statusLabel")}</dt>
               <dd>
-                <a href="/status" className="text-brand-600 hover:text-brand-700">
+                <Link href="/status" className="text-brand-600 hover:text-brand-700">
                   freecapt.com/status
-                </a>
+                </Link>
               </dd>
             </div>
           </dl>
