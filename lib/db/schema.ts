@@ -232,6 +232,45 @@ export const stakeholders = pgTable(
   ],
 );
 
+// --- share_classes — named classes of equity managed per company ---
+// Cap tables routinely carry several classes (Ordinary, Ordinary A, Preferred
+// Seed…). A class is referenced by name from securities.shareClass (kept as
+// text so imports with arbitrary class names — e.g. Carta's "Ordinary A-shares"
+// — round-trip without a hard FK), and defined here so founders can manage the
+// catalog and its economics (seniority, liquidation preference, votes).
+export const shareClasses = pgTable(
+  "share_classes",
+  {
+    id: primaryId(),
+    companyId: uuid()
+      .notNull()
+      .references(() => companies.id),
+    name: text().notNull(),
+    // Higher = more senior in a liquidation waterfall. Common is usually 0.
+    seniority: integer().notNull().default(0),
+    isPreferred: boolean().notNull().default(false),
+    // 1.00 = a 1× non-participating preference; null for common.
+    liquidationPreferenceMultiple: numeric({ precision: 8, scale: 2 }),
+    participating: boolean().notNull().default(false),
+    votesPerShare: numeric({ precision: 12, scale: 4 }),
+    notes: text(),
+
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdByAccountId: uuid().references(() => accounts.id),
+    updatedByAccountId: uuid().references(() => accounts.id),
+    deletedAt: timestamp({ withTimezone: true }),
+  },
+  (t) => [
+    uniqueIndex("uq_share_classes_company_name")
+      .on(t.companyId, sql`lower(${t.name})`)
+      .where(sql`${t.deletedAt} IS NULL`),
+    index("idx_share_classes_company")
+      .on(t.companyId)
+      .where(sql`${t.deletedAt} IS NULL`),
+  ],
+);
+
 // --- §2.5 securities — issued instruments ---
 export const securities = pgTable(
   "securities",

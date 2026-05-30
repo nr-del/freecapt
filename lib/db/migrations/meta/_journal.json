@@ -29,6 +29,13 @@
       "when": 1780088590281,
       "tag": "0003_romantic_bushwacker",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780181287497,
+      "tag": "0004_clumsy_mad_thinker",
+      "breakpoints": true
     }
   ]
 }

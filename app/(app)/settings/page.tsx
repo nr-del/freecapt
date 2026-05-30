@@ -1,8 +1,10 @@
 import { getActiveCompany, getCompanyMembers, getCurrentAccountId } from "@/lib/db/queries";
 import { AVAILABLE_PACKS, getPackForCompany } from "@/lib/packs/_shared/loader";
+import { getShareClasses } from "@/lib/share-classes/queries";
 
 import { MembersSection, type MemberRow } from "./members-section";
 import { SettingsClient, type JurisdictionOption } from "./settings-client";
+import { ShareClassesSection } from "./share-classes-section";
 
 export default async function SettingsPage() {
   const company = await getActiveCompany();
@@ -31,9 +33,10 @@ export default async function SettingsPage() {
     })),
   );
 
-  const [members, meId] = await Promise.all([
+  const [members, meId, shareClasses] = await Promise.all([
     getCompanyMembers(company.id),
     getCurrentAccountId(),
+    getShareClasses(company.id),
   ]);
   const memberRows: MemberRow[] = members.map((m) => ({
     membershipId: m.membershipId,
@@ -57,6 +60,18 @@ export default async function SettingsPage() {
         options={options}
       />
       <div className="mx-auto max-w-2xl px-6 pb-8">
+        <ShareClassesSection
+          classes={shareClasses.map((c) => ({
+            id: c.id,
+            name: c.name,
+            seniority: c.seniority,
+            isPreferred: c.isPreferred,
+            liquidationPreferenceMultiple: c.liquidationPreferenceMultiple,
+            participating: c.participating,
+            votesPerShare: c.votesPerShare,
+            inUse: c.inUse,
+          }))}
+        />
         <MembersSection members={memberRows} />
       </div>
     </>

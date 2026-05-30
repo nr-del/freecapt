@@ -2,11 +2,14 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { AccountMenu } from "@/components/freecapt/account-menu";
 import { AiHelperLauncher } from "@/components/freecapt/ai-helper-launcher";
 import { Toaster } from "@/components/ui/sonner";
 import { createServerClient } from "@/lib/auth/supabase-server";
+import { db, schema } from "@/lib/db";
 import { emailHoldsEquity, getCompanyForEmail } from "@/lib/db/queries";
 import { fontVars } from "@/lib/fonts";
+import { eq } from "drizzle-orm";
 
 const NAV = [
   { href: "/cap-table", label: "Cap table" },
@@ -35,6 +38,12 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
     redirect((await emailHoldsEquity(user.email)) ? "/portfolio" : "/onboarding");
   }
 
+  const [account] = await db
+    .select({ fullName: schema.accounts.fullName })
+    .from(schema.accounts)
+    .where(eq(schema.accounts.email, user.email))
+    .limit(1);
+
   // The product is English-only (not localized); it renders its own <html>/
   // <body> because the root layout is a pass-through.
   return (
@@ -59,6 +68,9 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
                     {item.label}
                   </Link>
                 ))}
+              </div>
+              <div className="ml-auto">
+                <AccountMenu email={user.email} fullName={account?.fullName ?? null} />
               </div>
             </div>
           </nav>

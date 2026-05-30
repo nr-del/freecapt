@@ -8,7 +8,15 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "./index";
-import { accounts, companies, memberships, securities, stakeholders, subscriptions } from "./schema";
+import {
+  accounts,
+  companies,
+  memberships,
+  securities,
+  shareClasses,
+  stakeholders,
+  subscriptions,
+} from "./schema";
 
 function generateReferralCode() {
   return Math.random().toString(36).slice(2, 12);
@@ -105,6 +113,7 @@ async function main() {
 
   for (const { id } of existing) {
     await db.delete(securities).where(eq(securities.companyId, id));
+    await db.delete(shareClasses).where(eq(shareClasses.companyId, id));
     await db.delete(stakeholders).where(eq(stakeholders.companyId, id));
     await db.delete(subscriptions).where(eq(subscriptions.companyId, id));
     await db.delete(memberships).where(eq(memberships.companyId, id));
@@ -134,6 +143,15 @@ async function main() {
   const companyId = company.id;
 
   await db.insert(subscriptions).values({ companyId, plan: "free" });
+
+  // The single common class the founders/options use (securities store the name
+  // "common"; the catalog name matches case-insensitively).
+  await db.insert(shareClasses).values({
+    companyId,
+    name: "Common",
+    seniority: 0,
+    votesPerShare: "1",
+  });
 
   // Optional: grant a dev account admin access so the demo shows up after sign-in
   // (getActiveCompany is membership-scoped). Set SEED_OWNER_EMAIL to your
