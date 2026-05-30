@@ -18,9 +18,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FreeCapT — the free cap table for European founders",
+  title: "FreeCapT — the free cap table for founders and small businesses",
   description:
-    "The free cap table for European founders. Multi-jurisdiction, AI-native, free for personal cap tables.",
+    "The free cap table for founders and small businesses. Multi-jurisdiction, AI-native, free for personal cap tables.",
 };
 
 export default function RootLayout({

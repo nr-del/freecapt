@@ -78,7 +78,7 @@ export default async function SharePage({
             <Link href="/" className="font-medium text-brand-600 hover:text-brand-700">
               FreeCapT
             </Link>{" "}
-            — the free cap table for European founders.
+            — the free cap table for founders and small businesses.
           </p>
           <p className="mt-1">
             This is a what-if projection, not legal or tax advice. Numbers assume a simplified,

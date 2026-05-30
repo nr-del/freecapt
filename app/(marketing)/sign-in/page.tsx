@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -56,9 +57,12 @@ export default function SignInPage() {
     <main className="flex min-h-dvh flex-col items-center justify-center px-6">
       <Card className="mx-auto w-full max-w-md p-8">
         <div className="mb-6 text-center">
-          <div className="mb-2 text-2xl font-bold tracking-tight text-slate-900">
+          <Link
+            href="/"
+            className="mb-2 inline-block text-2xl font-bold tracking-tight text-slate-900 hover:opacity-80"
+          >
             Free<span className="text-brand-600">C</span>apT
-          </div>
+          </Link>
           <p className="text-sm text-slate-500">
             {status === "sent"
               ? `Check ${email} for your sign-in link.`
@@ -101,6 +105,12 @@ export default function SignInPage() {
           No password required. We&apos;ll email you a one-time sign-in link.
         </p>
       </Card>
+      <Link
+        href="/"
+        className="mt-6 text-sm text-slate-500 transition hover:text-slate-700"
+      >
+        ← Back to home
+      </Link>
     </main>
   );
 }

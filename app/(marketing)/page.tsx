@@ -3,13 +3,14 @@
 // the conic-gradient donut follow docs/12_design_system.md. The product lives
 // behind the magic-link auth wall, so every CTA points to /sign-in.
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
 import { CapTableDonut, Swatch } from "@/components/freecapt/cap-table-donut";
 
 export const metadata = {
-  title: "FreeCapT — the free cap table for European founders",
+  title: "FreeCapT — the free cap table for founders and small businesses",
   description:
-    "The free cap table for bootstrapped founders, family businesses, and small SaaS. Built for Denmark, Norway, Sweden, Germany, Switzerland, the UK, and US. AI-native. $15/month when you're ready to share.",
+    "The free cap table for bootstrapped founders, family businesses, and small SaaS — anywhere in the world. Local rules for Denmark, Norway, Sweden, Germany, Switzerland, the UK, and US, with more on the way. AI-native. $15/month when you're ready to share.",
 };
 
 // Wordmark — the C is brand-600 (docs/07_brand_package.md §1).
@@ -154,7 +155,7 @@ const FAQ = [
   },
   {
     q: "How is this different from Carta?",
-    a: "Carta is built for venture-backed US scaleups and prices accordingly — $2,400+/year for a tiny company. It's the right tool for that audience. FreeCapT is built for the 95% of private companies that aren't VC-backed unicorns — bootstrapped founders, family businesses, agencies, small SaaS. We have first-class support for European jurisdictions, AI-native UX, and a free plan that's actually usable.",
+    a: "Carta is built for venture-backed US scaleups and prices accordingly — $2,400+/year for a tiny company. It's the right tool for that audience. FreeCapT is built for the 95% of private companies that aren't VC-backed unicorns — bootstrapped founders, family businesses, agencies, small SaaS. We have first-class support for the local jurisdictions most tools ignore, AI-native UX, and a free plan that's actually usable.",
   },
   {
     q: "Is my data safe?",
@@ -189,17 +190,20 @@ export default function LandingPage() {
             <a href="#faq" className="hover:text-slate-900">FAQ</a>
           </nav>
           <div className="flex items-center gap-3">
-            <select
-              aria-label="Language"
-              className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs"
-              defaultValue="EN"
-            >
-              <option value="EN">🇬🇧 EN</option>
-              <option value="DA">🇩🇰 DA</option>
-              <option value="NO">🇳🇴 NO</option>
-              <option value="SV">🇸🇪 SV</option>
-              <option value="DE">🇩🇪 DE</option>
-            </select>
+            <div className="relative">
+              <select
+                aria-label="Language"
+                className="appearance-none rounded-md border border-slate-200 bg-white py-1.5 pl-2 pr-7 text-xs"
+                defaultValue="EN"
+              >
+                <option value="EN">🇬🇧 EN</option>
+                <option value="DA">🇩🇰 DA</option>
+                <option value="NO">🇳🇴 NO</option>
+                <option value="SV">🇸🇪 SV</option>
+                <option value="DE">🇩🇪 DE</option>
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-slate-400" />
+            </div>
             <Link href="/sign-in" className="text-sm font-medium text-slate-700 hover:text-slate-900">
               Sign in
             </Link>
@@ -221,7 +225,7 @@ export default function LandingPage() {
               <span>●</span> Now in private beta — DK · NO · SE · DE · CH · UK · US
             </div>
             <h1 className="mb-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              The free cap table for <span className="text-brand-600">European founders</span>.
+              The free cap table for <span className="text-brand-600">founders everywhere</span>.
             </h1>
             <p className="mb-8 max-w-xl text-lg leading-relaxed text-slate-600">
               Built for bootstrapped startups, family businesses, agencies, and small SaaS. In
@@ -581,7 +585,7 @@ export default function LandingPage() {
             <div className="md:col-span-2">
               <Wordmark className="mb-3 text-xl font-bold text-white [&_.text-brand-600]:text-brand-500" />
               <p className="max-w-xs text-sm leading-relaxed">
-                The free cap table for European founders. Built by{" "}
+                The free cap table for founders and small businesses. Built by{" "}
                 <span className="text-slate-300">Bifrost Studios</span> in Copenhagen.
               </p>
             </div>
