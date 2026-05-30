@@ -8,7 +8,11 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "./index";
-import { companies, securities, stakeholders, subscriptions } from "./schema";
+import { accounts, companies, memberships, securities, stakeholders, subscriptions } from "./schema";
+
+function generateReferralCode() {
+  return Math.random().toString(36).slice(2, 12);
+}
 
 type Variant = {
   legalName: string;
@@ -103,6 +107,7 @@ async function main() {
     await db.delete(securities).where(eq(securities.companyId, id));
     await db.delete(stakeholders).where(eq(stakeholders.companyId, id));
     await db.delete(subscriptions).where(eq(subscriptions.companyId, id));
+    await db.delete(memberships).where(eq(memberships.companyId, id));
     await db.delete(companies).where(eq(companies.id, id));
   }
 
@@ -129,6 +134,29 @@ async function main() {
   const companyId = company.id;
 
   await db.insert(subscriptions).values({ companyId, plan: "free" });
+
+  // Optional: grant a dev account admin access so the demo shows up after sign-in
+  // (getActiveCompany is membership-scoped). Set SEED_OWNER_EMAIL to your
+  // magic-link email, e.g. `SEED_OWNER_EMAIL=me@example.com pnpm db:seed`.
+  const ownerEmail = process.env.SEED_OWNER_EMAIL?.trim().toLowerCase();
+  if (ownerEmail) {
+    await db
+      .insert(accounts)
+      .values({ email: ownerEmail, fullName: "Demo Owner", referralCode: generateReferralCode() })
+      .onConflictDoNothing({ target: accounts.email });
+    const [owner] = await db
+      .select({ id: accounts.id })
+      .from(accounts)
+      .where(eq(accounts.email, ownerEmail))
+      .limit(1);
+    if (owner) {
+      await db
+        .insert(memberships)
+        .values({ accountId: owner.id, companyId, role: "admin", acceptedAt: new Date() })
+        .onConflictDoNothing();
+      console.log(`  · linked ${ownerEmail} as admin`);
+    }
+  }
 
   // --- Stakeholders ---
   const people = [

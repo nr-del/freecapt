@@ -28,7 +28,8 @@ async function defaultLandingFor(accountId: string, email: string): Promise<stri
     .from(stakeholders)
     .where(and(eq(stakeholders.email, email), isNull(stakeholders.deletedAt)))
     .limit(1);
-  return holding ? "/portfolio" : "/cap-table";
+  // No company yet and no equity held: a brand-new user — start onboarding.
+  return holding ? "/portfolio" : "/onboarding";
 }
 
 // Magic-link callback. Prefers the token_hash + verifyOtp flow (no PKCE

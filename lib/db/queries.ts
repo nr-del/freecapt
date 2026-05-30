@@ -4,22 +4,60 @@ import { createServerClient } from "@/lib/auth/supabase-server";
 
 import { db, schema } from "./index";
 
-const { accounts, companies, memberships } = schema;
+const { accounts, companies, memberships, stakeholders } = schema;
 
 export type ActiveCompany = typeof companies.$inferSelect;
 
-// Resolve the company the current build operates on. Until full
-// membership/company wiring lands (later prompt), this is the seeded Acme demo —
-// the most recently created one, so `pnpm db:seed dk` swaps the active company
-// to the Danish ApS variant (both share displayName "Acme").
-export async function getActiveCompany(): Promise<ActiveCompany | null> {
-  const [company] = await db
-    .select()
-    .from(companies)
-    .where(and(eq(companies.displayName, "Acme"), isNull(companies.deletedAt)))
-    .orderBy(desc(companies.createdAt))
+// Resolve the active company for an email: the most-recent active company the
+// account is a (non-deleted) member of. Multi-tenant — a person only ever
+// resolves a company they belong to. Returns null when they have none yet
+// (a brand-new user before onboarding, or a stakeholder-only account).
+export async function getCompanyForEmail(email: string): Promise<ActiveCompany | null> {
+  const [account] = await db
+    .select({ id: accounts.id })
+    .from(accounts)
+    .where(eq(accounts.email, email))
     .limit(1);
-  return company ?? null;
+  if (!account) return null;
+
+  const [row] = await db
+    .select({ company: companies })
+    .from(memberships)
+    .innerJoin(companies, eq(memberships.companyId, companies.id))
+    .where(
+      and(
+        eq(memberships.accountId, account.id),
+        isNull(memberships.deletedAt),
+        isNull(companies.deletedAt),
+        eq(companies.status, "active"),
+      ),
+    )
+    .orderBy(desc(memberships.createdAt))
+    .limit(1);
+  return row?.company ?? null;
+}
+
+// Resolve the active company for the signed-in user. The single entry point the
+// product (cap table, stakeholders, simulate, data room, settings, exports) uses
+// to scope every query to the viewer's own company.
+export async function getActiveCompany(): Promise<ActiveCompany | null> {
+  const supabase = await createServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user?.email) return null;
+  return getCompanyForEmail(user.email);
+}
+
+// Whether an email holds equity in any company (a stakeholder, distinct from a
+// member). Drives onboarding routing: no membership + holds equity ⇒ portal.
+export async function emailHoldsEquity(email: string): Promise<boolean> {
+  const [holding] = await db
+    .select({ id: stakeholders.id })
+    .from(stakeholders)
+    .where(and(eq(stakeholders.email, email), isNull(stakeholders.deletedAt)))
+    .limit(1);
+  return Boolean(holding);
 }
 
 // The domain account id for the signed-in Supabase user, for audit columns.

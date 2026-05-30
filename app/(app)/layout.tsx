@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { AiHelperLauncher } from "@/components/freecapt/ai-helper-launcher";
 import { Toaster } from "@/components/ui/sonner";
 import { createServerClient } from "@/lib/auth/supabase-server";
+import { emailHoldsEquity, getCompanyForEmail } from "@/lib/db/queries";
 import { fontVars } from "@/lib/fonts";
 
 const NAV = [
@@ -22,8 +23,16 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (!user?.email) {
     redirect("/sign-in");
+  }
+
+  // First-run gate: the product is unusable without a company. A signed-in user
+  // who isn't a member of one is either brand-new (→ onboarding) or only holds
+  // equity elsewhere as a stakeholder (→ their portfolio).
+  const company = await getCompanyForEmail(user.email);
+  if (!company) {
+    redirect((await emailHoldsEquity(user.email)) ? "/portfolio" : "/onboarding");
   }
 
   // The product is English-only (not localized); it renders its own <html>/
