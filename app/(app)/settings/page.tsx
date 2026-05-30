@@ -1,6 +1,7 @@
-import { getActiveCompany } from "@/lib/db/queries";
+import { getActiveCompany, getCompanyMembers, getCurrentAccountId } from "@/lib/db/queries";
 import { AVAILABLE_PACKS, getPackForCompany } from "@/lib/packs/_shared/loader";
 
+import { MembersSection, type MemberRow } from "./members-section";
 import { SettingsClient, type JurisdictionOption } from "./settings-client";
 
 export default async function SettingsPage() {
@@ -30,16 +31,34 @@ export default async function SettingsPage() {
     })),
   );
 
+  const [members, meId] = await Promise.all([
+    getCompanyMembers(company.id),
+    getCurrentAccountId(),
+  ]);
+  const memberRows: MemberRow[] = members.map((m) => ({
+    membershipId: m.membershipId,
+    email: m.email,
+    fullName: m.fullName,
+    role: m.role,
+    pending: m.acceptedAt == null,
+    isSelf: meId != null && m.accountId === meId,
+  }));
+
   return (
-    <SettingsClient
-      companyName={company.displayName}
-      currentEntityType={company.entityType}
-      currentJurisdiction={company.jurisdiction.toUpperCase()}
-      currentCurrency={company.currency.trim()}
-      currentPackVersion={company.packVersion}
-      registryLabel={pack.registryId.label}
-      registryValue={company.registryIdentifier}
-      options={options}
-    />
+    <>
+      <SettingsClient
+        companyName={company.displayName}
+        currentEntityType={company.entityType}
+        currentJurisdiction={company.jurisdiction.toUpperCase()}
+        currentCurrency={company.currency.trim()}
+        currentPackVersion={company.packVersion}
+        registryLabel={pack.registryId.label}
+        registryValue={company.registryIdentifier}
+        options={options}
+      />
+      <div className="mx-auto max-w-2xl px-6 pb-8">
+        <MembersSection members={memberRows} />
+      </div>
+    </>
   );
 }

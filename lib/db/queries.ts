@@ -1,10 +1,10 @@
-import { and, desc, eq, isNull } from "drizzle-orm";
+import { and, asc, eq, desc, isNull } from "drizzle-orm";
 
 import { createServerClient } from "@/lib/auth/supabase-server";
 
 import { db, schema } from "./index";
 
-const { accounts, companies } = schema;
+const { accounts, companies, memberships } = schema;
 
 export type ActiveCompany = typeof companies.$inferSelect;
 
@@ -37,4 +37,33 @@ export async function getCurrentAccountId(): Promise<string | null> {
     .where(eq(accounts.email, user.email))
     .limit(1);
   return account?.id ?? null;
+}
+
+export interface CompanyMember {
+  membershipId: string;
+  accountId: string;
+  email: string;
+  fullName: string | null;
+  role: string;
+  invitedAt: Date | null;
+  acceptedAt: Date | null;
+}
+
+// Everyone who can access a company's cap table (§5.13). An invite that hasn't
+// been accepted yet has acceptedAt = null. Sorted accepted-first, then by email.
+export async function getCompanyMembers(companyId: string): Promise<CompanyMember[]> {
+  return db
+    .select({
+      membershipId: memberships.id,
+      accountId: accounts.id,
+      email: accounts.email,
+      fullName: accounts.fullName,
+      role: memberships.role,
+      invitedAt: memberships.invitedAt,
+      acceptedAt: memberships.acceptedAt,
+    })
+    .from(memberships)
+    .innerJoin(accounts, eq(memberships.accountId, accounts.id))
+    .where(and(eq(memberships.companyId, companyId), isNull(memberships.deletedAt)))
+    .orderBy(desc(memberships.acceptedAt), asc(accounts.email));
 }

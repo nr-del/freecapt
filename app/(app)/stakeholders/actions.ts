@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { db, schema } from "@/lib/db";
 import { getActiveCompany, getCurrentAccountId } from "@/lib/db/queries";
+import { sendGrantWelcome } from "@/lib/email/send";
 import {
   SECURITIES,
   normalizeSecurity,
@@ -42,6 +43,10 @@ export async function createStakeholdersBulk(rows: BulkRow[]): Promise<BulkAddRe
 
   const currency = company.currency.trim();
   const today = new Date().toISOString().slice(0, 10);
+
+  // Stakeholders with an email get a "view your stake" welcome after the write
+  // commits (§5.7). Deduped, one per address.
+  const inviteByEmail = new Map<string, string>();
 
   try {
     await db.transaction(async (tx) => {
@@ -108,11 +113,25 @@ export async function createStakeholdersBulk(rows: BulkRow[]): Promise<BulkAddRe
           createdByAccountId: accountId,
           updatedByAccountId: accountId,
         });
+
+        const email = row.email.trim().toLowerCase();
+        if (email && !inviteByEmail.has(email)) {
+          inviteByEmail.set(email, row.name.trim());
+        }
       }
     });
   } catch (err) {
     console.error("[createStakeholdersBulk] failed:", err);
     return { ok: false, error: "Couldn't save those rows. Please try again." };
+  }
+
+  // Best-effort welcome emails; never fail the add if delivery has a hiccup.
+  if (inviteByEmail.size > 0) {
+    await Promise.allSettled(
+      Array.from(inviteByEmail, ([email, name]) =>
+        sendGrantWelcome({ to: email, companyName: company.displayName, stakeholderName: name }),
+      ),
+    );
   }
 
   revalidatePath("/stakeholders");
