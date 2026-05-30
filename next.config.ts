@@ -2,7 +2,14 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Friendly aliases for the canonical sign-in route (/sign-in), so common
+  // guesses like /login don't dead-end on a 404.
+  async redirects() {
+    return [
+      { source: "/login", destination: "/sign-in", permanent: true },
+      { source: "/signin", destination: "/sign-in", permanent: true },
+    ];
+  },
 };
 
 // withSentryConfig wires up tunneling + source-map upload. Source-map upload is
