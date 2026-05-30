@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { inviteMember, removeMember } from "./actions";
+import { inviteMember, inviteMembersBulk, removeMember } from "./actions";
 
 export interface MemberRow {
   membershipId: string;
@@ -38,6 +38,8 @@ export function MembersSection({ members }: { members: MemberRow[] }) {
   const [pending, startTransition] = useTransition();
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("editor");
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [bulkText, setBulkText] = useState("");
 
   const onInvite = () => {
     const value = email.trim();
@@ -54,6 +56,27 @@ export function MembersSection({ members }: { members: MemberRow[] }) {
             : `${value} added. (Email isn't configured here, so no message went out.)`,
         );
         setEmail("");
+        router.refresh();
+      } else {
+        toast.error(result.error);
+      }
+    });
+  };
+
+  const onBulkInvite = () => {
+    if (!bulkText.trim()) {
+      toast.error("Paste some email addresses first.");
+      return;
+    }
+    startTransition(async () => {
+      const result = await inviteMembersBulk(bulkText, role);
+      if (result.ok) {
+        const parts = [`${result.invited} invited`];
+        if (result.skipped) parts.push(`${result.skipped} already members`);
+        if (result.invalid.length) parts.push(`${result.invalid.length} skipped`);
+        toast.success(parts.join(" · "));
+        setBulkText("");
+        setBulkOpen(false);
         router.refresh();
       } else {
         toast.error(result.error);
@@ -109,6 +132,36 @@ export function MembersSection({ members }: { members: MemberRow[] }) {
           {pending ? "Sending…" : "Invite member"}
         </Button>
       </div>
+
+      <button
+        type="button"
+        onClick={() => setBulkOpen((v) => !v)}
+        className="mt-3 text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
+      >
+        {bulkOpen ? "Hide bulk invite" : "Invite several at once"}
+      </button>
+
+      {bulkOpen ? (
+        <div className="mt-3 rounded-md border border-slate-200 bg-slate-50/60 p-3">
+          <p className="text-xs text-slate-500">
+            One email per line (up to 50). Add a role after a comma to override the one above —
+            e.g. <code className="rounded bg-white px-1">sam@acme.com, admin</code>.
+          </p>
+          <textarea
+            value={bulkText}
+            onChange={(e) => setBulkText(e.target.value)}
+            disabled={pending}
+            rows={5}
+            placeholder={"alex@acme.com\njordan@acme.com, viewer"}
+            className="mt-2 w-full resize-y rounded-md border border-slate-200 bg-white p-2 font-mono text-xs text-slate-900 outline-none focus:border-brand-400"
+          />
+          <div className="mt-2 flex justify-end">
+            <Button size="sm" onClick={onBulkInvite} disabled={pending}>
+              {pending ? "Sending…" : "Send invites"}
+            </Button>
+          </div>
+        </div>
+      ) : null}
 
       <ul className="mt-5 divide-y divide-slate-100">
         {members.map((m) => (
