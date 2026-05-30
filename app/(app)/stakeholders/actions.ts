@@ -7,6 +7,7 @@ import { db, schema } from "@/lib/db";
 import { getActiveCompany, getCurrentAccountId } from "@/lib/db/queries";
 import { sendGrantWelcome, sendStakeholderPortalInvite } from "@/lib/email/send";
 import { ensureShareClasses } from "@/lib/share-classes/queries";
+import { parseCartaWorkbook, type CartaGrant, type CartaParseResult } from "@/lib/carta/parse";
 import {
   SECURITIES,
   STAKEHOLDER_TYPES,
@@ -731,4 +732,195 @@ export async function sendStakeholderInvite(id: string): Promise<ActionResult> {
 
   revalidateStakeholder(id);
   return { ok: true };
+}
+
+// --- Carta import --------------------------------------------------------
+
+// Parse an uploaded Carta "Equity Plan" .xlsx into a preview. No writes happen
+// here — the client shows the grants, then calls importCartaGrants to commit.
+export async function previewCartaImport(formData: FormData): Promise<CartaParseResult> {
+  const company = await getActiveCompany();
+  if (!company) return { ok: false, error: "No active company found." };
+
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) {
+    return { ok: false, error: "Choose a Carta export (.xlsx) to upload." };
+  }
+  if (file.size > 15 * 1024 * 1024) {
+    return { ok: false, error: "That file is larger than 15 MB." };
+  }
+  const name = file.name.toLowerCase();
+  if (!name.endsWith(".xlsx") && !name.endsWith(".xlsm")) {
+    return { ok: false, error: "Upload the Excel (.xlsx) export, not a CSV or PDF." };
+  }
+
+  const buf = await file.arrayBuffer();
+  return parseCartaWorkbook(buf);
+}
+
+export type CartaImportResult =
+  | { ok: true; stakeholdersCreated: number; stakeholdersMatched: number; holdings: number }
+  | { ok: false; error: string };
+
+// Commit reviewed Carta grants: find-or-create each stakeholder (deduped by
+// email, then name, against both existing rows and others in this batch), then
+// insert one security + issuance transaction per grant and register the share
+// classes. Carta's schedule column carries no reliable duration, so vesting
+// months are left empty — the start date is kept for reference.
+export async function importCartaGrants(grants: CartaGrant[]): Promise<CartaImportResult> {
+  const company = await getActiveCompany();
+  if (!company) return { ok: false, error: "No active company found." };
+  if (!Array.isArray(grants) || grants.length === 0) {
+    return { ok: false, error: "Nothing to import." };
+  }
+
+  const accountId = await getCurrentAccountId();
+  const currency = company.currency.trim();
+  const today = new Date().toISOString().slice(0, 10);
+
+  // Existing stakeholders, so we match instead of duplicating.
+  const existing = await db
+    .select({ id: stakeholders.id, email: stakeholders.email, fullName: stakeholders.fullName })
+    .from(stakeholders)
+    .where(and(eq(stakeholders.companyId, company.id), isNull(stakeholders.deletedAt)));
+
+  const byEmail = new Map<string, string>();
+  const byName = new Map<string, string>();
+  for (const s of existing) {
+    if (s.email) byEmail.set(s.email.toLowerCase(), s.id);
+    byName.set(s.fullName.trim().toLowerCase(), s.id);
+  }
+
+  const newIds = new Set<string>();
+  const matchedIds = new Set<string>();
+  const classSet = new Set<string>();
+  const welcomeByEmail = new Map<string, string>();
+  let holdings = 0;
+
+  try {
+    await db.transaction(async (tx) => {
+      const runByEmail = new Map<string, string>();
+      const runByName = new Map<string, string>();
+
+      for (const g of grants) {
+        const name = g.stakeholderName.trim();
+        if (!name) continue;
+        const email = g.stakeholderEmail.trim();
+        const emailKey = email.toLowerCase();
+        const nameKey = name.toLowerCase();
+
+        // Resolve the stakeholder: existing DB row, then one created earlier in
+        // this batch, otherwise create a fresh one.
+        let stakeholderId =
+          (emailKey ? byEmail.get(emailKey) ?? runByEmail.get(emailKey) : undefined) ??
+          byName.get(nameKey) ??
+          runByName.get(nameKey) ??
+          "";
+
+        if (!stakeholderId) {
+          const type: StakeholderType = (STAKEHOLDER_TYPES as readonly string[]).includes(g.type)
+            ? g.type
+            : "other";
+          const [ins] = await tx
+            .insert(stakeholders)
+            .values({
+              companyId: company.id,
+              fullName: name,
+              email: email || null,
+              type,
+              notes: g.jobTitle.trim() || null,
+              createdByAccountId: accountId,
+              updatedByAccountId: accountId,
+            })
+            .returning({ id: stakeholders.id });
+          if (!ins) throw new Error("Failed to insert stakeholder");
+          stakeholderId = ins.id;
+          newIds.add(stakeholderId);
+          if (emailKey) runByEmail.set(emailKey, stakeholderId);
+          runByName.set(nameKey, stakeholderId);
+          if (email) welcomeByEmail.set(emailKey, name);
+        } else if (!newIds.has(stakeholderId)) {
+          matchedIds.add(stakeholderId);
+        }
+
+        const isMoney = g.category === "convertible";
+        const qty = isMoney ? null : String(Math.max(0, Math.round(g.quantity)));
+        const shareClass = isMoney ? null : g.shareClass.trim() || "common";
+        if (shareClass) classSet.add(shareClass);
+        const strike =
+          g.category === "option_like" && g.strikePrice != null && g.strikePrice > 0
+            ? String(g.strikePrice)
+            : null;
+        const effectiveDate = g.vestingStartDate ?? today;
+
+        const [security] = await tx
+          .insert(securities)
+          .values({
+            companyId: company.id,
+            stakeholderId,
+            category: g.category,
+            subtype: g.subtype || (isMoney ? "safe" : "common_stock"),
+            packVersion: company.packVersion,
+            quantity: qty,
+            monetaryAmount: null,
+            monetaryCurrency: null,
+            strikePrice: strike,
+            strikeCurrency: strike ? currency : null,
+            shareClass,
+            taxScheme: g.subtype === "iso" || g.subtype === "nso" ? g.subtype : null,
+            vestingStartDate: g.vestingStartDate,
+            vestingTotalMonths: null,
+            vestingCliffMonths: null,
+            vestingFrequency: null,
+            createdByAccountId: accountId,
+            updatedByAccountId: accountId,
+          })
+          .returning({ id: securities.id });
+        if (!security) throw new Error("Failed to insert security");
+
+        await tx.insert(transactions).values({
+          companyId: company.id,
+          type: TXN_FOR_CATEGORY[g.category] ?? "share_issuance",
+          packVersion: company.packVersion,
+          effectiveDate,
+          securityId: security.id,
+          stakeholderId,
+          quantity: qty,
+          monetaryAmount: null,
+          monetaryCurrency: null,
+          note: g.planName.trim() ? `Imported from Carta — ${g.planName.trim()}` : "Imported from Carta",
+          createdByAccountId: accountId,
+          updatedByAccountId: accountId,
+        });
+        holdings++;
+      }
+    });
+  } catch (err) {
+    console.error("[importCartaGrants] failed:", err);
+    return { ok: false, error: "Couldn't import those grants. Please try again." };
+  }
+
+  if (classSet.size > 0) {
+    await ensureShareClasses(company.id, Array.from(classSet), accountId).catch(() => {});
+  }
+
+  // Best-effort welcome emails for newly-added stakeholders with an address.
+  if (welcomeByEmail.size > 0) {
+    await Promise.allSettled(
+      Array.from(welcomeByEmail, ([email, name]) =>
+        sendGrantWelcome({ to: email, companyName: company.displayName, stakeholderName: name }),
+      ),
+    );
+  }
+
+  revalidatePath("/stakeholders");
+  revalidatePath("/cap-table");
+  revalidatePath("/settings");
+
+  return {
+    ok: true,
+    stakeholdersCreated: newIds.size,
+    stakeholdersMatched: matchedIds.size,
+    holdings,
+  };
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { BulkAddModal } from "@/components/freecapt/bulk-add-modal";
+import { CartaImportModal } from "@/components/freecapt/carta-import-modal";
 import {
   AddStakeholderModal,
   type InstrumentOption,
@@ -53,10 +54,12 @@ export function StakeholdersClient({
   const router = useRouter();
   const [bulkOpen, setBulkOpen] = useState(false);
   const [singleOpen, setSingleOpen] = useState(false);
+  const [cartaOpen, setCartaOpen] = useState(false);
   const [paywall, setPaywall] = useState<string | null>(null);
 
   const openBulk = () => setBulkOpen(true);
   const openSingle = () => setSingleOpen(true);
+  const openCarta = () => setCartaOpen(true);
 
   const isEmpty = rows.length === 0;
 
@@ -69,6 +72,9 @@ export function StakeholdersClient({
         </div>
         {!isEmpty && (
           <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={openCarta}>
+              Import from Carta
+            </Button>
             <Button variant="outline" onClick={openSingle}>
               + Add one
             </Button>
@@ -103,12 +109,11 @@ export function StakeholdersClient({
               onClick={() => setPaywall("AI “type it out” bulk add")}
             />
             <EmptyCta
-              icon="↥"
-              title="Upload documents"
-              body="Drop in formation docs or a cap-table PDF for AI extraction."
-              cta="Upgrade"
-              paid
-              onClick={() => setPaywall("AI document extraction")}
+              icon="↧"
+              title="Import from Carta"
+              body="Already on Carta? Upload their Equity Plan export and we'll bring it in."
+              cta="Upload export"
+              onClick={openCarta}
             />
           </div>
           <p className="mt-6 text-sm text-slate-500">
@@ -177,6 +182,8 @@ export function StakeholdersClient({
         }}
         startRows={3}
       />
+
+      <CartaImportModal open={cartaOpen} onOpenChange={setCartaOpen} currency={currency} />
 
       {/* Paywall modal (§6.6) */}
       <Dialog open={paywall != null} onOpenChange={(o) => !o && setPaywall(null)}>
