@@ -9,6 +9,7 @@ import { z } from "zod";
 import { createServerClient } from "@/lib/auth/supabase-server";
 import { getActiveCompany } from "@/lib/db/queries";
 import { buildTermSheet } from "@/lib/exports/term-sheet";
+import { renderTermSheetDocx } from "@/lib/exports/term-sheet-docx";
 import { renderTermSheetPdf } from "@/lib/exports/term-sheet-pdf";
 import { getPackForCompany } from "@/lib/packs/_shared/loader";
 import { loadSimData } from "@/lib/simulate/load";
@@ -42,6 +43,7 @@ const bodySchema = z.object({
     )
     .max(100),
   allocations: z.record(z.string(), z.number()),
+  format: z.enum(["pdf", "docx"]).default("pdf"),
 });
 
 function slugify(name: string): string {
@@ -90,13 +92,18 @@ export async function POST(req: Request) {
 
   const model = modelRound(holders, safes, parsed.terms, investors, parsed.allocations);
   const ts = buildTermSheet(company, pack, parsed.terms, model);
-  const pdf = await renderTermSheetPdf(ts);
 
-  const filename = `${slugify(company.legalName)}-term-sheet.pdf`;
-  return new NextResponse(Buffer.from(pdf), {
+  const isDocx = parsed.format === "docx";
+  const bytes = isDocx ? await renderTermSheetDocx(ts) : await renderTermSheetPdf(ts);
+  const contentType = isDocx
+    ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    : "application/pdf";
+  const filename = `${slugify(company.legalName)}-term-sheet.${isDocx ? "docx" : "pdf"}`;
+
+  return new NextResponse(Buffer.from(bytes), {
     status: 200,
     headers: {
-      "Content-Type": "application/pdf",
+      "Content-Type": contentType,
       "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },

@@ -127,21 +127,21 @@ export function RoundModelView({
     setRows((prev) => prev.map((r) => ({ ...r, allocated: Math.round(alloc[r.id] ?? 0) })));
   };
 
-  const [downloading, setDownloading] = useState(false);
-  const downloadTermSheet = async () => {
-    setDownloading(true);
+  const [downloading, setDownloading] = useState<"pdf" | "docx" | null>(null);
+  const downloadTermSheet = async (format: "pdf" | "docx") => {
+    setDownloading(format);
     try {
       const res = await fetch("/simulate/term-sheet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ terms, investors, allocations }),
+        body: JSON.stringify({ terms, investors, allocations, format }),
       });
       if (!res.ok) throw new Error("Failed to generate term sheet");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "term-sheet.pdf";
+      a.download = `term-sheet.${format}`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -149,7 +149,7 @@ export function RoundModelView({
     } catch {
       toast.error("Couldn't generate the term sheet. Try again.");
     } finally {
-      setDownloading(false);
+      setDownloading(null);
     }
   };
 
@@ -341,13 +341,29 @@ export function RoundModelView({
             </span>
           </p>
           <p className="text-xs text-slate-500">
-            A non-binding PDF summarizing terms, allocation, and key clauses — for your counsel to review.
+            A non-binding draft summarizing terms, allocation, and key clauses — for your counsel to review.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={downloadTermSheet} disabled={downloading || !anyAllocated}>
-          <Download className="mr-1.5 h-4 w-4" />
-          {downloading ? "Generating…" : "Download PDF"}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => downloadTermSheet("pdf")}
+            disabled={downloading !== null || !anyAllocated}
+          >
+            <Download className="mr-1.5 h-4 w-4" />
+            {downloading === "pdf" ? "Generating…" : "PDF"}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => downloadTermSheet("docx")}
+            disabled={downloading !== null || !anyAllocated}
+          >
+            <Download className="mr-1.5 h-4 w-4" />
+            {downloading === "docx" ? "Generating…" : "Word"}
+          </Button>
+        </div>
       </div>
 
       {/* Resulting cap table */}

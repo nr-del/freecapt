@@ -1,10 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import type { ActiveCompany } from "@/lib/db/queries";
 import type { CountryPack } from "@/lib/packs/_shared/types";
 import { type SimHolder } from "@/lib/simulate/engine";
 import { modelRound, type RoundInvestor } from "@/lib/simulate/round-model";
 
+// The renderers guard with `import "server-only"`, which throws outside an RSC
+// bundle. Stub it so the pure render logic is unit-testable under vitest.
+vi.mock("server-only", () => ({}));
+
+import { renderTermSheetDocx } from "./term-sheet-docx";
 import { buildTermSheet } from "./term-sheet";
 
 const HOLDERS: SimHolder[] = [
@@ -80,5 +85,17 @@ describe("buildTermSheet", () => {
     const noSafe = modelRound(HOLDERS, [], TERMS, INVESTORS, { a: 1_500_000, b: 500_000 });
     const tsNoSafe = buildTermSheet(COMPANY, PACK, TERMS, noSafe);
     expect(tsNoSafe.keyTerms.some((t) => t.label.startsWith("SAFE"))).toBe(false);
+  });
+});
+
+describe("renderTermSheetDocx", () => {
+  it("renders a valid .docx (zip) document", async () => {
+    const model = modelRound(HOLDERS, [], TERMS, INVESTORS, { a: 1_500_000, b: 500_000 });
+    const ts = buildTermSheet(COMPANY, PACK, TERMS, model);
+    const bytes = await renderTermSheetDocx(ts);
+    expect(bytes.length).toBeGreaterThan(1000);
+    // .docx is a ZIP archive — first two bytes are the local-file-header magic "PK".
+    expect(bytes[0]).toBe(0x50);
+    expect(bytes[1]).toBe(0x4b);
   });
 });
