@@ -39,6 +39,8 @@ export default async function DataRoomPage() {
       paidToGenerate: s.paidToGenerate,
       multiple: s.multiple,
       required: s.required,
+      // Auto slots backed by a server-rendered export expose a download link.
+      autoHref: s.key === "shareholder_register" ? "/data-room/register" : undefined,
       documents: s.documents.map((d) => ({ id: d.id, filename: d.filename, signed: d.signed })),
     })),
   }));

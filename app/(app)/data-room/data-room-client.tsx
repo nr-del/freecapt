@@ -33,6 +33,7 @@ export type ClientSlot = {
   paidToGenerate?: boolean;
   multiple?: boolean;
   required?: boolean;
+  autoHref?: string; // download link for an auto-generated export (e.g. the register PDF)
   documents: SlotDoc[];
 };
 
@@ -194,13 +195,23 @@ function SlotRow({ slot, onAdd }: { slot: ClientSlot; onAdd: () => void }) {
       </div>
       <div className="flex shrink-0 items-center gap-3">
         <StatusPill status={slot.status} />
-        {slot.status === "auto" ? null : (
+        {slot.status === "auto" ? (
+          slot.autoHref ? (
+            <a
+              href={slot.autoHref}
+              className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
+            >
+              <Download className="size-3.5" />
+              PDF
+            </a>
+          ) : null
+        ) : (
           <button
             type="button"
             onClick={onAdd}
             className="text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
           >
-            {slot.multiple || slot.documents.length > 0 ? "+ Add" : "+ Add"}
+            + Add
           </button>
         )}
       </div>
