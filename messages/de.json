@@ -1,1 +1,642 @@
-{}
+{
+  "nav": {
+    "items": [
+      { "key": "product", "label": "Produkt", "href": "/#features" },
+      { "key": "countries", "label": "Länder", "href": "/#countries" },
+      { "key": "pricing", "label": "Preise", "href": "/#pricing" },
+      { "key": "compare", "label": "Vergleichen", "href": "/compare" },
+      { "key": "security", "label": "Sicherheit", "href": "/#security" }
+    ],
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen – kostenlos",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache"
+  },
+  "footer": {
+    "tagline": "Die kostenlose Cap Table für Gründer und kleine Unternehmen. Entwickelt von <studio>Bifrost Studios</studio> in Kopenhagen.",
+    "columns": [
+      {
+        "heading": "Produkt",
+        "links": [
+          { "label": "Funktionen", "href": "/#features" },
+          { "label": "Länderpakete", "href": "/#countries" },
+          { "label": "Preise", "href": "/#pricing" },
+          { "label": "Vergleichen", "href": "/compare" },
+          { "label": "Changelog", "href": "/changelog" }
+        ]
+      },
+      {
+        "heading": "Vertrauen",
+        "links": [
+          { "label": "Sicherheit", "href": "/#security" },
+          { "label": "Datenschutz", "href": "/privacy" },
+          { "label": "AGB", "href": "/terms" },
+          { "label": "Status", "href": "/status" }
+        ]
+      },
+      {
+        "heading": "Unternehmen",
+        "links": [
+          { "label": "Über uns", "href": "/about" },
+          { "label": "Kontakt", "href": "/contact" },
+          { "label": "Presse", "href": "/press" },
+          { "label": "hello@freecapt.com", "href": "mailto:hello@freecapt.com" }
+        ]
+      }
+    ],
+    "copyright": "© 2026 Bifrost Studios. Alle Rechte vorbehalten.",
+    "badgeGdpr": "🇪🇺 DSGVO",
+    "badgeRegions": "EU- und US-Regionen",
+    "badgeSoc2": "SOC 2 in Arbeit",
+    "badgeStatus": "Status: ●"
+  },
+  "hero": {
+    "company": "Acme ApS · Runden-Simulator",
+    "title": "Was passiert, wenn du Kapital aufnimmst?",
+    "livePreview": "Live-Vorschau",
+    "founderSuffix": "Gründer",
+    "optionsLabel": "Optionen (Dana, Erik)",
+    "safeLabel": "Frank (SAFE)",
+    "poolLabel": "Pool",
+    "newInvestorLabel": "Neuer Investor",
+    "raiseAmount": "Finanzierungssumme",
+    "preMoney": "Pre-Money-Bewertung",
+    "raiseAria": "Finanzierungssumme in Millionen",
+    "preAria": "Pre-Money-Bewertung in Millionen",
+    "newInvestorOwns": "Neuer Investor hält",
+    "founders": "Gründer",
+    "gdpr": "🇪🇺 DSGVO",
+    "simplified": "Vereinfachte Vorschau – probiere den vollständigen Simulator kostenlos"
+  },
+  "home": {
+    "meta": {
+      "title": "FreeCapT – die kostenlose Cap Table für Gründer und kleine Unternehmen",
+      "description": "Die kostenlose Cap Table für bootstrapped Gründer, Familienunternehmen und kleine SaaS – überall auf der Welt. Lokale Regeln für Dänemark, Norwegen, Schweden, Deutschland, die Schweiz, Großbritannien und die USA, mit weiteren in Vorbereitung. KI-nativ. $15/Monat, wenn du bereit bist zu teilen."
+    },
+    "hero": {
+      "badge": "Jetzt in der privaten Beta – DK · NO · SE · DE · CH · UK · US",
+      "titleBefore": "Die kostenlose Cap Table für ",
+      "titleHighlight": "Gründer überall",
+      "lede": "Entwickelt für bootstrapped Startups, Familienunternehmen, Agenturen und kleine SaaS. In fünf Sprachen. Nach den Regeln deines Landes. KI-nativ. <strong>$15/Monat</strong>, wenn du mit Stakeholdern teilen möchtest.",
+      "ctaPrimary": "Loslegen – kostenlos",
+      "ctaSecondary": "Preise ansehen",
+      "fineprint": "Keine Kreditkarte. In 15 Minuten eingerichtet. Unbegrenzte Stakeholder im kostenlosen Tarif."
+    },
+    "valueProps": {
+      "kicker": "Was du bekommst",
+      "heading": "Cap Tables sollten weder einen Anwalt noch ein Verkaufsgespräch noch einen ganzen Dienstag kosten.",
+      "cards": [
+        {
+          "icon": "◐",
+          "title": "Kostenlos für deine persönliche Cap Table",
+          "body": "Erstelle sie, sieh sie, modelliere Runden, exportiere die Rohdaten. Keine Begrenzung der Stakeholder-Anzahl. Keine Kreditkarte. Keine Sternchen. Zahle nur $15/Monat, wenn du mit Mitarbeitern teilen, Rechtsdokumente erstellen oder KI-Funktionen nutzen möchtest."
+        },
+        {
+          "icon": "⌖",
+          "title": "Entwickelt für sieben Rechtsräume",
+          "body": "Dänische ApS · Norwegische AS · Schwedische AB · Deutsche GmbH · Schweizer AG · UK Ltd. · US Delaware C-Corp + LLC. Jeweils mit eigenen Instrumenten, Vorlagen und steuerbegünstigten Programmen (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, Profits Interests)."
+        },
+        {
+          "icon": "✦",
+          "title": "KI-nativ, nicht nachträglich angeflanscht",
+          "body": "Lade deine Gründungsdokumente hoch – die KI extrahiert deine Cap Table in 90 Sekunden. Frag in einfacher Sprache: „Was passiert, wenn ich 2 Mio. bei 8 Mio. Pre-Money aufnehme?“ Klicke bei jeder Zahl auf „das erklären“. Angetrieben von Claude, in deiner Region."
+        }
+      ]
+    },
+    "countries": {
+      "kicker": "Länderpakete",
+      "heading": "Kostenlos in deinem Land, nach den Regeln deines Landes.",
+      "lede": "Jedes Paket bringt die lokalen Gesellschaftsformen, Instrumente, Validierungen und Dokumentvorlagen mit. Kein US-zentriertes Drumherumreden.",
+      "packs": [
+        { "flag": "🇩🇰", "name": "Dänemark", "entity": "ApS · A/S", "schemes": "§ 7P · Tegningsoptioner · Ejerbog" },
+        { "flag": "🇳🇴", "name": "Norwegen", "entity": "AS · ASA", "schemes": "Opsjonsskatteordningen · Aksjeeierbok" },
+        { "flag": "🇸🇪", "name": "Schweden", "entity": "AB privat · publikt", "schemes": "QESO · Aktiebok · Teckningsoptioner" },
+        { "flag": "🇩🇪", "name": "Deutschland", "entity": "GmbH · AG", "schemes": "VSOP · Notar-Workflow · § 19a" },
+        { "flag": "🇨🇭", "name": "Schweiz", "entity": "AG · GmbH", "schemes": "Sperrfrist · Mitarbeiteroptionen" },
+        { "flag": "🇬🇧", "name": "Großbritannien", "entity": "Ltd.", "schemes": "EMI · Register of Members · ASA" },
+        { "flag": "🇺🇸", "name": "Vereinigte Staaten", "entity": "DE C-Corp · DE LLC", "schemes": "ISO · NSO · SAFE · Profits Interests" }
+      ],
+      "soonName": "Frankreich · NL · ES · FI · CA",
+      "soonLabel": "Kommen als Länderpakete",
+      "soonNote": "Ein Sprint pro neuem Land.",
+      "languagesNote": "Oberfläche verfügbar in Dansk · Norsk · Svenska · Deutsch · English. Die Sprache ist unabhängig vom Rechtsraum – wähle, was für dich passt."
+    },
+    "product": {
+      "kicker": "Das Produkt",
+      "heading": "Sechs Bildschirme. Nicht dreißig.",
+      "lede": "FreeCapT dreht sich um eine Frage: Wem gehört dieses Unternehmen? Alles andere steht im Dienst dieser Antwort – klar, in 15 Minuten oder weniger.",
+      "screens": [
+        {
+          "kicker": "Cap Table",
+          "title": "Wem das Unternehmen heute gehört.",
+          "body": "Donut-Diagramm und Tabelle nebeneinander. Umschalter zwischen ausstehend und vollständig verwässert. Stichtag für historische Ansichten. Klicke auf „Du hast noch 18,5 % zu vergeben“, um Anteile auszugeben."
+        },
+        {
+          "kicker": "Stakeholder",
+          "title": "Alle in 30 Sekunden hinzugefügt.",
+          "body": "Aus der Tabelle einfügen. Oder in einfacher Sprache tippen: „Anna und Ben mit je 30 %, Dana hat 200k Optionen mit 4 Jahren Vesting.“ Die KI verarbeitet es, du bestätigst."
+        },
+        {
+          "kicker": "Runden-Modellierung",
+          "paid": "Kostenpflichtig",
+          "title": "Verteile deine Runde auf echte Investoren.",
+          "body": "Du nimmst 2 Mio. bei 8 Mio. Pre auf? Trage deine 10 interessierten Investoren mit ihren Zusagen ein. Sieh, wer passt, wer zurückskaliert und wie die Cap Table danach aussieht."
+        },
+        {
+          "kicker": "Stakeholder-Portal",
+          "paid": "Kostenpflichtig",
+          "title": "Dein Team sieht in einfacher Sprache, was es besitzt.",
+          "body": "Magic-Link-Anmeldung (keine Passwörter). Ihr Vesting-Plan. KI-Button „erkläre meine Zuteilung“. Angels und Berater mit mehreren Zuteilungen erhalten ein kostenloses Portfolio-Dashboard."
+        },
+        {
+          "kicker": "Dokumente",
+          "paid": "Kostenpflichtig für Rechtsqualität",
+          "title": "Länderspezifische Vorlagen, die Anwälte respektieren.",
+          "body": "Erstelle deine dänische Ejerbog, deine deutsche Gesellschafterliste, dein UK Register of Members, deine US-Kapitalisierungstabelle für 409A. PDF/A-Archivformat. Word zum Redlining."
+        },
+        {
+          "kicker": "Simulator",
+          "title": "„Was passiert, wenn ich 2 Mio. bei 8 Mio. Post aufnehme?“",
+          "body": "Cap Tables vor/nach nebeneinander mit Verwässerung pro Stakeholder. SAFEs werden automatisch umgewandelt. Speichere Szenarien, teile schreibgeschützte Links mit deinen Mitgründern."
+        }
+      ]
+    },
+    "pricing": {
+      "kicker": "Preise",
+      "heading": "Zwei Tarife. Ein Preis.",
+      "lede": "$15/Monat – und nur, wenn du bereit bist. Der kostenlose Tarif ist eine echte, vollständige Cap Table, keine Testversion.",
+      "freeName": "Kostenlos",
+      "freePrice": "$0",
+      "freeTagline": "Für deine persönliche Cap Table. Für immer.",
+      "freeCta": "Loslegen – kostenlos",
+      "freeFeatures": [
+        "Vollständige Cap Table – unbegrenzte Stakeholder",
+        "Massen-Import per Tabellen-Einfügen",
+        "KI-Onboarding-Helfer (einmalig)",
+        "Runden-Simulator (einzelner Investor)",
+        "Einfacher CSV-Export",
+        "Mitgründer als Admin / Bearbeiter / Betrachter",
+        "Mehrfirmen-Umschalter",
+        "Alle 7 Länderpakete",
+        "5 Oberflächensprachen",
+        "Mehrwährung, mehrere Zeitzonen",
+        "2FA, Audit-Log, DSGVO-Datenexport",
+        "Magic-Link-Anmeldung"
+      ],
+      "paidBadge": "Wenn du bereit bist",
+      "paidName": "Kostenpflichtig",
+      "paidPrice": "$15",
+      "paidPer": "/Monat",
+      "paidTagline": "Alles aus Kostenlos, plus die wertvollen Momente.",
+      "paidCta": "Kostenpflichtigen Tarif starten",
+      "paidFeatures": [
+        "Alles aus Kostenlos",
+        "Laufender KI-Chat – „frag deine Cap Table“",
+        "„Das erklären“-Buttons bei jeder Zahl",
+        "KI-gestützter Massen-Import (Eingabe + Dokument-Upload)",
+        "Umfangreicher Excel-Export – mehrere Blätter, Live-Formeln, eingebettetes Diagramm",
+        "Rechtsqualitäts-PDF- und Word-Exporte – pro Rechtsraum",
+        "Erstellung von Dokumentvorlagen",
+        "Stakeholder-Portalzugang für dein Team",
+        "Runden-Modellierung – Verteilung auf mehrere Investoren",
+        "Erstellung von Term-Sheet-Entwürfen"
+      ],
+      "footnote": "Keine Nutzungsgrenzen. Keine Gebühren pro Stakeholder. Kündige mit einem Klick; deine Daten bleiben deine."
+    },
+    "security": {
+      "kicker": "Sicherheit & Vertrauen",
+      "heading": "Eine Cap Table ist das sensibelste Dokument, das ein privates Unternehmen besitzt.",
+      "lede": "Wir behandeln sie genau so.",
+      "cards": [
+        {
+          "icon": "🇪🇺",
+          "title": "DSGVO-konform. EU- und US-Regionen.",
+          "body": "Daten von EU-Kunden in Frankfurt gehostet; US-Kunden in us-east. Deine Wahl bei der Unternehmenserstellung, danach unveränderlich."
+        },
+        {
+          "icon": "🔒",
+          "title": "AES-256-verschlüsselt. TLS 1.3.",
+          "body": "Verschlüsselungsschlüssel pro Mandant. SOC 2 Typ I-Attestierung in Arbeit (Ziel Q3 2026). ISO 27001 auf der Roadmap."
+        },
+        {
+          "icon": "📋",
+          "title": "Append-only-Audit-Log.",
+          "body": "Jede Zustandsänderung wird mit Akteur, IP, Vorher/Nachher protokolliert. 7 Jahre Aufbewahrung. Manipulationssichere Replikation in unveränderlichen Speicher."
+        },
+        {
+          "icon": "💾",
+          "title": "Deine Daten gehören dir.",
+          "body": "Ein-Klick-Export von allem – Hauptbuch, Dokumente, Audit-Log – als ZIP. Kontolöschung innerhalb von 30 Tagen, vollständige Bereinigung gemäß DSGVO."
+        },
+        {
+          "icon": "🪄",
+          "title": "Nur Magic-Link. Keine Passwörter.",
+          "body": "Geringere Angriffsfläche als Passwort-Datenbanken. Optionale TOTP-2FA für Vorsichtige. Geräte-Vertrauensabfragen bei neuen Anmeldungen."
+        },
+        {
+          "icon": "🛡️",
+          "title": "Bug-Bounty + öffentliche Sicherheitsseite.",
+          "body": "Forscher willkommen. Statusseite unter freecapt.com/status. Öffentliches Changelog bei jedem Release."
+        }
+      ]
+    },
+    "faq": {
+      "kicker": "Erwartete Fragen",
+      "heading": "FAQ",
+      "items": [
+        {
+          "q": "Ist es wirklich kostenlos?",
+          "a": "Ja. Der kostenlose Tarif ist die vollständige persönliche Cap Table – erstelle sie, sieh sie, modelliere Runden, exportiere die Daten, wechsle zwischen Unternehmen, wenn du mehrere verwaltest. Es gibt keine Stakeholder-Grenzen, keine Zeitlimits, keine Kreditkarte. Du zahlst nur $15/Monat, wenn du mit Stakeholdern teilen, KI-Funktionen über die Einrichtung hinaus nutzen oder Dokumente in Rechtsqualität erstellen möchtest."
+        },
+        {
+          "q": "Welche Rechtsräume unterstützt ihr?",
+          "a": "Sieben zum Start: Dänemark (ApS + A/S), Norwegen (AS + ASA), Schweden (AB privat + publikt), Deutschland (GmbH + AG), Schweiz (AG + GmbH), Großbritannien (Ltd.) und Vereinigte Staaten Delaware (C-Corp + LLC). Jeder kommt mit den lokalen Instrumententypen, Validierungsregeln, Dokumentvorlagen und steuerbegünstigten Programmen (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, Profits Interests). Weitere Länder sind sprintgroße Ergänzungen."
+        },
+        {
+          "q": "Brauche ich einen Anwalt, um FreeCapT zu nutzen?",
+          "a": "Nein. FreeCapT ist für Gründer gebaut, die keinen Cooley-Partner auf Kurzwahl haben. Das Onboarding ist dialogorientiert. Die Voreinstellungen sind sinnvoll. Die KI erklärt alles in einfacher Sprache. Einen Anwalt willst du weiterhin für tatsächliche Finanzierungsrunden, steuerliche Wahlrechte und Notartermine – wir machen diese Momente günstiger und schneller, indem wir das richtige Dokument für deinen Anwalt zur Prüfung erstellen."
+        },
+        {
+          "q": "Wie unterscheidet sich das von Carta?",
+          "a": "Carta ist für venture-finanzierte US-Scaleups gebaut und entsprechend bepreist. Für dieses Publikum ist es das richtige Werkzeug. FreeCapT ist für alle anderen gebaut – bootstrapped Gründer, Familienunternehmen, Agenturen, kleine SaaS. Wir bieten erstklassige Unterstützung für die lokalen Rechtsräume, die die meisten Tools ignorieren, eine KI-native Bedienung und einen kostenlosen Tarif, der wirklich nutzbar ist. Die Details findest du auf unseren vollständigen Vergleichsseiten."
+        },
+        {
+          "q": "Sind meine Daten sicher?",
+          "a": "Eine Cap Table ist das sensibelste Dokument, das ein privates Unternehmen besitzt. Wir behandeln sie genau so – AES-256-Verschlüsselung im Ruhezustand, TLS 1.3 bei der Übertragung, Verschlüsselungsschlüssel pro Mandant, Append-only-Audit-Log, DSGVO-konform. Daten von EU-Kunden werden in Frankfurt gehostet; US in us-east. Die SOC 2 Typ I-Attestierung ist in Arbeit, Typ II folgt rund 12 Monate später."
+        },
+        {
+          "q": "Wie steht es um die DSGVO?",
+          "a": "EU-Daten bleiben in der EU (Region Frankfurt). AVV verfügbar. Ein-Klick-Datenexport (deine Daten gehören dir). Eine Kontolöschung löst eine 30-tägige Karenzzeit aus, danach die vollständige Bereinigung. Auskunftsersuchen werden innerhalb von 30 Tagen bearbeitet. Datenschutzerklärung in einfacher Sprache, kein Juristendeutsch."
+        },
+        {
+          "q": "Welche Sprachen unterstützt ihr?",
+          "a": "Die Oberfläche ist in English, Dansk, Norsk, Svenska und Deutsch verfügbar. Die Sprache ist unabhängig vom Rechtsraum – ein dänischer Gründer mit einer UK Ltd. kann die dänische Oberfläche nutzen. Exporte in Rechtsqualität bleiben in der regulatorischen Sprache des Rechtsraums (eine dänische Ejerbog ist auf Dänisch; eine US-Kapitalisierungstabelle auf Englisch), unabhängig von der Oberflächeneinstellung. Französisch und Italienisch für Schweizer Kunden kommen nach dem Start."
+        },
+        {
+          "q": "Kann ich aus Carta oder einem anderen Tool importieren?",
+          "a": "Ja. Exportiere eine CSV aus Carta, Pulley oder einer beliebigen Tabelle und füge sie in unseren Massen-Import-Bildschirm ein – die Spalten werden automatisch zugeordnet. Oder lade deine Gründungsdokumente und Zuteilungsvereinbarungen hoch; unsere KI extrahiert die gesamte Cap Table in einen Entwurf, den du bestätigst. Beide Wege sind in der Regel eine 5-Minuten-Migration."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Sieh deine Cap Table in 15 Minuten.",
+      "lede": "Keine Kreditkarte. Kein Verkaufsgespräch. Kein Anwalt. Füge deine bestehende Tabelle ein, tippe sie in einfacher Sprache oder lade deine Gründungsdokumente hoch.",
+      "emailPlaceholder": "du@deinunternehmen.com",
+      "submit": "Loslegen →",
+      "languages": "Verfügbar in Dansk · Norsk · Svenska · Deutsch · English"
+    }
+  },
+  "compareIndex": {
+    "meta": {
+      "title": "FreeCapT vergleichen – kostenlose Cap Table vs. Carta und Pulley",
+      "description": "Sieh, wie sich FreeCapT mit den größeren Cap-Table-Plattformen vergleicht. Kostenlos für persönliche Cap Tables, mehrere Rechtsräume, KI-nativ, $15/Monat zum Teilen."
+    },
+    "kicker": "Vergleich",
+    "title": "Wie FreeCapT abschneidet",
+    "lede": "Ehrliche, sachliche Vergleiche mit den größeren Systemen. Wir sagen dir, wann sie die bessere Wahl sind – und wann eine kostenlose, mehrere Rechtsräume abdeckende, KI-native Cap Table die klügere Entscheidung ist.",
+    "readComparison": "Vergleich lesen →",
+    "vs": "FreeCapT vs.",
+    "cards": [
+      {
+        "name": "Carta",
+        "href": "/compare/carta",
+        "blurb": "Die marktführende US-Equity-Plattform für venture-finanzierte Unternehmen. Sieh, wo stattdessen ein kostenloses, mehrere Rechtsräume abdeckendes Tool passt."
+      },
+      {
+        "name": "Pulley",
+        "href": "/compare/pulley",
+        "blurb": "Ein modernes Cap-Table-Tool für US-Startups. Sieh, wie FreeCapT bei Preis, Rechtsräumen und KI abschneidet."
+      }
+    ]
+  },
+  "comparison": {
+    "kicker": "Vergleich",
+    "title": "FreeCapT vs. {competitor}",
+    "freecaptIsFor": "FreeCapT ist für",
+    "competitorIsFor": "{competitor} ist für",
+    "featureHeader": "Funktion",
+    "freecaptHeader": "FreeCapT",
+    "whenBetter": "Wann {competitor} die bessere Wahl ist",
+    "ctaButton": "FreeCapT testen – kostenlos",
+    "ctaNote": "Keine Kreditkarte. Migriere von {competitor} per CSV oder KI-Dokument-Upload in Minuten.",
+    "disclaimer": "{competitor}-Angaben basieren auf öffentlich verfügbaren Informationen mit Stand 2026 und können sich ändern. {competitor} ist eine Marke des jeweiligen Inhabers; FreeCapT ist nicht mit {competitor} verbunden oder von {competitor} unterstützt. Etwas veraltet entdeckt? <link>Sag uns Bescheid</link>."
+  },
+  "compareCarta": {
+    "meta": {
+      "title": "FreeCapT vs. Carta – eine kostenlose Alternative für mehrere Rechtsräume",
+      "description": "Wie sich FreeCapT mit Carta für Gründer und kleine Unternehmen vergleicht: Preise, Rechtsräume, KI-Funktionen und für wen jedes Tool gebaut ist. Kostenlos für persönliche Cap Tables; $15/Monat zum Teilen."
+    },
+    "competitor": "Carta",
+    "competitorTagline": "Die marktführende US-Plattform für Equity-Management für venture-finanzierte Unternehmen.",
+    "lede": "Carta ist die bekannteste Cap-Table-Plattform, gebaut für venture-finanzierte US-Scaleups. FreeCapT ist für alle anderen gebaut – bootstrapped Gründer, Familienunternehmen, Agenturen und kleine SaaS, in sieben Rechtsräumen. Hier ist ein ehrlicher, sachlicher Vergleich.",
+    "bestForFreeCapT": "Bootstrapped und Gründer in der Frühphase, Familienunternehmen, Agenturen und kleine SaaS, die eine echte Cap Table kostenlos wollen, in ihrem eigenen Rechtsraum und ihrer Sprache, ohne Verkaufsgespräch.",
+    "bestForCompetitor": "Venture-finanzierte US-Startups und Scaleups, die 409A-Bewertungen, Fondsverwaltung und die breite Equity-Management-Suite benötigen, die Investoren bereits erwarten.",
+    "whenCompetitor": "Wenn du eine US-C-Corp bist, die geprägte Venture-Runden aufnimmt, und integrierte 409A-Bewertungen, Fondsverwaltung oder Funktionen brauchst, die deine Investoren ausdrücklich verlangen, ist Cartas Tiefe in diesem Ökosystem schwer zu übertreffen. Wir konzentrieren uns auf den Long Tail, für den Carta nicht optimiert ist.",
+    "rows": [
+      { "feature": "Kostenloser Tarif", "freecapt": "Ja – die vollständige persönliche Cap Table, unbegrenzte Stakeholder, für immer.", "competitor": "Begrenzter kostenloser Tarif für die kleinsten Unternehmen; kostenpflichtige Tarife skalieren schnell.", "edge": "freecapt" },
+      { "feature": "Einstiegspreis", "freecapt": "$0 kostenlos, $15/Monat, wenn du teilst, KI nutzt oder Rechtsdokumente exportierst.", "competitor": "Kostenpflichtige Tarife liegen typischerweise bei einigen Hundert bis Tausenden Dollar pro Jahr, wenn du wächst.", "edge": "freecapt" },
+      { "feature": "Rechtsräume", "freecapt": "DK, NO, SE, DE, CH, UK, US – lokale Instrumente, Register und Steuerprogramme eingebaut.", "competitor": "Starke US-Abdeckung; etwas internationale Unterstützung, US-zentriert konzipiert.", "edge": "freecapt" },
+      { "feature": "Sprachen", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (Oberfläche unabhängig vom Rechtsraum).", "competitor": "Hauptsächlich Englisch.", "edge": "freecapt" },
+      { "feature": "KI-nativ", "freecapt": "Dokumentenextraktion, Massen-Import in einfacher Sprache, frag-deine-Cap-Table-Chat, das-erklären bei jeder Zahl.", "competitor": "Fügt KI-Funktionen hinzu; nicht der Kern des Produkts.", "edge": "freecapt" },
+      { "feature": "409A-Bewertungen", "freecapt": "Nicht angeboten – wir sind kein US-Bewertungsanbieter.", "competitor": "Integrierte 409A-Bewertungen und Audit-Unterstützung.", "edge": "competitor" },
+      { "feature": "Fondsverwaltung", "freecapt": "Nicht angeboten – Fokus auf die Unternehmens-Cap-Table.", "competitor": "Vollständige Fondsverwaltung und LP-Tools.", "edge": "competitor" },
+      { "feature": "Runden-Modellierung", "freecapt": "Einzelrunden-Simulator kostenlos; Mehr-Investoren-Modellierung im $15/Monat-Tarif.", "competitor": "Umfassende Szenario- und Wasserfall-Modellierung.", "edge": "even" },
+      { "feature": "Datenbesitz & Export", "freecapt": "Ein-Klick-Vollexport (Hauptbuch, Dokumente, Audit-Log). Magic-Link-Auth, keine Passwörter.", "competitor": "Export verfügbar; stärkere Plattformbindung, je mehr Module du übernimmst.", "edge": "freecapt" },
+      { "feature": "Einrichtung", "freecapt": "Selbstständig in ca. 15 Minuten, kein Verkaufsgespräch.", "competitor": "Selbstständig für kleine Tarife; vertriebsgesteuert für größere.", "edge": "even" }
+    ]
+  },
+  "comparePulley": {
+    "meta": {
+      "title": "FreeCapT vs. Pulley – eine kostenlose Alternative für mehrere Rechtsräume",
+      "description": "Wie sich FreeCapT mit Pulley für Gründer und kleine Unternehmen vergleicht: Preise, Rechtsräume, KI-Funktionen und für wen jedes Tool gebaut ist. Kostenlos für persönliche Cap Tables; $15/Monat zum Teilen."
+    },
+    "competitor": "Pulley",
+    "competitorTagline": "Ein modernes Cap-Table- und Equity-Management-Tool für Startups.",
+    "lede": "Pulley ist ein angesehenes modernes Cap-Table-Tool, das sich vor allem an US-Startups richtet. FreeCapT deckt sieben Rechtsräume ab, ist KI-nativ und kostenlos für deine persönliche Cap Table. Hier ist ein ehrlicher, sachlicher Vergleich.",
+    "bestForFreeCapT": "Gründer und kleine Unternehmen außerhalb des US-Venture-Tracks – oder darin –, die eine kostenlose, mehrere Rechtsräume abdeckende Cap Table in ihrer eigenen Sprache mit eingebauter KI wollen.",
+    "bestForCompetitor": "US-Startups, die eine saubere, moderne Cap Table mit starker Unterstützung für geprägte Runden, SAFEs und US-Workflows zur Equity-Vergütung wollen.",
+    "whenCompetitor": "Wenn du ein US-Startup bist und ein ausgefeiltes, gut unterstütztes Equity-Tool mit tiefen US-Fundraising-Workflows und 409A-Partnerschaften willst, ist Pulley eine starke Wahl. Wir differenzieren uns durch kostenlose Preise, europäische Rechtsräume und eine KI-native Bedienung.",
+    "rows": [
+      { "feature": "Kostenloser Tarif", "freecapt": "Ja – die vollständige persönliche Cap Table, unbegrenzte Stakeholder, für immer.", "competitor": "Kostenloser Tarif für Unternehmen in der Frühphase bis zu einer Stakeholder-Grenze; darüber kostenpflichtige Tarife.", "edge": "freecapt" },
+      { "feature": "Einstiegspreis", "freecapt": "$0 kostenlos, $15/Monat, wenn du teilst, KI nutzt oder Rechtsdokumente exportierst.", "competitor": "Kostenpflichtige Tarife pro Unternehmen, steigen typischerweise mit Phase und Mitarbeiterzahl.", "edge": "freecapt" },
+      { "feature": "Rechtsräume", "freecapt": "DK, NO, SE, DE, CH, UK, US – lokale Instrumente, Register und Steuerprogramme eingebaut.", "competitor": "US-fokussiert, mit etwas internationaler Abdeckung.", "edge": "freecapt" },
+      { "feature": "Sprachen", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (Oberfläche unabhängig vom Rechtsraum).", "competitor": "Hauptsächlich Englisch.", "edge": "freecapt" },
+      { "feature": "KI-nativ", "freecapt": "Dokumentenextraktion, Massen-Import in einfacher Sprache, frag-deine-Cap-Table-Chat, das-erklären bei jeder Zahl.", "competitor": "Moderne Bedienung; KI ist nicht die zentrale Botschaft.", "edge": "freecapt" },
+      { "feature": "Lokale Steuerprogramme", "freecapt": "EMI, § 7P, opsjonsskatteordningen, QESO, ISO, Profits Interests – pro Rechtsraum validiert.", "competitor": "Starke US-Programmunterstützung (ISO/NSO/SAFE); begrenzte europäische Programme.", "edge": "freecapt" },
+      { "feature": "Runden-Modellierung", "freecapt": "Einzelrunden-Simulator kostenlos; Mehr-Investoren-Modellierung im $15/Monat-Tarif.", "competitor": "Gute Szenario-Modellierung für geprägte Runden und SAFEs.", "edge": "even" },
+      { "feature": "Dokumentenerstellung", "freecapt": "Länderspezifisches PDF/Word in Rechtsqualität (Ejerbog, Gesellschafterliste, Register of Members).", "competitor": "US-orientierte Dokument-Workflows.", "edge": "freecapt" },
+      { "feature": "Datenbesitz & Export", "freecapt": "Ein-Klick-Vollexport (Hauptbuch, Dokumente, Audit-Log). Magic-Link-Auth, keine Passwörter.", "competitor": "Export verfügbar.", "edge": "even" },
+      { "feature": "Einrichtung", "freecapt": "Selbstständig in ca. 15 Minuten, kein Verkaufsgespräch.", "competitor": "Selbstständiges Onboarding.", "edge": "even" }
+    ]
+  },
+  "about": {
+    "meta": {
+      "title": "Über FreeCapT – entwickelt von Bifrost Studios in Kopenhagen",
+      "description": "Warum wir eine kostenlose, mehrere Rechtsräume abdeckende, KI-native Cap Table für Gründer und kleine Unternehmen überall gebaut haben. Gemacht von Bifrost Studios in Kopenhagen."
+    },
+    "kicker": "Über uns",
+    "title": "Eine kostenlose Cap Table für die anderen 95 %",
+    "lede": "Die meisten Unternehmen sind keine venture-finanzierten Einhörner. Sie sind bootstrapped Startups, Familienunternehmen, Agenturen und kleine SaaS – und sie verdienen eine Cap Table, die kostenlos, lesbar und für ihr Land gebaut ist.",
+    "paragraphs": [
+      "FreeCapT begann mit einer einfachen Frustration: Die Tools, um festzuhalten, wem ein Unternehmen gehört, sind für venture-finanzierte US-Scaleups bepreist und behandeln jede andere Art von Unternehmen als Nebensache. Wenn du eine dänische ApS, eine deutsche GmbH oder eine UK Ltd. führst, zahlst du entweder für Software, die deinen Rechtsraum nicht versteht, oder du führst deine Cap Table in einer Tabelle und hoffst, dass sie korrekt bleibt.",
+      "Wir finden das verkehrt herum. Die große Mehrheit privater Unternehmen jagt keiner Series C hinterher. Sie sind Gründer, Familien und kleine Teams, die klar und sicher wissen müssen, wem was gehört. Also haben wir eine Cap Table gebaut, die für den persönlichen Gebrauch kostenlos ist, fünf Sprachen spricht, sieben Rechtsräume versteht und KI nutzt, damit die Einrichtung Minuten statt eines Nachmittags mit dem Anwalt dauert.",
+      "Wir berechnen $15/Monat, wenn du bereit bist, mit Stakeholdern zu teilen, KI über die erste Einrichtung hinaus zu nutzen oder Dokumente in Rechtsqualität zu erstellen. Das ist das ganze Geschäftsmodell. Kein Pro-Platz-Schleichweg, keine Nutzungsgrenzen, keine Verkaufsgespräche."
+    ],
+    "values": [
+      {
+        "title": "Kostenlos sollte kostenlos heißen",
+        "body": "Die persönliche Cap Table ist für immer kostenlos – unbegrenzte Stakeholder, kein Zeitlimit, keine Kreditkarte. Du zahlst nur $15/Monat, wenn du teilen, KI nutzen oder Dokumente in Rechtsqualität erstellen möchtest."
+      },
+      {
+        "title": "Dein Land, deine Regeln",
+        "body": "Die meisten Tools sind US-zentriert und flanschen den Rest der Welt später an. Wir bauen Länderpakete – echte Instrumente, Register und Steuerprogramme – für jeden Rechtsraum, den wir unterstützen."
+      },
+      {
+        "title": "Klare Sprache statt Fachjargon",
+        "body": "Eine Cap Table ist das wichtigste Dokument, das ein privates Unternehmen besitzt. Sie sollte für den Gründer lesbar sein, dem sie gehört, nicht nur für den Anwalt, der sie verfasst hat."
+      },
+      {
+        "title": "Deine Daten gehören dir",
+        "body": "Ein-Klick-Export von allem. Magic-Link-Anmeldung, keine Passwörter. DSGVO-gerechte Verarbeitung, EU- und US-Regionen. Keine Tracker von Drittanbietern."
+      }
+    ],
+    "whoHeading": "Wer es baut",
+    "whoBody": "FreeCapT wird von <studio>Bifrost Studios</studio> gebaut, einem kleinen Software-Studio in Kopenhagen, Dänemark. Wir sind ein fokussiertes Team, dem Handwerk, Datenschutz und Preise am Herzen liegen, die die Menschen respektieren, die unsere Produkte nutzen.",
+    "ctaPrimary": "Loslegen – kostenlos",
+    "ctaSecondary": "Kontakt aufnehmen"
+  },
+  "contact": {
+    "meta": {
+      "title": "FreeCapT kontaktieren – Support, Vertrieb, Datenschutz und Sicherheit",
+      "description": "Nimm Kontakt mit FreeCapT auf. Support, allgemeine Anfragen, Datenschutz-/DSGVO-Anfragen und Sicherheitsmeldungen. Entwickelt von Bifrost Studios in Kopenhagen."
+    },
+    "kicker": "Kontakt",
+    "title": "Sprich mit uns",
+    "lede": "Wir sind ein kleines Team und lesen alles. Wähle unten das richtige Postfach und wir melden uns bei dir.",
+    "channels": [
+      {
+        "icon": "✉️",
+        "title": "Allgemein & Support",
+        "body": "Fragen, Feedback oder Hilfe mit deiner Cap Table. Wir bemühen uns, innerhalb eines Werktags zu antworten.",
+        "email": "hello@freecapt.com"
+      },
+      {
+        "icon": "🔐",
+        "title": "Datenschutz & DSGVO",
+        "body": "Auskunftsersuchen, Datenexport, Löschung oder AVV-Anfragen.",
+        "email": "privacy@freecapt.com"
+      },
+      {
+        "icon": "🛡️",
+        "title": "Sicherheit",
+        "body": "Verantwortungsvolle Meldung einer Schwachstelle. PGP auf Anfrage verfügbar.",
+        "email": "security@freecapt.com"
+      },
+      {
+        "icon": "📰",
+        "title": "Presse",
+        "body": "Medienanfragen, Interviews und unser Pressekit.",
+        "email": "press@freecapt.com"
+      }
+    ],
+    "detailsHeading": "Unternehmensangaben",
+    "operatedByLabel": "Betrieben von",
+    "operatedByValue": "Bifrost Studios",
+    "basedInLabel": "Sitz in",
+    "basedInValue": "Kopenhagen, Dänemark",
+    "emailLabel": "E-Mail",
+    "statusLabel": "Status"
+  },
+  "press": {
+    "meta": {
+      "title": "Presse & Medien – FreeCapT",
+      "description": "Pressekit, Boilerplate, Fakten und Medienkontakt für FreeCapT, die kostenlose Cap Table für Gründer und kleine Unternehmen. Entwickelt von Bifrost Studios in Kopenhagen."
+    },
+    "kicker": "Presse",
+    "title": "Presse & Medien",
+    "lede": "Alles, was du brauchst, um über FreeCapT zu schreiben. Für Interviews oder alles, was hier nicht abgedeckt ist, schreibe an press@freecapt.com.",
+    "boilerplateHeading": "Boilerplate",
+    "boilerplate": "FreeCapT ist die kostenlose Cap Table für Gründer und kleine Unternehmen. Entwickelt von Bifrost Studios in Kopenhagen, gibt es bootstrapped Startups, Familienunternehmen, Agenturen und kleinen SaaS eine vollständige Cap Table – kostenlos für den persönlichen Gebrauch, in fünf Sprachen, nach den Regeln von sieben Rechtsräumen. Die KI übernimmt die Einrichtung in Minuten: Lade deine Gründungsdokumente hoch und FreeCapT extrahiert deine Cap Table, oder beschreibe sie in einfacher Sprache. FreeCapT berechnet nur $15/Monat, wenn du mit Stakeholdern teilen, KI über die Einrichtung hinaus nutzen oder Dokumente in Rechtsqualität erstellen möchtest.",
+    "factsHeading": "Schnelle Fakten",
+    "facts": [
+      { "label": "Produkt", "value": "FreeCapT – eine kostenlose, mehrere Rechtsräume abdeckende, KI-native Cap Table" },
+      { "label": "Betrieben von", "value": "Bifrost Studios, Kopenhagen, Dänemark" },
+      { "label": "Preise", "value": "Kostenlos für persönliche Cap Tables; $15/Monat zum Teilen, für KI oder zum Export von Rechtsdokumenten" },
+      { "label": "Rechtsräume", "value": "Dänemark, Norwegen, Schweden, Deutschland, Schweiz, Großbritannien, Vereinigte Staaten" },
+      { "label": "Sprachen", "value": "English, Dansk, Norsk, Svenska, Deutsch" },
+      { "label": "Phase", "value": "Private Beta (2026)" }
+    ],
+    "assetsHeading": "Markenassets",
+    "assetsBody": "Die FreeCapT-Wortmarke ist „FreeCapT“ mit großem C in Smaragdgrün (#059669). Bitte ändere weder die Farben noch die Proportionen. Ein vollständiges Logo-Paket (SVG/PNG, auf hell und dunkel) ist auf Anfrage verfügbar.",
+    "requestLogo": "Logo-Paket anfordern →",
+    "mediaHeading": "Medienkontakt",
+    "mediaBody": "Schreibe an <email>press@freecapt.com</email> für Interviews, Zitate oder alles, was du brauchst. Du kannst auch <link>das erweiterte Team erreichen</link>."
+  },
+  "statusPage": {
+    "meta": {
+      "title": "Status – FreeCapT",
+      "description": "Aktueller Betriebsstatus der FreeCapT-Dienste: Anwendung, API, Authentifizierung, Datenbank, KI-Funktionen und E-Mail-Zustellung."
+    },
+    "kicker": "Status",
+    "title": "Systemstatus",
+    "allOperational": "Alle Systeme betriebsbereit",
+    "updated": "Aktualisiert {date}",
+    "operational": "Betriebsbereit",
+    "components": [
+      "Webanwendung",
+      "API",
+      "Authentifizierung (Magic Link)",
+      "Datenbank (EU-Region)",
+      "Datenbank (US-Region)",
+      "KI-Funktionen",
+      "E-Mail-Zustellung"
+    ],
+    "footnote": "Siehst du ein Problem, das wir nicht erkannt haben? Schreibe an <email>hello@freecapt.com</email> und wir sehen sofort nach."
+  },
+  "changelog": {
+    "meta": {
+      "title": "Changelog – FreeCapT",
+      "description": "Was neu ist in FreeCapT: Cap Table, Stakeholder, Länderpakete, Runden-Simulator, KI-Onboarding und mehr."
+    },
+    "kicker": "Changelog",
+    "title": "Was ist neu",
+    "lede": "Ein laufendes Protokoll dessen, was wir ausgeliefert haben. Wir sind in der privaten Beta, also erwarte, dass sich das schnell bewegt.",
+    "entries": [
+      {
+        "date": "Mai 2026",
+        "tag": "Marketing",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "Neue Landingpage und öffentliche Website",
+        "items": [
+          "Interaktiver Hero mit einem live vereinfachten Runden-Simulator.",
+          "Vergleichsseiten mit den größeren Cap-Table-Plattformen.",
+          "Vollständige Unternehmens- und Rechtsseiten: Über uns, Kontakt, Presse, Datenschutz, AGB, Status.",
+          "Neu positioniert für Gründer und kleine Unternehmen überall."
+        ]
+      },
+      {
+        "date": "Mai 2026",
+        "tag": "AI",
+        "tagColor": "bg-amber-100 text-amber-700",
+        "title": "KI-Onboarding-Helfer",
+        "items": [
+          "Lade Gründungsdokumente hoch und FreeCapT extrahiert deine Cap Table in einen Entwurf.",
+          "Beschreibe deine Cap Table in einfacher Sprache und lass sie in Zeilen verarbeiten.",
+          "Ein kostenloses KI-Onboarding pro Konto."
+        ]
+      },
+      {
+        "date": "Mai 2026",
+        "tag": "Produkt",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Runden-Simulator",
+        "items": [
+          "Modelliere eine einzelne geprägte Runde und sieh die Beteiligung vor/nach und die Verwässerung pro Stakeholder.",
+          "SAFEs werden in der Projektion automatisch umgewandelt.",
+          "Speichere Szenarien und teile einen schreibgeschützten Link."
+        ]
+      },
+      {
+        "date": "Mai 2026",
+        "tag": "Länderpakete",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "Sieben Rechtsräume",
+        "items": [
+          "Dänemark, Norwegen, Schweden, Deutschland, Schweiz, Großbritannien, Vereinigte Staaten.",
+          "Lokale Instrumente, Validierung der Registernummer und steuerbegünstigte Programme (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, Profits Interests)."
+        ]
+      },
+      {
+        "date": "April 2026",
+        "tag": "Produkt",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Cap Table und Stakeholder",
+        "items": [
+          "Reiner CSS-Beteiligungs-Donut, Umschalter ausstehend/vollständig verwässert, CSV-Export.",
+          "Stakeholder per Tabellen-Einfügen massenhaft hinzufügen.",
+          "Magic-Link-Anmeldung – keine Passwörter."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "meta": {
+      "title": "Datenschutzerklärung – FreeCapT",
+      "description": "Wie FreeCapT deine Daten erhebt, nutzt und schützt. DSGVO-konform, EU- und US-Regionen, keine Tracker von Drittanbietern, Ein-Klick-Export und -Löschung."
+    },
+    "kicker": "Rechtliches",
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert {date}",
+    "lastUpdatedDate": "30. Mai 2026",
+    "intro": "Diese Erklärung beschreibt, welche Daten FreeCapT erhebt, warum, und was du dagegen tun kannst. FreeCapT wird von Bifrost Studios („wir“), Kopenhagen, Dänemark, betrieben. Wir sind der Verantwortliche für deine Kontodaten und ein Auftragsverarbeiter für die Cap-Table-Inhalte, die du bei uns speicherst. Wir schreiben das bewusst in einfacher Sprache.",
+    "collectHeading": "Was wir erheben",
+    "collectItems": [
+      "<strong>Kontodaten:</strong> deine E-Mail-Adresse (für die Magic-Link-Anmeldung) sowie grundlegende Profil- und Workspace-Einstellungen.",
+      "<strong>Cap-Table-Inhalte:</strong> die Unternehmen, Stakeholder, Wertpapiere und Transaktionen, die du anlegst. Du kontrollierst diese; wir verarbeiten sie, um den Dienst bereitzustellen.",
+      "<strong>Nutzung und Diagnose:</strong> minimale, datenschutzfreundliche Produktanalysen und Fehlerberichte, um den Dienst funktionsfähig zu halten. Kontokennungen werden in Ereignisdaten gehasht."
+    ],
+    "collectNote": "Wir verwenden weder Google Analytics noch Werbe-Tracker noch Session-Replay-Tools von Drittanbietern, die wir nicht kontrollieren. Wir verkaufen deine Daten niemals.",
+    "whereHeading": "Wo deine Daten liegen",
+    "whereBody": "Du wählst deine Datenregion, wenn du ein Unternehmen anlegst. Daten von EU-Kunden werden in der EU (Frankfurt) gehostet; US-Kunden in us-east. Die Region ist nach der Erstellung eines Unternehmens festgelegt. Eine kleine Zahl sorgfältig ausgewählter Unterauftragsverarbeiter (Hosting, E-Mail-Zustellung, KI-Inferenz, Fehlerverfolgung) unterstützt den Dienst; jeder ist durch einen Auftragsverarbeitungsvertrag gebunden und für die EU-Datenverarbeitung ausgewählt, soweit anwendbar.",
+    "aiHeading": "KI-Funktionen",
+    "aiBody": "Wenn du KI-Funktionen nutzt (Dokumentenextraktion, Massen-Import in einfacher Sprache, frag-deine-Cap-Table), werden die relevanten Inhalte an unseren KI-Anbieter gesendet, um eine Antwort zu erzeugen, in deiner Region, wo unterstützt. Wir lassen nicht zu, dass deine Inhalte zum Training von Modellen Dritter verwendet werden.",
+    "legalHeading": "Rechtsgrundlage (DSGVO)",
+    "legalBody": "Wir verarbeiten Konto- und Cap-Table-Daten zur Erfüllung unseres Vertrags mit dir, Nutzungs- und Sicherheitsdaten auf Grundlage unseres berechtigten Interesses, den Dienst sicher und zuverlässig zu halten, sowie etwaige optionale Mitteilungen mit deiner Einwilligung. Betroffene in der EU/UK haben Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Übertragbarkeit und Widerspruch.",
+    "controlsHeading": "Deine Kontrollen",
+    "controlsItems": [
+      "<strong>Export:</strong> ein Klick exportiert alles – Hauptbuch, Dokumente und Audit-Log – als ZIP.",
+      "<strong>Löschung:</strong> das Löschen deines Kontos startet eine 30-tägige Karenzzeit, danach eine vollständige Bereinigung.",
+      "<strong>Anfragen:</strong> Auskunftsersuchen werden innerhalb von 30 Tagen bearbeitet."
+    ],
+    "securityHeading": "Sicherheit",
+    "securityBody": "AES-256-Verschlüsselung im Ruhezustand, TLS 1.3 bei der Übertragung, Verschlüsselungsschlüssel pro Mandant, ein Append-only-Audit-Log und Magic-Link-Authentifizierung (keine Passwörter). Weitere Details findest du in unserer <link>Sicherheitsübersicht</link>.",
+    "cookiesHeading": "Cookies",
+    "cookiesBody": "Wir verwenden nur die Cookies, die nötig sind, um dich angemeldet zu halten und den Dienst sicher zu machen. Wir verwenden keine Werbe- oder seitenübergreifenden Tracking-Cookies.",
+    "contactHeading": "Kontakt",
+    "contactBody": "Für jede Datenschutzanfrage oder -frage schreibe an <email>privacy@freecapt.com</email>. Ein Auftragsverarbeitungsvertrag ist auf Anfrage verfügbar.",
+    "disclaimer": "Diese Erklärung wird nach bestem Wissen und in einfacher Sprache bereitgestellt. Falls etwas hier mit deinen Rechten nach geltendem Recht in Konflikt steht, haben diese Rechte Vorrang."
+  },
+  "terms": {
+    "meta": {
+      "title": "Nutzungsbedingungen – FreeCapT",
+      "description": "Die Bedingungen für die Nutzung von FreeCapT, der kostenlosen Cap Table für Gründer und kleine Unternehmen. Bedingungen in einfacher Sprache zu Konten, Tarifen, deinen Daten und zulässiger Nutzung."
+    },
+    "kicker": "Rechtliches",
+    "title": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert {date}",
+    "lastUpdatedDate": "30. Mai 2026",
+    "intro": "Diese Bedingungen regeln deine Nutzung von FreeCapT, betrieben von Bifrost Studios („wir“), Kopenhagen, Dänemark. Mit der Erstellung eines Kontos stimmst du ihnen zu. Wir haben sie kurz und lesbar gehalten.",
+    "s1Heading": "1. Der Dienst",
+    "s1Body": "FreeCapT hilft dir, die Kapitalisierung eines Unternehmens festzuhalten und zu modellieren. Es ist ein Software-Werkzeug, keine Anwaltskanzlei, kein Steuerberater und kein Wirtschaftsprüfer. Nichts im Produkt ist Rechts-, Finanz- oder Steuerberatung. Für tatsächliche Finanzierungsrunden, steuerliche Wahlrechte und behördliche Einreichungen wende dich an eine qualifizierte Fachperson.",
+    "s2Heading": "2. Konten",
+    "s2Body": "Du meldest dich mit einem Magic Link an, der an deine E-Mail gesendet wird – es gibt keine Passwörter. Du bist dafür verantwortlich, den Zugang zu deiner E-Mail sicher zu halten, sowie für die Aktivität in deinem Workspace. Du musst alt genug sein, um in deinem Rechtsraum einen verbindlichen Vertrag zu schließen.",
+    "s3Heading": "3. Tarife und Abrechnung",
+    "s3Items": [
+      "<strong>Kostenloser Tarif:</strong> die persönliche Cap Table ist kostenlos, ohne Zeitlimit und ohne Stakeholder-Grenze.",
+      "<strong>Kostenpflichtiger Tarif ($15/Monat):</strong> schaltet das Teilen mit Stakeholdern, KI-Funktionen über die erste Einrichtung hinaus und die Erstellung von Dokumenten in Rechtsqualität frei. Im Voraus abgerechnet; jederzeit kündbar, dein Tarif bleibt bis zum Ende des Zeitraums aktiv.",
+      "Preise verstehen sich ohne etwaige anfallende Steuern (z. B. USt.), die hinzugefügt werden, wo erforderlich."
+    ],
+    "s4Heading": "4. Deine Daten",
+    "s4Body": "Die Inhalte, die du in FreeCapT eingibst, gehören dir. Du gewährst uns die begrenzten Rechte, die nötig sind, um sie zu hosten und zu verarbeiten, um den Dienst bereitzustellen. Du kannst jederzeit alles exportieren, und das Löschen deines Kontos bereinigt deine Daten nach einer 30-tägigen Karenzzeit. Unser Umgang mit personenbezogenen Daten ist in der <link>Datenschutzerklärung</link> beschrieben.",
+    "s5Heading": "5. Zulässige Nutzung",
+    "s5Intro": "Du stimmst zu, Folgendes nicht zu tun:",
+    "s5Items": [
+      "gegen das Gesetz verstoßen oder die Rechte anderer durch die Nutzung des Dienstes verletzen;",
+      "versuchen, auf Daten zuzugreifen, die nicht deine sind, oder unsere Sicherheit ohne Genehmigung testen;",
+      "den Dienst ohne unsere schriftliche Zustimmung weiterverkaufen oder als White-Label anbieten;",
+      "Schadsoftware hochladen oder den Betrieb des Dienstes stören."
+    ],
+    "s5Outro": "Sicherheitsforscher, die in gutem Glauben handeln, sind willkommen – siehe unseren Kontakt für verantwortungsvolle Offenlegung unter <email>security@freecapt.com</email>.",
+    "s6Heading": "6. Verfügbarkeit",
+    "s6Body": "Wir arbeiten hart daran, FreeCapT verfügbar und korrekt zu halten, aber der Dienst wird „wie besehen“ und „wie verfügbar“ ohne Gewährleistungen bereitgestellt. Geplanter und ungeplanter Status wird unter <link>freecapt.com/status</link> veröffentlicht.",
+    "s7Heading": "7. Haftung",
+    "s7Body": "Soweit gesetzlich zulässig, ist unsere Gesamthaftung aus dem Dienst auf den Betrag begrenzt, den du uns in den 12 Monaten vor dem Anspruch gezahlt hast. Wir haften nicht für mittelbare oder Folgeschäden. Nichts begrenzt eine Haftung, die gesetzlich nicht begrenzt werden kann.",
+    "s8Heading": "8. Änderungen und Kündigung",
+    "s8Body": "Wir können diese Bedingungen aktualisieren; wesentliche Änderungen werden per E-Mail oder im Produkt mitgeteilt. Du kannst die Nutzung jederzeit beenden und dein Konto löschen. Wir können den Zugang bei schweren oder wiederholten Verstößen gegen diese Bedingungen aussetzen oder beenden.",
+    "s9Heading": "9. Anwendbares Recht",
+    "s9Body": "Diese Bedingungen unterliegen dem Recht Dänemarks, mit den Gerichten von Kopenhagen als zuständig, außer wo zwingendes lokales Verbraucherrecht dir andere Rechte gewährt.",
+    "s10Heading": "10. Kontakt",
+    "s10Body": "Fragen zu diesen Bedingungen? Schreibe an <email>hello@freecapt.com</email>."
+  }
+}

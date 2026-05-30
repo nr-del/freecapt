@@ -1,11 +1,14 @@
 // Shared renderer for "FreeCapT vs X" comparison pages. Data-driven so each
-// competitor page is a thin data file. Tone follows docs/07_brand_package.md:
-// factual, never sneering. NOTE: these pages intentionally reference a single
-// competitor by name multiple times (the CLAUDE.md "one Carta reference per
-// page" rule is relaxed for dedicated comparison pages) - kept strictly factual
-// and dated, with a public-information disclaimer at the foot.
-import Link from "next/link";
+// competitor page is a thin data file (sourced from the message catalog). Tone
+// follows docs/07_brand_package.md: factual, never sneering. NOTE: these pages
+// intentionally reference a single competitor by name multiple times (the
+// CLAUDE.md "one Carta reference per page" rule is relaxed for dedicated
+// comparison pages) - kept strictly factual and dated, with a public-information
+// disclaimer at the foot. Chrome strings come from next-intl; the comparison
+// data is passed in already-translated by the page.
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { MarketingShell, PageHeader } from "@/components/marketing/site-chrome";
 
 export type CompareRow = {
@@ -42,11 +45,14 @@ function Cell({ value, highlight }: { value: string; highlight?: boolean }) {
 }
 
 export function ComparisonPage({ data }: { data: ComparisonData }) {
+  const t = useTranslations("comparison");
+  const competitor = data.competitor;
+
   return (
     <MarketingShell>
       <PageHeader
-        kicker="Comparison"
-        title={`FreeCapT vs ${data.competitor}`}
+        kicker={t("kicker")}
+        title={t("title", { competitor })}
         lede={data.lede}
       />
 
@@ -55,13 +61,13 @@ export function ComparisonPage({ data }: { data: ComparisonData }) {
         <div className="mb-12 grid gap-4 md:grid-cols-2">
           <div className="rounded-xl border border-brand-200 bg-brand-50 p-6">
             <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
-              FreeCapT is for
+              {t("freecaptIsFor")}
             </div>
             <p className="text-sm text-slate-700">{data.bestForFreeCapT}</p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
-              {data.competitor} is for
+              {t("competitorIsFor", { competitor })}
             </div>
             <p className="text-sm text-slate-600">{data.bestForCompetitor}</p>
           </div>
@@ -73,9 +79,9 @@ export function ComparisonPage({ data }: { data: ComparisonData }) {
           <table className="w-full min-w-[36rem] border-collapse">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
-                <th className="px-4 py-3">Feature</th>
-                <th className="px-4 py-3 text-brand-700">FreeCapT</th>
-                <th className="px-4 py-3">{data.competitor}</th>
+                <th className="px-4 py-3">{t("featureHeader")}</th>
+                <th className="px-4 py-3 text-brand-700">{t("freecaptHeader")}</th>
+                <th className="px-4 py-3">{competitor}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -95,7 +101,7 @@ export function ComparisonPage({ data }: { data: ComparisonData }) {
         {/* Honest "when to pick them" */}
         <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
           <div className="mb-1 text-sm font-semibold text-slate-900">
-            When {data.competitor} is the better choice
+            {t("whenBetter", { competitor })}
           </div>
           <p className="text-sm text-slate-600">{data.whenCompetitor}</p>
         </div>
@@ -106,21 +112,20 @@ export function ComparisonPage({ data }: { data: ComparisonData }) {
             href="/sign-in"
             className="inline-flex items-center gap-2 rounded-md bg-brand-600 px-6 py-3 text-base font-medium text-white hover:bg-brand-700"
           >
-            Try FreeCapT - free <span>→</span>
+            {t("ctaButton")} <span>→</span>
           </Link>
-          <p className="mt-3 text-xs text-slate-500">
-            No credit card. Migrate from {data.competitor} by CSV or AI document upload in minutes.
-          </p>
+          <p className="mt-3 text-xs text-slate-500">{t("ctaNote", { competitor })}</p>
         </div>
 
         <p className="mt-12 border-t border-slate-200 pt-6 text-xs text-slate-400">
-          {data.competitor} details are based on publicly available information as of 2026 and may
-          change. {data.competitor} is a trademark of its respective owner; FreeCapT is not
-          affiliated with or endorsed by {data.competitor}. Found something out of date?{" "}
-          <Link href="/contact" className="text-brand-600 hover:text-brand-700">
-            Let us know
-          </Link>
-          .
+          {t.rich("disclaimer", {
+            competitor,
+            link: (chunks) => (
+              <Link href="/contact" className="text-brand-600 hover:text-brand-700">
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
       </div>
     </MarketingShell>

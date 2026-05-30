@@ -1,1 +1,642 @@
-{}
+{
+  "nav": {
+    "items": [
+      { "key": "product", "label": "Produkt", "href": "/#features" },
+      { "key": "countries", "label": "Länder", "href": "/#countries" },
+      { "key": "pricing", "label": "Priser", "href": "/#pricing" },
+      { "key": "compare", "label": "Jämför", "href": "/compare" },
+      { "key": "security", "label": "Säkerhet", "href": "/#security" }
+    ],
+    "signIn": "Logga in",
+    "getStarted": "Kom igång – gratis",
+    "openMenu": "Öppna meny",
+    "closeMenu": "Stäng meny",
+    "language": "Språk"
+  },
+  "footer": {
+    "tagline": "Den gratis cap table-n för grundare och små företag. Byggd av <studio>Bifrost Studios</studio> i Köpenhamn.",
+    "columns": [
+      {
+        "heading": "Produkt",
+        "links": [
+          { "label": "Funktioner", "href": "/#features" },
+          { "label": "Landspaket", "href": "/#countries" },
+          { "label": "Priser", "href": "/#pricing" },
+          { "label": "Jämför", "href": "/compare" },
+          { "label": "Ändringslogg", "href": "/changelog" }
+        ]
+      },
+      {
+        "heading": "Förtroende",
+        "links": [
+          { "label": "Säkerhet", "href": "/#security" },
+          { "label": "Integritet", "href": "/privacy" },
+          { "label": "Villkor", "href": "/terms" },
+          { "label": "Status", "href": "/status" }
+        ]
+      },
+      {
+        "heading": "Företag",
+        "links": [
+          { "label": "Om oss", "href": "/about" },
+          { "label": "Kontakt", "href": "/contact" },
+          { "label": "Press", "href": "/press" },
+          { "label": "hello@freecapt.com", "href": "mailto:hello@freecapt.com" }
+        ]
+      }
+    ],
+    "copyright": "© 2026 Bifrost Studios. Med ensamrätt.",
+    "badgeGdpr": "🇪🇺 GDPR",
+    "badgeRegions": "EU- + US-regioner",
+    "badgeSoc2": "SOC 2 pågår",
+    "badgeStatus": "Status: ●"
+  },
+  "hero": {
+    "company": "Acme ApS · Rundsimulator",
+    "title": "Tänk om du tar in kapital?",
+    "livePreview": "Direktförhandsvisning",
+    "founderSuffix": "Grundare",
+    "optionsLabel": "Optioner (Dana, Erik)",
+    "safeLabel": "Frank (SAFE)",
+    "poolLabel": "Pool",
+    "newInvestorLabel": "Ny investerare",
+    "raiseAmount": "Belopp som tas in",
+    "preMoney": "Pre-money-värdering",
+    "raiseAria": "Belopp som tas in i miljoner",
+    "preAria": "Pre-money-värdering i miljoner",
+    "newInvestorOwns": "Ny investerare äger",
+    "founders": "Grundare",
+    "gdpr": "🇪🇺 GDPR",
+    "simplified": "Förenklad förhandsvisning – prova den fullständiga simulatorn gratis"
+  },
+  "home": {
+    "meta": {
+      "title": "FreeCapT – den gratis cap table-n för grundare och små företag",
+      "description": "Den gratis cap table-n för självfinansierade grundare, familjeföretag och små SaaS – var som helst i världen. Lokala regler för Danmark, Norge, Sverige, Tyskland, Schweiz, Storbritannien och USA, med fler på väg. AI-native. $15/månad när du är redo att dela."
+    },
+    "hero": {
+      "badge": "Nu i privat beta – DK · NO · SE · DE · CH · UK · US",
+      "titleBefore": "Den gratis cap table-n för ",
+      "titleHighlight": "grundare överallt",
+      "lede": "Byggd för självfinansierade startups, familjeföretag, byråer och små SaaS. På fem språk. Enligt ditt lands regler. AI-native. <strong>$15/månad</strong> när du vill dela med intressenter.",
+      "ctaPrimary": "Kom igång – gratis",
+      "ctaSecondary": "Se priser",
+      "fineprint": "Inget kreditkort. Klar på 15 minuter. Obegränsat antal intressenter på gratisplanen."
+    },
+    "valueProps": {
+      "kicker": "Vad du får",
+      "heading": "Cap tables borde inte kräva en jurist, ett säljsamtal eller en hel tisdag.",
+      "cards": [
+        {
+          "icon": "◐",
+          "title": "Gratis för din personliga cap table",
+          "body": "Bygg den, se den, modellera rundor, exportera rådata. Ingen gräns för antal intressenter. Inget kreditkort. Inga asterisker. Betala bara $15/månad när du vill dela med anställda, generera juridiska dokument eller använda AI-funktioner."
+        },
+        {
+          "icon": "⌖",
+          "title": "Byggd för sju jurisdiktioner",
+          "body": "Danskt ApS · Norskt AS · Svenskt AB · Tyskt GmbH · Schweiziskt AG · Brittiskt Ltd. · Amerikanskt Delaware C-Corp + LLC. Var och en med egna instrument, mallar och skattegynnade program (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests)."
+        },
+        {
+          "icon": "✦",
+          "title": "AI-native, inte påklistrat",
+          "body": "Ladda upp dina bildningshandlingar – AI extraherar din cap table på 90 sekunder. Fråga på vanlig svenska: \"Tänk om jag tar in 2M till 8M pre-money?\" Klicka \"förklara det här\" på vilket tal som helst. Drivs av Claude, i din region."
+        }
+      ]
+    },
+    "countries": {
+      "kicker": "Landspaket",
+      "heading": "Gratis i ditt land, enligt ditt lands regler.",
+      "lede": "Varje paket levereras med de lokala bolagsformerna, instrumenten, valideringen och dokumentmallarna. Inget US-först-viftande.",
+      "packs": [
+        { "flag": "🇩🇰", "name": "Danmark", "entity": "ApS · A/S", "schemes": "§ 7P · Tegningsoptioner · Ejerbog" },
+        { "flag": "🇳🇴", "name": "Norge", "entity": "AS · ASA", "schemes": "Opsjonsskatteordningen · Aksjeeierbok" },
+        { "flag": "🇸🇪", "name": "Sverige", "entity": "AB privat · publikt", "schemes": "QESO · Aktiebok · Teckningsoptioner" },
+        { "flag": "🇩🇪", "name": "Tyskland", "entity": "GmbH · AG", "schemes": "VSOP · Notary workflow · § 19a" },
+        { "flag": "🇨🇭", "name": "Schweiz", "entity": "AG · GmbH", "schemes": "Sperrfrist · Mitarbeiteroptionen" },
+        { "flag": "🇬🇧", "name": "Storbritannien", "entity": "Ltd.", "schemes": "EMI · Register of Members · ASA" },
+        { "flag": "🇺🇸", "name": "USA", "entity": "DE C-Corp · DE LLC", "schemes": "ISO · NSO · SAFE · Profits interests" }
+      ],
+      "soonName": "France · NL · ES · FI · CA",
+      "soonLabel": "På väg som landspaket",
+      "soonNote": "En sprint per nytt land.",
+      "languagesNote": "Gränssnitt tillgängligt på Dansk · Norsk · Svenska · Deutsch · English. Språk är oberoende av jurisdiktion – välj det som passar dig."
+    },
+    "product": {
+      "kicker": "Produkten",
+      "heading": "Sex skärmar. Inte trettio.",
+      "lede": "FreeCapT är byggd kring en fråga: vem äger det här företaget? Allt annat är till för att besvara den, tydligt, på 15 minuter eller mindre.",
+      "screens": [
+        {
+          "kicker": "Cap table",
+          "title": "Vem äger företaget idag.",
+          "body": "Cirkeldiagram och tabell sida vid sida. Växla mellan utestående och fullt utspätt. Per-datum för historiska vyer. Klicka \"Du har 18,5 % kvar att tilldela\" för att utfärda aktiekapital."
+        },
+        {
+          "kicker": "Intressenter",
+          "title": "Alla, tillagda på 30 sekunder.",
+          "body": "Klistra in från kalkylark. Eller skriv på vanligt språk: \"Anna och Ben med 30 % var, Dana har 200k optioner intjänade över 4 år.\" AI tolkar, du bekräftar."
+        },
+        {
+          "kicker": "Rundmodellering",
+          "paid": "Betald",
+          "title": "Fördela din kapitalanskaffning på riktiga investerare.",
+          "body": "Tar du in 2M till 8M pre? Lägg in dina 10 intresserade investerare med deras åtaganden. Se vem som får plats, vem som skalas ner, och hur cap table-n ser ut efteråt."
+        },
+        {
+          "kicker": "Intressentportal",
+          "paid": "Betald",
+          "title": "Ditt team ser vad de äger, på vanligt språk.",
+          "body": "Magic-link-inloggning (inga lösenord). Deras intjäningsschema. AI-knapp för \"förklara min tilldelning\". Änglar och rådgivare med flera tilldelningar får en gratis portföljöversikt."
+        },
+        {
+          "kicker": "Dokument",
+          "paid": "Betald för juridiskt giltiga",
+          "title": "Mallar per jurisdiktion som jurister respekterar.",
+          "body": "Generera din danska ejerbog, din tyska Gesellschafterliste, ditt brittiska Register of Members, din amerikanska kapitaliseringstabell för 409A. PDF/A-arkivformat. Word för markeringar."
+        },
+        {
+          "kicker": "Simulator",
+          "title": "\"Tänk om jag tar in 2M till 8M post?\"",
+          "body": "Cap tables före/efter sida vid sida med utspädning per intressent. SAFEs konverteras automatiskt. Spara scenarier, dela skrivskyddade länkar med dina medgrundare."
+        }
+      ]
+    },
+    "pricing": {
+      "kicker": "Priser",
+      "heading": "Två planer. Ett pris.",
+      "lede": "$15/månad – och bara när du är redo. Gratisplanen är en riktig, komplett cap table, inte en testversion.",
+      "freeName": "Gratis",
+      "freePrice": "$0",
+      "freeTagline": "För din personliga cap table. För alltid.",
+      "freeCta": "Kom igång – gratis",
+      "freeFeatures": [
+        "Full cap table – obegränsat antal intressenter",
+        "Massimport genom att klistra in från kalkylark",
+        "AI-onboardinghjälp (engångs)",
+        "Rundsimulator (en investerare)",
+        "Grundläggande CSV-export",
+        "Medgrundare som Admin / Redaktör / Läsare",
+        "Växla mellan flera företag",
+        "Alla 7 landspaket",
+        "5 gränssnittsspråk",
+        "Flera valutor, flera tidszoner",
+        "2FA, revisionslogg, GDPR-dataexport",
+        "Magic-link-inloggning"
+      ],
+      "paidBadge": "När du är redo",
+      "paidName": "Betald",
+      "paidPrice": "$15",
+      "paidPer": "/månad",
+      "paidTagline": "Allt i Gratis, plus värdeögonblicken.",
+      "paidCta": "Starta betald plan",
+      "paidFeatures": [
+        "Allt i Gratis",
+        "Löpande AI-chatt – \"fråga din cap table\"",
+        "\"Förklara det här\"-knappar på varje tal",
+        "AI-driven massimport (prompt + dokumentuppladdning)",
+        "Avancerad Excel-export – flera blad, levande formler, inbäddat diagram",
+        "Juridiskt giltiga PDF- + Word-exporter – per jurisdiktion",
+        "Generering av dokumentmallar",
+        "Intressentportalåtkomst för ditt team",
+        "Rundmodellering – fördelning på flera investerare",
+        "Generering av term sheet-utkast"
+      ],
+      "footnote": "Inga förbrukningsstup. Inga avgifter per intressent. Avsluta med ett klick; din data förblir din."
+    },
+    "security": {
+      "kicker": "Säkerhet & förtroende",
+      "heading": "En cap table är det känsligaste dokumentet ett privat företag äger.",
+      "lede": "Vi behandlar den så.",
+      "cards": [
+        {
+          "icon": "🇪🇺",
+          "title": "GDPR-kompatibel. EU- och US-regioner.",
+          "body": "EU-kunders data lagras i Frankfurt; US-kunder i us-east. Ditt val vid skapande av företag, oföränderligt därefter."
+        },
+        {
+          "icon": "🔒",
+          "title": "AES-256-krypterad. TLS 1.3.",
+          "body": "Krypteringsnycklar per tenant. SOC 2 Type I-attestering pågår (mål Q3 2026). ISO 27001 på färdplanen."
+        },
+        {
+          "icon": "📋",
+          "title": "Append-only revisionslogg.",
+          "body": "Varje tillståndsändring registreras med aktör, IP, före/efter. 7 års lagring. Manipuleringssäker replikering till oföränderlig lagring."
+        },
+        {
+          "icon": "💾",
+          "title": "Din data är din.",
+          "body": "Export av allt med ett klick – huvudbok, dokument, revisionslogg – som ZIP. Radering av konto inom 30 dagar, fullständig rensning under GDPR."
+        },
+        {
+          "icon": "🪄",
+          "title": "Endast magic-link. Inga lösenord.",
+          "body": "Mindre angreppsyta än lösenordsdatabaser. Valfri TOTP-2FA för de försiktiga. Enhetsförtroendemeddelanden vid nya inloggningar."
+        },
+        {
+          "icon": "🛡️",
+          "title": "Bug bounty + offentlig säkerhetssida.",
+          "body": "Forskare är välkomna. Statussida på freecapt.com/status. Offentlig ändringslogg med varje release."
+        }
+      ]
+    },
+    "faq": {
+      "kicker": "Förväntade frågor",
+      "heading": "FAQ",
+      "items": [
+        {
+          "q": "Är det verkligen gratis?",
+          "a": "Ja. Gratisplanen är den fullständiga personliga cap table-n – bygg den, se den, modellera rundor, exportera data, växla mellan företag om du hanterar flera. Det finns ingen gräns för intressenter, ingen tidsbegränsning, inget kreditkort. Du betalar bara $15/månad när du vill dela med intressenter, använda AI-funktioner utöver installation eller generera juridiskt giltiga dokument."
+        },
+        {
+          "q": "Vilka jurisdiktioner stöder ni?",
+          "a": "Sju vid lansering: Danmark (ApS + A/S), Norge (AS + ASA), Sverige (AB privat + publikt), Tyskland (GmbH + AG), Schweiz (AG + GmbH), Storbritannien (Ltd.) och USA Delaware (C-Corp + LLC). Var och en kommer med de lokala instrumenttyperna, valideringsreglerna, dokumentmallarna och skattegynnade programmen (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests). Fler länder är sprint-stora tillägg."
+        },
+        {
+          "q": "Behöver jag en jurist för att använda FreeCapT?",
+          "a": "Nej. FreeCapT är byggd för grundare som inte har en Cooley-partner på snabbval. Onboarding är samtalsbaserad. Standardvärden är vettiga. AI:n förklarar allt på vanligt språk. Du vill fortfarande ha en jurist för faktiska kapitalanskaffningar, val av skatteprogram och notariemöten – vi gör de stunderna billigare och snabbare genom att generera rätt dokument som din jurist kan granska."
+        },
+        {
+          "q": "Hur skiljer sig detta från Carta?",
+          "a": "Carta är byggd för riskkapitalfinansierade amerikanska scaleups och prissätter därefter. Det är rätt verktyg för den målgruppen. FreeCapT är byggd för resten av oss – självfinansierade grundare, familjeföretag, byråer, små SaaS. Vi har förstklassigt stöd för de lokala jurisdiktioner som de flesta verktyg ignorerar, AI-native UX och en gratisplan som faktiskt är användbar. Se våra fullständiga jämförelsesidor för detaljerna."
+        },
+        {
+          "q": "Är min data säker?",
+          "a": "En cap table är det känsligaste dokumentet ett privat företag äger. Vi behandlar den så – AES-256-kryptering i vila, TLS 1.3 under överföring, krypteringsnycklar per tenant, append-only revisionslogg, GDPR-kompatibel. EU-kunders data lagras i Frankfurt; US i us-east. SOC 2 Type I-attestering pågår, med Type II cirka 12 månader senare."
+        },
+        {
+          "q": "Hur är det med GDPR?",
+          "a": "EU-data stannar i EU (Frankfurt-region). DPA tillgänglig. Dataexport med ett klick (du äger din data). Radering av konto utlöser en 30-dagars frist och därefter fullständig rensning. Begäran om registerutdrag hanteras inom 30 dagar. Integritetspolicy på vanligt språk, inte juristspråk."
+        },
+        {
+          "q": "Vilka språk stöder ni?",
+          "a": "Gränssnittet är tillgängligt på English, Dansk, Norsk, Svenska och Deutsch. Språk är oberoende av jurisdiktion – en dansk grundare med ett brittiskt Ltd. kan använda det danska gränssnittet. Juridiskt giltiga exporter förblir på jurisdiktionens regulatoriska språk (en dansk ejerbog är på danska; en amerikansk kapitaliseringstabell är på engelska) oavsett gränssnittspreferens. Franska och italienska för schweiziska kunder kommer efter lansering."
+        },
+        {
+          "q": "Kan jag importera från Carta eller ett annat verktyg?",
+          "a": "Ja. Exportera en CSV från Carta, Pulley eller vilket kalkylark som helst och klistra in i vår massimportskärm – kolumner mappas automatiskt. Eller ladda upp dina bildningshandlingar och tilldelningsavtal; vår AI extraherar hela cap table-n till ett utkast du bekräftar. Båda vägarna är vanligtvis en 5-minuters migrering."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Se din cap table på 15 minuter.",
+      "lede": "Inget kreditkort. Inget säljsamtal. Ingen jurist. Klistra in ditt befintliga kalkylark, skriv det på vanligt språk, eller ladda upp dina bildningshandlingar.",
+      "emailPlaceholder": "du@dittforetag.com",
+      "submit": "Kom igång →",
+      "languages": "Tillgängligt på Dansk · Norsk · Svenska · Deutsch · English"
+    }
+  },
+  "compareIndex": {
+    "meta": {
+      "title": "Jämför FreeCapT – gratis cap table vs. Carta och Pulley",
+      "description": "Se hur FreeCapT står sig mot de större cap table-plattformarna. Gratis för personliga cap tables, multi-jurisdiktion, AI-native, $15/månad för att dela."
+    },
+    "kicker": "Jämförelse",
+    "title": "Hur FreeCapT står sig",
+    "lede": "Ärliga, faktabaserade jämförelser mot de större systemen. Vi säger det när de är det bättre valet – och när en gratis, multi-jurisdiktions, AI-native cap table är det smartare valet.",
+    "readComparison": "Läs jämförelsen →",
+    "vs": "FreeCapT vs",
+    "cards": [
+      {
+        "name": "Carta",
+        "href": "/compare/carta",
+        "blurb": "Den marknadsledande amerikanska aktieplattformen för riskkapitalfinansierade företag. Se var ett gratis, multi-jurisdiktions verktyg passar i stället."
+      },
+      {
+        "name": "Pulley",
+        "href": "/compare/pulley",
+        "blurb": "Ett modernt cap table-verktyg för amerikanska startups. Se hur FreeCapT står sig på pris, jurisdiktioner och AI."
+      }
+    ]
+  },
+  "comparison": {
+    "kicker": "Jämförelse",
+    "title": "FreeCapT vs {competitor}",
+    "freecaptIsFor": "FreeCapT är för",
+    "competitorIsFor": "{competitor} är för",
+    "featureHeader": "Funktion",
+    "freecaptHeader": "FreeCapT",
+    "whenBetter": "När {competitor} är det bättre valet",
+    "ctaButton": "Prova FreeCapT – gratis",
+    "ctaNote": "Inget kreditkort. Migrera från {competitor} via CSV eller AI-dokumentuppladdning på minuter.",
+    "disclaimer": "Uppgifter om {competitor} baseras på offentligt tillgänglig information per 2026 och kan ändras. {competitor} är ett varumärke som tillhör sin respektive ägare; FreeCapT är inte anslutet till eller rekommenderat av {competitor}. Hittade du något inaktuellt? <link>Säg till</link>."
+  },
+  "compareCarta": {
+    "meta": {
+      "title": "FreeCapT vs Carta – ett gratis, multi-jurisdiktions alternativ",
+      "description": "Hur FreeCapT står sig mot Carta för grundare och små företag: priser, jurisdiktioner, AI-funktioner och vem varje verktyg är byggt för. Gratis för personliga cap tables; $15/månad för att dela."
+    },
+    "competitor": "Carta",
+    "competitorTagline": "Den marknadsledande amerikanska plattformen för aktieförvaltning för riskkapitalfinansierade företag.",
+    "lede": "Carta är den mest kända cap table-plattformen, byggd för riskkapitalfinansierade amerikanska scaleups. FreeCapT är byggd för alla andra – självfinansierade grundare, familjeföretag, byråer och små SaaS, i sju jurisdiktioner. Här är en ärlig, faktabaserad jämförelse.",
+    "bestForFreeCapT": "Självfinansierade grundare i tidigt skede, familjeföretag, byråer och små SaaS som vill ha en riktig cap table gratis, i sin egen jurisdiktion och språk, utan ett säljsamtal.",
+    "bestForCompetitor": "Riskkapitalfinansierade amerikanska startups och scaleups som behöver 409A-värderingar, fondadministration och den breda aktieförvaltningssviten som investerare redan förväntar sig.",
+    "whenCompetitor": "Om du är ett amerikanskt C-corp som tar in prissatta riskkapitalrundor och behöver integrerade 409A-värderingar, fondadministration eller funktioner som dina investerare specifikt ber om, är Cartas djup i det ekosystemet svårt att matcha. Vi fokuserar på den långa svans som Carta inte är optimerad för.",
+    "rows": [
+      { "feature": "Gratisplan", "freecapt": "Ja – den fullständiga personliga cap table-n, obegränsat antal intressenter, för alltid.", "competitor": "Begränsad gratisnivå för de minsta företagen; betalda planer skalar snabbt upp.", "edge": "freecapt" },
+      { "feature": "Startpris", "freecapt": "$0 gratis, $15/månad när du delar, använder AI eller exporterar juridiska dokument.", "competitor": "Betalda planer kostar vanligtvis flera hundra till tusentals dollar per år allteftersom du växer.", "edge": "freecapt" },
+      { "feature": "Jurisdiktioner", "freecapt": "DK, NO, SE, DE, CH, UK, US – lokala instrument, register och skatteprogram inbyggda.", "competitor": "Stark US-täckning; visst internationellt stöd, US-först i designen.", "edge": "freecapt" },
+      { "feature": "Språk", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (gränssnitt oberoende av jurisdiktion).", "competitor": "Främst engelska.", "edge": "freecapt" },
+      { "feature": "AI-native", "freecapt": "Dokumentextraktion, massimport på vanligt språk, fråga-din-cap-table-chatt, förklara-det-här på varje tal.", "competitor": "Lägger till AI-funktioner; inte produktens kärna.", "edge": "freecapt" },
+      { "feature": "409A-värderingar", "freecapt": "Erbjuds inte – vi är inte en amerikansk värderingsleverantör.", "competitor": "Integrerade 409A-värderingar och revisionsstöd.", "edge": "competitor" },
+      { "feature": "Fondadministration", "freecapt": "Erbjuds inte – fokuserad på företagets cap table.", "competitor": "Full fondadministration och LP-verktyg.", "edge": "competitor" },
+      { "feature": "Rundmodellering", "freecapt": "Enrundssimulator gratis; modellering med flera investerare på $15/månad-planen.", "competitor": "Omfattande scenario- och waterfall-modellering.", "edge": "even" },
+      { "feature": "Dataägande & export", "freecapt": "Full export med ett klick (huvudbok, dokument, revisionslogg). Magic-link-inloggning, inga lösenord.", "competitor": "Export tillgänglig; bredare plattformsinlåsning allteftersom du tar i bruk fler moduler.", "edge": "freecapt" },
+      { "feature": "Installation", "freecapt": "Självbetjäning på ~15 minuter, inget säljsamtal.", "competitor": "Självbetjäning för små planer; säljledd för större.", "edge": "even" }
+    ]
+  },
+  "comparePulley": {
+    "meta": {
+      "title": "FreeCapT vs Pulley – ett gratis, multi-jurisdiktions alternativ",
+      "description": "Hur FreeCapT står sig mot Pulley för grundare och små företag: priser, jurisdiktioner, AI-funktioner och vem varje verktyg är byggt för. Gratis för personliga cap tables; $15/månad för att dela."
+    },
+    "competitor": "Pulley",
+    "competitorTagline": "Ett modernt cap table- och aktieförvaltningsverktyg för startups.",
+    "lede": "Pulley är ett välansett modernt cap table-verktyg riktat främst mot amerikanska startups. FreeCapT täcker sju jurisdiktioner, är AI-native och är gratis för din personliga cap table. Här är en ärlig, faktabaserad jämförelse.",
+    "bestForFreeCapT": "Grundare och små företag utanför det amerikanska riskkapitalspåret – eller inom det – som vill ha en gratis, multi-jurisdiktions cap table på sitt eget språk, med AI inbyggd.",
+    "bestForCompetitor": "Amerikanska startups som vill ha en ren, modern cap table med starkt stöd för prissatta rundor, SAFEs och amerikanska aktiekompensationsflöden.",
+    "whenCompetitor": "Om du är en amerikansk startup och vill ha ett polerat, välsupporterat aktieverktyg med djupa amerikanska fundraising-flöden och 409A-partnerskap, är Pulley ett starkt val. Vi differentierar oss på gratis priser, europeiska jurisdiktioner och AI-native UX.",
+    "rows": [
+      { "feature": "Gratisplan", "freecapt": "Ja – den fullständiga personliga cap table-n, obegränsat antal intressenter, för alltid.", "competitor": "Gratisnivå för företag i tidigt skede upp till en intressentgräns; betalda planer över det.", "edge": "freecapt" },
+      { "feature": "Startpris", "freecapt": "$0 gratis, $15/månad när du delar, använder AI eller exporterar juridiska dokument.", "competitor": "Betalda planer prissatta per företag, stiger vanligtvis med skede och antal anställda.", "edge": "freecapt" },
+      { "feature": "Jurisdiktioner", "freecapt": "DK, NO, SE, DE, CH, UK, US – lokala instrument, register och skatteprogram inbyggda.", "competitor": "US-fokuserad, med viss internationell täckning.", "edge": "freecapt" },
+      { "feature": "Språk", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (gränssnitt oberoende av jurisdiktion).", "competitor": "Främst engelska.", "edge": "freecapt" },
+      { "feature": "AI-native", "freecapt": "Dokumentextraktion, massimport på vanligt språk, fråga-din-cap-table-chatt, förklara-det-här på varje tal.", "competitor": "Modern UX; AI är inte den centrala pitchen.", "edge": "freecapt" },
+      { "feature": "Lokala skatteprogram", "freecapt": "EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests – validerade per jurisdiktion.", "competitor": "Starkt stöd för amerikanska program (ISO/NSO/SAFE); begränsade europeiska program.", "edge": "freecapt" },
+      { "feature": "Rundmodellering", "freecapt": "Enrundssimulator gratis; modellering med flera investerare på $15/månad-planen.", "competitor": "Bra scenariomodellering för prissatta rundor och SAFEs.", "edge": "even" },
+      { "feature": "Dokumentgenerering", "freecapt": "Juridiskt giltig PDF/Word per jurisdiktion (ejerbog, Gesellschafterliste, Register of Members).", "competitor": "US-orienterade dokumentflöden.", "edge": "freecapt" },
+      { "feature": "Dataägande & export", "freecapt": "Full export med ett klick (huvudbok, dokument, revisionslogg). Magic-link-inloggning, inga lösenord.", "competitor": "Export tillgänglig.", "edge": "even" },
+      { "feature": "Installation", "freecapt": "Självbetjäning på ~15 minuter, inget säljsamtal.", "competitor": "Självbetjäningsonboarding.", "edge": "even" }
+    ]
+  },
+  "about": {
+    "meta": {
+      "title": "Om FreeCapT – byggd av Bifrost Studios i Köpenhamn",
+      "description": "Varför vi byggde en gratis, multi-jurisdiktions, AI-native cap table för grundare och små företag överallt. Skapad av Bifrost Studios i Köpenhamn."
+    },
+    "kicker": "Om oss",
+    "title": "En gratis cap table för de andra 95 %",
+    "lede": "De flesta företag är inte riskkapitalfinansierade enhörningar. De är självfinansierade startups, familjeföretag, byråer och små SaaS – och de förtjänar en cap table som är gratis, läsbar och byggd för deras land.",
+    "paragraphs": [
+      "FreeCapT började med en enkel frustration: verktygen för att spåra vem som äger ett företag är prissatta för riskkapitalfinansierade amerikanska scaleups, och de behandlar varje annan typ av verksamhet som en eftertanke. Om du driver ett danskt ApS, ett tyskt GmbH eller ett brittiskt Ltd., betalar du antingen för programvara som inte förstår din jurisdiktion, eller så håller du din cap table i ett kalkylark och hoppas att den förblir korrekt.",
+      "Vi tycker att det är bakvänt. De allra flesta privata företag jagar inte en Series C. De är grundare, familjer och små team som behöver veta – tydligt och tryggt – vem som äger vad. Så vi byggde en cap table som är gratis för personligt bruk, talar fem språk, förstår sju jurisdiktioner och använder AI för att göra installationen till en fråga om minuter i stället för en eftermiddag med en jurist.",
+      "Vi tar $15/månad när du är redo att dela med intressenter, använda AI utöver den inledande installationen eller generera juridiskt giltiga dokument. Det är hela affärsmodellen. Ingen smygande pris per plats, inga förbrukningsstup, inga säljsamtal."
+    ],
+    "values": [
+      {
+        "title": "Gratis bör betyda gratis",
+        "body": "Den personliga cap table-n är gratis för alltid – obegränsat antal intressenter, ingen tidsbegränsning, inget kreditkort. Du betalar bara $15/månad när du vill dela, använda AI eller generera juridiskt giltiga dokument."
+      },
+      {
+        "title": "Ditt land, dina regler",
+        "body": "De flesta verktyg är US-först och klistrar på resten av världen senare. Vi bygger landspaket – riktiga instrument, register och skatteprogram – för varje jurisdiktion vi stöder."
+      },
+      {
+        "title": "Vanligt språk framför jargong",
+        "body": "En cap table är det viktigaste dokumentet ett privat företag äger. Den bör vara läsbar för grundaren som äger den, inte bara för juristen som utformade den."
+      },
+      {
+        "title": "Din data är din",
+        "body": "Export av allt med ett klick. Magic-link-inloggning, inga lösenord. GDPR-grad hantering, EU- och US-regioner. Inga tredjepartsspårare."
+      }
+    ],
+    "whoHeading": "Vem bygger det",
+    "whoBody": "FreeCapT byggs av <studio>Bifrost Studios</studio>, en liten programvarustudio i Köpenhamn, Danmark. Vi är ett fokuserat team som bryr sig om hantverk, integritet och prissättning som respekterar människorna som använder våra produkter.",
+    "ctaPrimary": "Kom igång – gratis",
+    "ctaSecondary": "Ta kontakt"
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakta FreeCapT – support, försäljning, integritet och säkerhet",
+      "description": "Ta kontakt med FreeCapT. Support, allmänna förfrågningar, integritets-/GDPR-förfrågningar och säkerhetsrapporter. Byggd av Bifrost Studios i Köpenhamn."
+    },
+    "kicker": "Kontakt",
+    "title": "Prata med oss",
+    "lede": "Vi är ett litet team och vi läser allt. Välj rätt inkorg nedan, så återkommer vi till dig.",
+    "channels": [
+      {
+        "icon": "✉️",
+        "title": "Allmänt & support",
+        "body": "Frågor, feedback eller hjälp med din cap table. Vi strävar efter att svara inom en arbetsdag.",
+        "email": "hello@freecapt.com"
+      },
+      {
+        "icon": "🔐",
+        "title": "Integritet & GDPR",
+        "body": "Begäran om registerutdrag, dataexport, radering eller DPA-förfrågningar.",
+        "email": "privacy@freecapt.com"
+      },
+      {
+        "icon": "🛡️",
+        "title": "Säkerhet",
+        "body": "Ansvarsfull rapportering av en sårbarhet. PGP tillgänglig på begäran.",
+        "email": "security@freecapt.com"
+      },
+      {
+        "icon": "📰",
+        "title": "Press",
+        "body": "Medieförfrågningar, intervjuer och vårt presskit.",
+        "email": "press@freecapt.com"
+      }
+    ],
+    "detailsHeading": "Företagsuppgifter",
+    "operatedByLabel": "Drivs av",
+    "operatedByValue": "Bifrost Studios",
+    "basedInLabel": "Baserat i",
+    "basedInValue": "Köpenhamn, Danmark",
+    "emailLabel": "E-post",
+    "statusLabel": "Status"
+  },
+  "press": {
+    "meta": {
+      "title": "Press & medier – FreeCapT",
+      "description": "Presskit, boilerplate, fakta och mediekontakt för FreeCapT, den gratis cap table-n för grundare och små företag. Byggd av Bifrost Studios i Köpenhamn."
+    },
+    "kicker": "Press",
+    "title": "Press & medier",
+    "lede": "Allt du behöver för att skriva om FreeCapT. För intervjuer eller något som inte täcks här, mejla press@freecapt.com.",
+    "boilerplateHeading": "Boilerplate",
+    "boilerplate": "FreeCapT är den gratis cap table-n för grundare och små företag. Byggd av Bifrost Studios i Köpenhamn ger den självfinansierade startups, familjeföretag, byråer och små SaaS en komplett cap table – gratis för personligt bruk, på fem språk, enligt reglerna i sju jurisdiktioner. AI sköter installationen på minuter: ladda upp dina bildningshandlingar, och FreeCapT extraherar din cap table, eller beskriv den på vanligt språk. FreeCapT tar $15/månad endast när du vill dela med intressenter, använda AI utöver installation eller generera juridiskt giltiga dokument.",
+    "factsHeading": "Snabba fakta",
+    "facts": [
+      { "label": "Produkt", "value": "FreeCapT – en gratis, multi-jurisdiktions, AI-native cap table" },
+      { "label": "Drivs av", "value": "Bifrost Studios, Köpenhamn, Danmark" },
+      { "label": "Priser", "value": "Gratis för personliga cap tables; $15/månad för att dela, använda AI eller exportera juridiska dokument" },
+      { "label": "Jurisdiktioner", "value": "Danmark, Norge, Sverige, Tyskland, Schweiz, Storbritannien, USA" },
+      { "label": "Språk", "value": "English, Dansk, Norsk, Svenska, Deutsch" },
+      { "label": "Skede", "value": "Privat beta (2026)" }
+    ],
+    "assetsHeading": "Varumärkesresurser",
+    "assetsBody": "FreeCapT-ordmärket är \"FreeCapT\" med ett stort C satt i emerald (#059669). Ändra vänligen inte färgerna eller proportionerna. Ett fullständigt logotyppaket (SVG/PNG, på ljust och mörkt) är tillgängligt på begäran.",
+    "requestLogo": "Begär logotyppaketet →",
+    "mediaHeading": "Mediekontakt",
+    "mediaBody": "Mejla <email>press@freecapt.com</email> för intervjuer, citat eller vad du behöver. Du kan också <link>nå det bredare teamet</link>."
+  },
+  "statusPage": {
+    "meta": {
+      "title": "Status – FreeCapT",
+      "description": "Aktuell driftstatus för FreeCapT-tjänster: applikation, API, autentisering, databas, AI-funktioner och e-postleverans."
+    },
+    "kicker": "Status",
+    "title": "Systemstatus",
+    "allOperational": "Alla system i drift",
+    "updated": "Uppdaterad {date}",
+    "operational": "I drift",
+    "components": [
+      "Webbapplikation",
+      "API",
+      "Autentisering (magic link)",
+      "Databas (EU-region)",
+      "Databas (US-region)",
+      "AI-funktioner",
+      "E-postleverans"
+    ],
+    "footnote": "Ser du ett problem vi inte har fångat? Mejla <email>hello@freecapt.com</email>, så tittar vi på det direkt."
+  },
+  "changelog": {
+    "meta": {
+      "title": "Ändringslogg – FreeCapT",
+      "description": "Vad som är nytt i FreeCapT: cap table, intressenter, landspaket, rundsimulator, AI-onboarding och mer."
+    },
+    "kicker": "Ändringslogg",
+    "title": "Vad som är nytt",
+    "lede": "En löpande logg över vad vi har släppt. Vi är i privat beta, så förvänta dig att detta rör sig snabbt.",
+    "entries": [
+      {
+        "date": "Maj 2026",
+        "tag": "Marknadsföring",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "Ny landningssida och offentlig webbplats",
+        "items": [
+          "Interaktiv hero med en direkt, förenklad rundsimulator.",
+          "Jämförelsesidor mot de större cap table-plattformarna.",
+          "Fullständiga företags- och juridiska sidor: om oss, kontakt, press, integritet, villkor, status.",
+          "Ompositionerad för grundare och små företag överallt."
+        ]
+      },
+      {
+        "date": "Maj 2026",
+        "tag": "AI",
+        "tagColor": "bg-amber-100 text-amber-700",
+        "title": "AI-onboardinghjälp",
+        "items": [
+          "Ladda upp bildningshandlingar, och FreeCapT extraherar din cap table till ett utkast.",
+          "Beskriv din cap table på vanligt språk och få den tolkad till rader.",
+          "En gratis AI-onboarding per konto."
+        ]
+      },
+      {
+        "date": "Maj 2026",
+        "tag": "Produkt",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Rundsimulator",
+        "items": [
+          "Modellera en enskild prissatt runda och se ägande före/efter och utspädning per intressent.",
+          "SAFEs konverteras automatiskt i prognosen.",
+          "Spara scenarier och dela en skrivskyddad länk."
+        ]
+      },
+      {
+        "date": "Maj 2026",
+        "tag": "Landspaket",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "Sju jurisdiktioner",
+        "items": [
+          "Danmark, Norge, Sverige, Tyskland, Schweiz, Storbritannien, USA.",
+          "Lokala instrument, validering av registreringsnummer och skattegynnade program (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests)."
+        ]
+      },
+      {
+        "date": "April 2026",
+        "tag": "Produkt",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Cap table och intressenter",
+        "items": [
+          "Ren CSS-ägandedonut, växling mellan utestående/fullt utspätt, CSV-export.",
+          "Lägg till intressenter i bulk genom att klistra in från ett kalkylark.",
+          "Magic-link-inloggning – inga lösenord."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "meta": {
+      "title": "Integritetspolicy – FreeCapT",
+      "description": "Hur FreeCapT samlar in, använder och skyddar din data. GDPR-kompatibel, EU- och US-regioner, inga tredjepartsspårare, export och radering med ett klick."
+    },
+    "kicker": "Juridiskt",
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad {date}",
+    "lastUpdatedDate": "30 maj 2026",
+    "intro": "Denna policy förklarar vilken data FreeCapT samlar in, varför, och vad du kan göra åt det. FreeCapT drivs av Bifrost Studios (\"vi\"), Köpenhamn, Danmark. Vi är personuppgiftsansvarig för dina kontodata och personuppgiftsbiträde för det cap table-innehåll du lagrar hos oss. Vi skriver detta på vanligt språk med avsikt.",
+    "collectHeading": "Vad vi samlar in",
+    "collectItems": [
+      "<strong>Kontodata:</strong> din e-postadress (används för magic-link-inloggning) och grundläggande profil- och arbetsyteinställningar.",
+      "<strong>Cap table-innehåll:</strong> företagen, intressenterna, värdepapperen och transaktionerna du skapar. Du styr detta; vi behandlar det för att leverera tjänsten.",
+      "<strong>Användning och diagnostik:</strong> minimal, integritetsrespekterande produktanalys och felrapporter för att hålla tjänsten igång. Kontoidentifierare hashas i händelsedata."
+    ],
+    "collectNote": "Vi använder inte Google Analytics, annonsspårare eller tredjeparts session-replay-verktyg som vi inte kontrollerar. Vi säljer aldrig din data.",
+    "whereHeading": "Var din data finns",
+    "whereBody": "Du väljer din dataregion när du skapar ett företag. EU-kunders data lagras i EU (Frankfurt); US-kunder i us-east. Regionen är fast när ett företag har skapats. Ett litet antal noggrant utvalda underbiträden (hosting, e-postleverans, AI-inferens, felspårning) stöder tjänsten; var och en är bunden av ett personuppgiftsbiträdesavtal och vald för EU-datahantering där det är relevant.",
+    "aiHeading": "AI-funktioner",
+    "aiBody": "När du använder AI-funktioner (dokumentextraktion, massimport på vanligt språk, fråga-din-cap-table), skickas det relevanta innehållet till vår AI-leverantör för att generera ett svar, i din region där det stöds. Vi tillåter inte att ditt innehåll används för att träna tredjepartsmodeller.",
+    "legalHeading": "Rättslig grund (GDPR)",
+    "legalBody": "Vi behandlar konto- och cap table-data för att uppfylla vårt avtal med dig, användnings- och säkerhetsdata under vårt berättigade intresse av att hålla tjänsten säker och tillförlitlig, och eventuell valfri kommunikation med ditt samtycke. EU/UK-registrerade har rätt till tillgång, rättelse, radering, begränsning, dataportabilitet och invändning.",
+    "controlsHeading": "Dina kontroller",
+    "controlsItems": [
+      "<strong>Export:</strong> ett klick exporterar allt – huvudbok, dokument och revisionslogg – som ZIP.",
+      "<strong>Radering:</strong> radering av ditt konto startar en 30-dagars frist, sedan fullständig rensning.",
+      "<strong>Förfrågningar:</strong> begäran om registerutdrag hanteras inom 30 dagar."
+    ],
+    "securityHeading": "Säkerhet",
+    "securityBody": "AES-256-kryptering i vila, TLS 1.3 under överföring, krypteringsnycklar per tenant, en append-only revisionslogg och magic-link-autentisering (inga lösenord). Mer detaljer finns i vår <link>säkerhetsöversikt</link>.",
+    "cookiesHeading": "Cookies",
+    "cookiesBody": "Vi använder endast de cookies som krävs för att hålla dig inloggad och tjänsten säker. Vi använder inte annons- eller spårningscookies mellan webbplatser.",
+    "contactHeading": "Kontakt",
+    "contactBody": "För alla integritetsförfrågningar eller frågor, mejla <email>privacy@freecapt.com</email>. Ett personuppgiftsbiträdesavtal är tillgängligt på begäran.",
+    "disclaimer": "Denna policy tillhandahålls i god tro och på vanligt språk. Om något här strider mot dina rättigheter enligt tillämplig lag, har dessa rättigheter företräde."
+  },
+  "terms": {
+    "meta": {
+      "title": "Användarvillkor – FreeCapT",
+      "description": "Villkoren för att använda FreeCapT, den gratis cap table-n för grundare och små företag. Villkor på vanligt språk om konton, planer, din data och acceptabel användning."
+    },
+    "kicker": "Juridiskt",
+    "title": "Användarvillkor",
+    "lastUpdated": "Senast uppdaterad {date}",
+    "lastUpdatedDate": "30 maj 2026",
+    "intro": "Dessa villkor reglerar din användning av FreeCapT, som drivs av Bifrost Studios (\"vi\"), Köpenhamn, Danmark. Genom att skapa ett konto godkänner du dem. Vi har hållit dem korta och läsbara.",
+    "s1Heading": "1. Tjänsten",
+    "s1Body": "FreeCapT hjälper dig att registrera och modellera ett företags kapitalisering. Det är ett programvaruverktyg, inte en advokatbyrå, en revisor eller en skatterådgivare. Ingenting i produkten är juridisk, finansiell eller skattemässig rådgivning. För faktiska kapitalanskaffningar, skatteval och lagstadgade inlämningar bör du konsultera en kvalificerad yrkesperson.",
+    "s2Heading": "2. Konton",
+    "s2Body": "Du loggar in med en magic link som skickas till din e-post – det finns inga lösenord. Du ansvarar för att hålla åtkomsten till din e-post säker och för aktivitet i din arbetsyta. Du måste vara gammal nog att ingå ett bindande avtal i din jurisdiktion.",
+    "s3Heading": "3. Planer och fakturering",
+    "s3Items": [
+      "<strong>Gratisplan:</strong> den personliga cap table-n är gratis, utan tidsbegränsning och utan intressentgräns.",
+      "<strong>Betald plan ($15/månad):</strong> låser upp delning med intressenter, AI-funktioner utöver den inledande installationen och generering av juridiskt giltiga dokument. Faktureras i förskott; avsluta när som helst, och din plan förblir aktiv till slutet av perioden.",
+      "Priser visas exklusive eventuella tillämpliga skatter (t.ex. moms), som läggs till där det krävs."
+    ],
+    "s4Heading": "4. Din data",
+    "s4Body": "Du äger innehållet du lägger in i FreeCapT. Du ger oss de begränsade rättigheter som behövs för att lagra och behandla det för att leverera tjänsten. Du kan exportera allt när som helst, och radering av ditt konto rensar din data efter en 30-dagars frist. Vår hantering av personuppgifter beskrivs i <link>integritetspolicyn</link>.",
+    "s5Heading": "5. Acceptabel användning",
+    "s5Intro": "Du godkänner att inte:",
+    "s5Items": [
+      "bryta mot lagen eller kränka andras rättigheter genom att använda tjänsten;",
+      "försöka få tillgång till data som inte är din, eller undersöka vår säkerhet utan tillstånd;",
+      "vidaresälja eller white-labe tjänsten utan vårt skriftliga avtal;",
+      "ladda upp skadlig kod eller störa tjänstens drift."
+    ],
+    "s5Outro": "Säkerhetsforskare som agerar i god tro är välkomna – se vår kontakt för ansvarsfull rapportering på <email>security@freecapt.com</email>.",
+    "s6Heading": "6. Tillgänglighet",
+    "s6Body": "Vi arbetar hårt för att hålla FreeCapT tillgänglig och korrekt, men tjänsten tillhandahålls \"i befintligt skick\" och \"som tillgänglig\" utan garantier. Planerad och oplanerad status publiceras på <link>freecapt.com/status</link>.",
+    "s7Heading": "7. Ansvar",
+    "s7Body": "I den utsträckning lagen tillåter är vårt totala ansvar som uppstår från tjänsten begränsat till det belopp du har betalat oss under de 12 månaderna före kravet. Vi ansvarar inte för indirekta skador eller följdskador. Ingenting begränsar ansvar som inte kan begränsas enligt lag.",
+    "s8Heading": "8. Ändringar och uppsägning",
+    "s8Body": "Vi kan uppdatera dessa villkor; väsentliga ändringar meddelas via e-post eller i produkten. Du kan sluta använda och radera ditt konto när som helst. Vi kan stänga av eller avsluta åtkomst vid allvarliga eller upprepade brott mot dessa villkor.",
+    "s9Heading": "9. Tillämplig lag",
+    "s9Body": "Dessa villkor regleras av dansk lag, med domstolarna i Köpenhamn som behörig domstol, utom där tvingande lokal konsumentlagstiftning ger dig andra rättigheter.",
+    "s10Heading": "10. Kontakt",
+    "s10Body": "Frågor om dessa villkor? Mejla <email>hello@freecapt.com</email>."
+  }
+}

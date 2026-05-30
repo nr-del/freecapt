@@ -1,11 +1,18 @@
 // Shared marketing chrome - one header + footer used across every public
 // page (landing, comparisons, legal, company). Keeping these in one place means
 // the nav and footer links stay consistent site-wide. Copy follows
-// docs/07_brand_package.md; tokens follow docs/12_design_system.md.
-import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+// docs/07_brand_package.md; tokens follow docs/12_design_system.md. All display
+// text comes from the message catalog (messages/*.json) via next-intl; links use
+// the locale-aware Link so the active locale prefix is preserved.
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/marketing/language-switcher";
 import { MobileNav } from "@/components/marketing/mobile-nav";
+
+type NavItem = { key: string; label: string; href: string };
+type FooterLink = { label: string; href: string };
+type FooterColumn = { heading: string; links: FooterLink[] };
 
 // Wordmark - the C is brand-600 (docs/07_brand_package.md §1).
 export function Wordmark({ className = "" }: { className?: string }) {
@@ -16,15 +23,27 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-const NAV = [
-  { label: "Product", href: "/#features" },
-  { label: "Countries", href: "/#countries" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Compare", href: "/compare" },
-  { label: "Security", href: "/#security" },
-];
+// mailto:/http(s): links must not be locale-prefixed; everything else routes
+// through the locale-aware Link.
+function FooterAnchor({ href, children }: { href: string; children: React.ReactNode }) {
+  if (href.startsWith("mailto:") || href.startsWith("http")) {
+    return (
+      <a href={href} className="hover:text-white">
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className="hover:text-white">
+      {children}
+    </Link>
+  );
+}
 
 export function SiteHeader() {
+  const t = useTranslations("nav");
+  const items = t.raw("items") as NavItem[];
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -32,82 +51,39 @@ export function SiteHeader() {
           <Wordmark />
         </Link>
         <nav className="hidden items-center gap-7 text-sm text-slate-600 md:flex">
-          {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-slate-900">
+          {items.map((item) => (
+            <Link key={item.key} href={item.href} className="hover:text-slate-900">
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          {/* Desktop actions. Decorative language switcher - next-intl wiring
-              lands later. appearance:none + forced webkit/moz removes the native
-              arrow so only our single chevron shows. */}
-          <div className="relative hidden md:block">
-            <select
-              aria-label="Language"
-              defaultValue="EN"
-              className="cursor-pointer appearance-none rounded-md border border-slate-200 bg-white py-1.5 pl-2 pr-7 text-xs [-moz-appearance:none] [-webkit-appearance:none]"
-            >
-              <option value="EN">🇬🇧 EN</option>
-              <option value="DA">🇩🇰 DA</option>
-              <option value="NO">🇳🇴 NO</option>
-              <option value="SV">🇸🇪 SV</option>
-              <option value="DE">🇩🇪 DE</option>
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-slate-400" />
-          </div>
+          {/* Desktop actions. */}
+          <LanguageSwitcher className="hidden md:block" />
           <Link
             href="/sign-in"
             className="hidden text-sm font-medium text-slate-700 hover:text-slate-900 md:inline-block"
           >
-            Sign in
+            {t("signIn")}
           </Link>
           <Link
             href="/sign-in"
             className="hidden rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 md:inline-block"
           >
-            Get started - free
+            {t("getStarted")}
           </Link>
           {/* Mobile: hamburger -> full-screen menu. */}
-          <MobileNav items={NAV} />
+          <MobileNav items={items} />
         </div>
       </div>
     </header>
   );
 }
 
-const FOOTER_COLUMNS = [
-  {
-    heading: "Product",
-    links: [
-      { label: "Features", href: "/#features" },
-      { label: "Country packs", href: "/#countries" },
-      { label: "Pricing", href: "/#pricing" },
-      { label: "Compare", href: "/compare" },
-      { label: "Changelog", href: "/changelog" },
-    ],
-  },
-  {
-    heading: "Trust",
-    links: [
-      { label: "Security", href: "/#security" },
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-      { label: "Status", href: "/status" },
-    ],
-  },
-  {
-    heading: "Company",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
-      { label: "Press", href: "/press" },
-      { label: "hello@freecapt.com", href: "mailto:hello@freecapt.com" },
-    ],
-  },
-];
-
 export function SiteFooter() {
+  const t = useTranslations("footer");
+  const columns = t.raw("columns") as FooterColumn[];
+
   return (
     <footer className="border-t border-slate-800 bg-slate-900 text-slate-400">
       <div className="mx-auto max-w-6xl px-6 py-12">
@@ -115,11 +91,12 @@ export function SiteFooter() {
           <div className="md:col-span-2">
             <Wordmark className="mb-3 block text-xl font-bold text-white [&_.text-brand-600]:text-brand-500" />
             <p className="max-w-xs text-sm leading-relaxed">
-              The free cap table for founders and small businesses. Built by{" "}
-              <span className="text-slate-300">Bifrost Studios</span> in Copenhagen.
+              {t.rich("tagline", {
+                studio: (chunks) => <span className="text-slate-300">{chunks}</span>,
+              })}
             </p>
           </div>
-          {FOOTER_COLUMNS.map((col) => (
+          {columns.map((col) => (
             <div key={col.heading}>
               <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
                 {col.heading}
@@ -127,9 +104,7 @@ export function SiteFooter() {
               <ul className="space-y-2 text-sm">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="hover:text-white">
-                      {link.label}
-                    </Link>
+                    <FooterAnchor href={link.href}>{link.label}</FooterAnchor>
                   </li>
                 ))}
               </ul>
@@ -137,13 +112,13 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-800 pt-6 text-xs text-slate-500">
-          <div>© 2026 Bifrost Studios. All rights reserved.</div>
+          <div>{t("copyright")}</div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded border border-slate-800 px-2 py-1">🇪🇺 GDPR</span>
-            <span className="rounded border border-slate-800 px-2 py-1">EU + US regions</span>
-            <span className="rounded border border-slate-800 px-2 py-1">SOC 2 in progress</span>
+            <span className="rounded border border-slate-800 px-2 py-1">{t("badgeGdpr")}</span>
+            <span className="rounded border border-slate-800 px-2 py-1">{t("badgeRegions")}</span>
+            <span className="rounded border border-slate-800 px-2 py-1">{t("badgeSoc2")}</span>
             <Link href="/status" className="rounded border border-slate-800 px-2 py-1 hover:text-white">
-              Status: ●
+              {t("badgeStatus")}
             </Link>
           </div>
         </div>

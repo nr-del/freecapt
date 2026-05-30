@@ -1,1 +1,642 @@
-{}
+{
+  "nav": {
+    "items": [
+      { "key": "product", "label": "Product", "href": "/#features" },
+      { "key": "countries", "label": "Countries", "href": "/#countries" },
+      { "key": "pricing", "label": "Pricing", "href": "/#pricing" },
+      { "key": "compare", "label": "Compare", "href": "/compare" },
+      { "key": "security", "label": "Security", "href": "/#security" }
+    ],
+    "signIn": "Sign in",
+    "getStarted": "Get started - free",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "footer": {
+    "tagline": "The free cap table for founders and small businesses. Built by <studio>Bifrost Studios</studio> in Copenhagen.",
+    "columns": [
+      {
+        "heading": "Product",
+        "links": [
+          { "label": "Features", "href": "/#features" },
+          { "label": "Country packs", "href": "/#countries" },
+          { "label": "Pricing", "href": "/#pricing" },
+          { "label": "Compare", "href": "/compare" },
+          { "label": "Changelog", "href": "/changelog" }
+        ]
+      },
+      {
+        "heading": "Trust",
+        "links": [
+          { "label": "Security", "href": "/#security" },
+          { "label": "Privacy", "href": "/privacy" },
+          { "label": "Terms", "href": "/terms" },
+          { "label": "Status", "href": "/status" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "label": "About", "href": "/about" },
+          { "label": "Contact", "href": "/contact" },
+          { "label": "Press", "href": "/press" },
+          { "label": "hello@freecapt.com", "href": "mailto:hello@freecapt.com" }
+        ]
+      }
+    ],
+    "copyright": "© 2026 Bifrost Studios. All rights reserved.",
+    "badgeGdpr": "🇪🇺 GDPR",
+    "badgeRegions": "EU + US regions",
+    "badgeSoc2": "SOC 2 in progress",
+    "badgeStatus": "Status: ●"
+  },
+  "hero": {
+    "company": "Acme ApS · Round simulator",
+    "title": "What if you raise?",
+    "livePreview": "Live preview",
+    "founderSuffix": "Founder",
+    "optionsLabel": "Options (Dana, Erik)",
+    "safeLabel": "Frank (SAFE)",
+    "poolLabel": "Pool",
+    "newInvestorLabel": "New investor",
+    "raiseAmount": "Raise amount",
+    "preMoney": "Pre-money valuation",
+    "raiseAria": "Raise amount in millions",
+    "preAria": "Pre-money valuation in millions",
+    "newInvestorOwns": "New investor owns",
+    "founders": "Founders",
+    "gdpr": "🇪🇺 GDPR",
+    "simplified": "Simplified preview - try the full simulator free"
+  },
+  "home": {
+    "meta": {
+      "title": "FreeCapT - the free cap table for founders and small businesses",
+      "description": "The free cap table for bootstrapped founders, family businesses, and small SaaS - anywhere in the world. Local rules for Denmark, Norway, Sweden, Germany, Switzerland, the UK, and US, with more on the way. AI-native. $15/month when you're ready to share."
+    },
+    "hero": {
+      "badge": "Now in private beta - DK · NO · SE · DE · CH · UK · US",
+      "titleBefore": "The free cap table for ",
+      "titleHighlight": "founders everywhere",
+      "lede": "Built for bootstrapped startups, family businesses, agencies, and small SaaS. In five languages. Under your country's rules. AI-native. <strong>$15/month</strong> when you want to share with stakeholders.",
+      "ctaPrimary": "Get started - free",
+      "ctaSecondary": "See pricing",
+      "fineprint": "No credit card. Set up in 15 minutes. Unlimited stakeholders on the free plan."
+    },
+    "valueProps": {
+      "kicker": "What you get",
+      "heading": "Cap tables shouldn't take a lawyer, a sales call, or a Tuesday.",
+      "cards": [
+        {
+          "icon": "◐",
+          "title": "Free for your personal cap table",
+          "body": "Build it, see it, model rounds, export the raw data. No stakeholder count limits. No credit card. No asterisks. Pay $15/month only when you want to share with employees, generate legal docs, or use AI features."
+        },
+        {
+          "icon": "⌖",
+          "title": "Built for seven jurisdictions",
+          "body": "Danish ApS · Norwegian AS · Swedish AB · German GmbH · Swiss AG · UK Ltd. · US Delaware C-Corp + LLC. Each with its own instruments, templates, and tax-favorable schemes (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests)."
+        },
+        {
+          "icon": "✦",
+          "title": "AI-native, not bolted-on",
+          "body": "Upload your formation docs - AI extracts your cap table in 90 seconds. Ask in plain English: \"What if I raise 2M at 8M pre-money?\" Click \"explain this\" on any number. Powered by Claude, in your region."
+        }
+      ]
+    },
+    "countries": {
+      "kicker": "Country packs",
+      "heading": "Free in your country, under your country's rules.",
+      "lede": "Every pack ships with the local entity types, instruments, validation, and document templates. No US-first hand-waving.",
+      "packs": [
+        { "flag": "🇩🇰", "name": "Denmark", "entity": "ApS · A/S", "schemes": "§ 7P · Tegningsoptioner · Ejerbog" },
+        { "flag": "🇳🇴", "name": "Norway", "entity": "AS · ASA", "schemes": "Opsjonsskatteordningen · Aksjeeierbok" },
+        { "flag": "🇸🇪", "name": "Sweden", "entity": "AB privat · publikt", "schemes": "QESO · Aktiebok · Teckningsoptioner" },
+        { "flag": "🇩🇪", "name": "Germany", "entity": "GmbH · AG", "schemes": "VSOP · Notary workflow · § 19a" },
+        { "flag": "🇨🇭", "name": "Switzerland", "entity": "AG · GmbH", "schemes": "Sperrfrist · Mitarbeiteroptionen" },
+        { "flag": "🇬🇧", "name": "United Kingdom", "entity": "Ltd.", "schemes": "EMI · Register of Members · ASA" },
+        { "flag": "🇺🇸", "name": "United States", "entity": "DE C-Corp · DE LLC", "schemes": "ISO · NSO · SAFE · Profits interests" }
+      ],
+      "soonName": "France · NL · ES · FI · CA",
+      "soonLabel": "Coming as country packs",
+      "soonNote": "One sprint per new country.",
+      "languagesNote": "UI available in Dansk · Norsk · Svenska · Deutsch · English. Language is independent of jurisdiction - pick what works for you."
+    },
+    "product": {
+      "kicker": "The product",
+      "heading": "Six screens. Not thirty.",
+      "lede": "FreeCapT is built around one question: who owns this company? Everything else is in service of answering that, clearly, in 15 minutes or less.",
+      "screens": [
+        {
+          "kicker": "Cap table",
+          "title": "Who owns this company today.",
+          "body": "Donut chart and table side by side. Outstanding or fully-diluted toggle. As-of-date for historical views. Click \"You have 18.5% left to grant\" to issue equity."
+        },
+        {
+          "kicker": "Stakeholders",
+          "title": "Everyone, added in 30 seconds.",
+          "body": "Paste from spreadsheet. Or type in plain English: \"Anna and Ben at 30% each, Dana has 200k options vested over 4 years.\" AI parses, you confirm."
+        },
+        {
+          "kicker": "Round modeling",
+          "paid": "Paid",
+          "title": "Allocate your raise across real investors.",
+          "body": "Raising 2M at 8M pre? Drop in your 10 interested investors with their commitment amounts. See who fits, who scales back, what the cap table looks like after."
+        },
+        {
+          "kicker": "Stakeholder portal",
+          "paid": "Paid",
+          "title": "Your team sees what they own, in plain English.",
+          "body": "Magic-link sign-in (no passwords). Their vesting schedule. AI \"explain my grant\" button. Angels and advisors with multiple grants get a free portfolio dashboard."
+        },
+        {
+          "kicker": "Documents",
+          "paid": "Paid for legal-grade",
+          "title": "Per-jurisdiction templates that lawyers respect.",
+          "body": "Generate your Danish ejerbog, your German Gesellschafterliste, your UK Register of Members, your US capitalization table for 409A. PDF/A archival format. Word for redlining."
+        },
+        {
+          "kicker": "Simulator",
+          "title": "\"What if I raise 2M at 8M post?\"",
+          "body": "Side-by-side before/after cap tables with per-stakeholder dilution. SAFEs auto-convert. Save scenarios, share read-only links with your cofounders."
+        }
+      ]
+    },
+    "pricing": {
+      "kicker": "Pricing",
+      "heading": "Two plans. One price.",
+      "lede": "$15/month - and only when you're ready. The free plan is a real, complete cap table, not a trial.",
+      "freeName": "Free",
+      "freePrice": "$0",
+      "freeTagline": "For your personal cap table. Forever.",
+      "freeCta": "Get started - free",
+      "freeFeatures": [
+        "Full cap table - unlimited stakeholders",
+        "Bulk add via spreadsheet paste",
+        "AI onboarding helper (one-time)",
+        "Round simulator (single-investor)",
+        "Basic CSV export",
+        "Cofounders as Admin / Editor / Viewer",
+        "Multi-company switcher",
+        "All 7 country packs",
+        "5 UI languages",
+        "Multi-currency, multi-timezone",
+        "2FA, audit log, GDPR data export",
+        "Magic-link sign-in"
+      ],
+      "paidBadge": "When you're ready",
+      "paidName": "Paid",
+      "paidPrice": "$15",
+      "paidPer": "/month",
+      "paidTagline": "Everything in Free, plus the value moments.",
+      "paidCta": "Start paid plan",
+      "paidFeatures": [
+        "Everything in Free",
+        "Ongoing AI chat - \"ask your cap table\"",
+        "\"Explain this\" buttons on every number",
+        "AI-driven bulk add (prompt + document upload)",
+        "Rich Excel export - multi-sheet, live formulas, embedded chart",
+        "Legal-grade PDF + Word exports - per jurisdiction",
+        "Document template generation",
+        "Stakeholder portal access for your team",
+        "Round modeling - multi-investor allocation",
+        "Term-sheet draft generation"
+      ],
+      "footnote": "No usage cliffs. No per-stakeholder fees. Cancel in one click; your data stays yours."
+    },
+    "security": {
+      "kicker": "Security & trust",
+      "heading": "A cap table is the most sensitive document a private company owns.",
+      "lede": "We treat it that way.",
+      "cards": [
+        {
+          "icon": "🇪🇺",
+          "title": "GDPR-compliant. EU and US regions.",
+          "body": "EU customers' data hosted in Frankfurt; US customers in us-east. Your choice at company creation, immutable thereafter."
+        },
+        {
+          "icon": "🔒",
+          "title": "AES-256 encrypted. TLS 1.3.",
+          "body": "Per-tenant encryption keys. SOC 2 Type I attestation in progress (target Q3 2026). ISO 27001 on the roadmap."
+        },
+        {
+          "icon": "📋",
+          "title": "Append-only audit log.",
+          "body": "Every state change recorded with actor, IP, before/after. 7-year retention. Tamper-evident replication to immutable storage."
+        },
+        {
+          "icon": "💾",
+          "title": "Your data is yours.",
+          "body": "One-click export of everything - ledger, documents, audit log - as a ZIP. Account deletion within 30 days, full purge under GDPR."
+        },
+        {
+          "icon": "🪄",
+          "title": "Magic-link only. No passwords.",
+          "body": "Lower attack surface than password databases. Optional TOTP 2FA for the paranoid. Device-trust prompts on new sign-ins."
+        },
+        {
+          "icon": "🛡️",
+          "title": "Bug bounty + public security page.",
+          "body": "Researchers welcome. Status page at freecapt.com/status. Public changelog with every release."
+        }
+      ]
+    },
+    "faq": {
+      "kicker": "Questions, anticipated",
+      "heading": "FAQ",
+      "items": [
+        {
+          "q": "Is it really free?",
+          "a": "Yes. The free plan is the full personal cap table - build it, see it, model rounds, export the data, switch between companies if you manage multiple. There are no stakeholder limits, no time limits, no credit card. You pay $15/month only when you want to share with stakeholders, use AI features beyond setup, or generate legal-grade documents."
+        },
+        {
+          "q": "What jurisdictions do you support?",
+          "a": "Seven at launch: Denmark (ApS + A/S), Norway (AS + ASA), Sweden (AB privat + publikt), Germany (GmbH + AG), Switzerland (AG + GmbH), United Kingdom (Ltd.), and United States Delaware (C-Corp + LLC). Each comes with the local instrument types, validation rules, document templates, and tax-favorable schemes (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests). More countries are sprint-sized additions."
+        },
+        {
+          "q": "Do I need a lawyer to use FreeCapT?",
+          "a": "No. FreeCapT is built for founders who don't have a Cooley partner on speed-dial. Onboarding is conversational. Defaults are sensible. The AI explains anything in plain English. You'll still want a lawyer for actual fundraises, tax-scheme elections, and notary appointments - we make those moments cheaper and faster by generating the right document for your lawyer to review."
+        },
+        {
+          "q": "How is this different from Carta?",
+          "a": "Carta is built for venture-backed US scaleups and prices accordingly. It's the right tool for that audience. FreeCapT is built for the rest of us - bootstrapped founders, family businesses, agencies, small SaaS. We have first-class support for the local jurisdictions most tools ignore, AI-native UX, and a free plan that's actually usable. See our full comparison pages for the detail."
+        },
+        {
+          "q": "Is my data safe?",
+          "a": "A cap table is the most sensitive document a private company owns. We treat it that way - AES-256 encryption at rest, TLS 1.3 in transit, per-tenant encryption keys, append-only audit log, GDPR-compliant. EU customers' data is hosted in Frankfurt; US in us-east. SOC 2 Type I attestation is in progress, with Type II following ~12 months later."
+        },
+        {
+          "q": "What about GDPR?",
+          "a": "EU data stays in the EU (Frankfurt region). DPA available. One-click data export (you own your data). Account deletion triggers a 30-day grace period then full purge. Data subject access requests handled within 30 days. Privacy policy in plain English, not legalese."
+        },
+        {
+          "q": "What languages do you support?",
+          "a": "UI is available in English, Dansk, Norsk, Svenska, and Deutsch. Language is independent of jurisdiction - a Danish founder running a UK Ltd. can use the Danish UI. Legal-grade exports stay in the jurisdiction's regulatory language (a Danish ejerbog is in Danish; a US capitalization table is in English) regardless of UI preference. French and Italian for Swiss customers are post-launch."
+        },
+        {
+          "q": "Can I import from Carta or another tool?",
+          "a": "Yes. Export a CSV from Carta, Pulley, or any spreadsheet and paste into our bulk-add screen - columns auto-map. Or upload your formation documents and grant agreements; our AI will extract the entire cap table to a draft you confirm. Either path is typically a 5-minute migration."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "See your cap table in 15 minutes.",
+      "lede": "No credit card. No sales call. No lawyer. Paste your existing spreadsheet, type it in plain English, or upload your formation docs.",
+      "emailPlaceholder": "you@yourcompany.com",
+      "submit": "Get started →",
+      "languages": "Available in Dansk · Norsk · Svenska · Deutsch · English"
+    }
+  },
+  "compareIndex": {
+    "meta": {
+      "title": "Compare FreeCapT - free cap table vs Carta and Pulley",
+      "description": "See how FreeCapT compares to the bigger cap table platforms. Free for personal cap tables, multi-jurisdiction, AI-native, $15/month to share."
+    },
+    "kicker": "Comparison",
+    "title": "How FreeCapT compares",
+    "lede": "Honest, factual comparisons against the bigger systems. We will tell you when they are the better pick - and when a free, multi-jurisdiction, AI-native cap table is the smarter call.",
+    "readComparison": "Read the comparison →",
+    "vs": "FreeCapT vs",
+    "cards": [
+      {
+        "name": "Carta",
+        "href": "/compare/carta",
+        "blurb": "The market-leading US equity platform for venture-backed companies. See where a free, multi-jurisdiction tool fits instead."
+      },
+      {
+        "name": "Pulley",
+        "href": "/compare/pulley",
+        "blurb": "A modern cap table tool for US startups. See how FreeCapT compares on pricing, jurisdictions, and AI."
+      }
+    ]
+  },
+  "comparison": {
+    "kicker": "Comparison",
+    "title": "FreeCapT vs {competitor}",
+    "freecaptIsFor": "FreeCapT is for",
+    "competitorIsFor": "{competitor} is for",
+    "featureHeader": "Feature",
+    "freecaptHeader": "FreeCapT",
+    "whenBetter": "When {competitor} is the better choice",
+    "ctaButton": "Try FreeCapT - free",
+    "ctaNote": "No credit card. Migrate from {competitor} by CSV or AI document upload in minutes.",
+    "disclaimer": "{competitor} details are based on publicly available information as of 2026 and may change. {competitor} is a trademark of its respective owner; FreeCapT is not affiliated with or endorsed by {competitor}. Found something out of date? <link>Let us know</link>."
+  },
+  "compareCarta": {
+    "meta": {
+      "title": "FreeCapT vs Carta - a free, multi-jurisdiction alternative",
+      "description": "How FreeCapT compares to Carta for founders and small businesses: pricing, jurisdictions, AI features, and who each tool is built for. Free for personal cap tables; $15/month to share."
+    },
+    "competitor": "Carta",
+    "competitorTagline": "The market-leading US equity-management platform for venture-backed companies.",
+    "lede": "Carta is the best-known cap table platform, built for venture-backed US scaleups. FreeCapT is built for everyone else - bootstrapped founders, family businesses, agencies, and small SaaS, in seven jurisdictions. Here is an honest, factual comparison.",
+    "bestForFreeCapT": "Bootstrapped and early-stage founders, family businesses, agencies and small SaaS who want a real cap table for free, in their own jurisdiction and language, without a sales call.",
+    "bestForCompetitor": "Venture-backed US startups and scaleups that need 409A valuations, fund administration, and the broad equity-management suite investors already expect.",
+    "whenCompetitor": "If you are a US C-corp raising priced venture rounds and need integrated 409A valuations, fund administration, or features your investors specifically request, Carta's depth in that ecosystem is hard to match. We focus on the long tail Carta is not optimised for.",
+    "rows": [
+      { "feature": "Free plan", "freecapt": "Yes - the full personal cap table, unlimited stakeholders, forever.", "competitor": "Limited free tier for the smallest companies; paid plans scale up quickly.", "edge": "freecapt" },
+      { "feature": "Entry pricing", "freecapt": "$0 free, $15/month when you share, use AI, or export legal docs.", "competitor": "Paid plans are typically several hundred to thousands of dollars per year as you grow.", "edge": "freecapt" },
+      { "feature": "Jurisdictions", "freecapt": "DK, NO, SE, DE, CH, UK, US - local instruments, registries and tax schemes built in.", "competitor": "Strong US coverage; some international support, US-first by design.", "edge": "freecapt" },
+      { "feature": "Languages", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (UI independent of jurisdiction).", "competitor": "Primarily English.", "edge": "freecapt" },
+      { "feature": "AI-native", "freecapt": "Document extraction, plain-English bulk add, ask-your-cap-table chat, explain-this on every number.", "competitor": "Adding AI features; not the core of the product.", "edge": "freecapt" },
+      { "feature": "409A valuations", "freecapt": "Not offered - we are not a US valuation provider.", "competitor": "Integrated 409A valuations and audit support.", "edge": "competitor" },
+      { "feature": "Fund administration", "freecapt": "Not offered - focused on the company cap table.", "competitor": "Full fund administration and LP tooling.", "edge": "competitor" },
+      { "feature": "Round modeling", "freecapt": "Single-round simulator free; multi-investor modeling on the $15/month plan.", "competitor": "Comprehensive scenario and waterfall modeling.", "edge": "even" },
+      { "feature": "Data ownership & export", "freecapt": "One-click full export (ledger, docs, audit log). Magic-link auth, no passwords.", "competitor": "Export available; broader platform lock-in as you adopt more modules.", "edge": "freecapt" },
+      { "feature": "Setup", "freecapt": "Self-serve in ~15 minutes, no sales call.", "competitor": "Self-serve for small plans; sales-led for larger ones.", "edge": "even" }
+    ]
+  },
+  "comparePulley": {
+    "meta": {
+      "title": "FreeCapT vs Pulley - a free, multi-jurisdiction alternative",
+      "description": "How FreeCapT compares to Pulley for founders and small businesses: pricing, jurisdictions, AI features, and who each tool is built for. Free for personal cap tables; $15/month to share."
+    },
+    "competitor": "Pulley",
+    "competitorTagline": "A modern cap table and equity-management tool for startups.",
+    "lede": "Pulley is a well-regarded modern cap table tool aimed primarily at US startups. FreeCapT covers seven jurisdictions, is AI-native, and is free for your personal cap table. Here is an honest, factual comparison.",
+    "bestForFreeCapT": "Founders and small businesses outside the US venture track - or inside it - who want a free, multi-jurisdiction cap table in their own language, with AI built in.",
+    "bestForCompetitor": "US startups that want a clean, modern cap table with strong support for priced rounds, SAFEs, and US equity-compensation workflows.",
+    "whenCompetitor": "If you are a US startup and want a polished, well-supported equity tool with deep US fundraising workflows and 409A partnerships, Pulley is a strong choice. We differentiate on free pricing, European jurisdictions, and AI-native UX.",
+    "rows": [
+      { "feature": "Free plan", "freecapt": "Yes - the full personal cap table, unlimited stakeholders, forever.", "competitor": "Free tier for early-stage companies up to a stakeholder limit; paid plans above that.", "edge": "freecapt" },
+      { "feature": "Entry pricing", "freecapt": "$0 free, $15/month when you share, use AI, or export legal docs.", "competitor": "Paid plans priced per company, typically rising with stage and headcount.", "edge": "freecapt" },
+      { "feature": "Jurisdictions", "freecapt": "DK, NO, SE, DE, CH, UK, US - local instruments, registries and tax schemes built in.", "competitor": "US-focused, with some international coverage.", "edge": "freecapt" },
+      { "feature": "Languages", "freecapt": "English, Dansk, Norsk, Svenska, Deutsch (UI independent of jurisdiction).", "competitor": "Primarily English.", "edge": "freecapt" },
+      { "feature": "AI-native", "freecapt": "Document extraction, plain-English bulk add, ask-your-cap-table chat, explain-this on every number.", "competitor": "Modern UX; AI is not the central pitch.", "edge": "freecapt" },
+      { "feature": "Local tax schemes", "freecapt": "EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests - validated per jurisdiction.", "competitor": "Strong US scheme support (ISO/NSO/SAFE); limited European schemes.", "edge": "freecapt" },
+      { "feature": "Round modeling", "freecapt": "Single-round simulator free; multi-investor modeling on the $15/month plan.", "competitor": "Good scenario modeling for priced rounds and SAFEs.", "edge": "even" },
+      { "feature": "Document generation", "freecapt": "Per-jurisdiction legal-grade PDF/Word (ejerbog, Gesellschafterliste, Register of Members).", "competitor": "US-oriented document workflows.", "edge": "freecapt" },
+      { "feature": "Data ownership & export", "freecapt": "One-click full export (ledger, docs, audit log). Magic-link auth, no passwords.", "competitor": "Export available.", "edge": "even" },
+      { "feature": "Setup", "freecapt": "Self-serve in ~15 minutes, no sales call.", "competitor": "Self-serve onboarding.", "edge": "even" }
+    ]
+  },
+  "about": {
+    "meta": {
+      "title": "About FreeCapT - built by Bifrost Studios in Copenhagen",
+      "description": "Why we built a free, multi-jurisdiction, AI-native cap table for founders and small businesses everywhere. Made by Bifrost Studios in Copenhagen."
+    },
+    "kicker": "About",
+    "title": "A free cap table for the other 95%",
+    "lede": "Most companies are not venture-backed unicorns. They are bootstrapped startups, family businesses, agencies, and small SaaS - and they deserve a cap table that is free, legible, and built for their country.",
+    "paragraphs": [
+      "FreeCapT started with a simple frustration: the tools for tracking who owns a company are priced for venture-backed US scaleups, and they treat every other kind of business as an afterthought. If you run a Danish ApS, a German GmbH, or a UK Ltd., you either pay for software that does not understand your jurisdiction, or you keep your cap table in a spreadsheet and hope it stays correct.",
+      "We think that is backwards. The vast majority of private companies are not chasing a Series C. They are founders, families, and small teams who need to know - clearly and confidently - who owns what. So we built a cap table that is free for personal use, speaks five languages, understands seven jurisdictions, and uses AI to make setup take minutes instead of an afternoon with a lawyer.",
+      "We charge $15/month when you are ready to share with stakeholders, use AI beyond initial setup, or generate legal-grade documents. That is the whole business model. No per-seat creep, no usage cliffs, no sales calls."
+    ],
+    "values": [
+      {
+        "title": "Free should mean free",
+        "body": "The personal cap table is free forever - unlimited stakeholders, no time limit, no credit card. You pay $15/month only when you want to share, use AI, or generate legal-grade documents."
+      },
+      {
+        "title": "Your country, your rules",
+        "body": "Most tools are US-first and bolt the rest of the world on later. We build country packs - real instruments, registries, and tax schemes - for each jurisdiction we support."
+      },
+      {
+        "title": "Plain language over jargon",
+        "body": "A cap table is the most important document a private company owns. It should be legible to the founder who owns it, not just the lawyer who drafted it."
+      },
+      {
+        "title": "Your data is yours",
+        "body": "One-click export of everything. Magic-link sign-in, no passwords. GDPR-grade handling, EU and US regions. No third-party trackers."
+      }
+    ],
+    "whoHeading": "Who builds it",
+    "whoBody": "FreeCapT is built by <studio>Bifrost Studios</studio>, a small software studio in Copenhagen, Denmark. We are a focused team that cares about craft, privacy, and pricing that respects the people who use our products.",
+    "ctaPrimary": "Get started - free",
+    "ctaSecondary": "Get in touch"
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact FreeCapT - support, sales, privacy, and security",
+      "description": "Get in touch with FreeCapT. Support, general enquiries, privacy/GDPR requests, and security disclosures. Built by Bifrost Studios in Copenhagen."
+    },
+    "kicker": "Contact",
+    "title": "Talk to us",
+    "lede": "We are a small team and we read everything. Pick the right inbox below and we will get back to you.",
+    "channels": [
+      {
+        "icon": "✉️",
+        "title": "General & support",
+        "body": "Questions, feedback, or help with your cap table. We aim to reply within one business day.",
+        "email": "hello@freecapt.com"
+      },
+      {
+        "icon": "🔐",
+        "title": "Privacy & GDPR",
+        "body": "Data subject access requests, data export, deletion, or DPA enquiries.",
+        "email": "privacy@freecapt.com"
+      },
+      {
+        "icon": "🛡️",
+        "title": "Security",
+        "body": "Responsible disclosure of a vulnerability. PGP available on request.",
+        "email": "security@freecapt.com"
+      },
+      {
+        "icon": "📰",
+        "title": "Press",
+        "body": "Media enquiries, interviews, and our press kit.",
+        "email": "press@freecapt.com"
+      }
+    ],
+    "detailsHeading": "Company details",
+    "operatedByLabel": "Operated by",
+    "operatedByValue": "Bifrost Studios",
+    "basedInLabel": "Based in",
+    "basedInValue": "Copenhagen, Denmark",
+    "emailLabel": "Email",
+    "statusLabel": "Status"
+  },
+  "press": {
+    "meta": {
+      "title": "Press & media - FreeCapT",
+      "description": "Press kit, boilerplate, facts, and media contact for FreeCapT, the free cap table for founders and small businesses. Built by Bifrost Studios in Copenhagen."
+    },
+    "kicker": "Press",
+    "title": "Press & media",
+    "lede": "Everything you need to write about FreeCapT. For interviews or anything not covered here, email press@freecapt.com.",
+    "boilerplateHeading": "Boilerplate",
+    "boilerplate": "FreeCapT is the free cap table for founders and small businesses. Built by Bifrost Studios in Copenhagen, it gives bootstrapped startups, family businesses, agencies, and small SaaS a complete cap table - free for personal use, in five languages, under the rules of seven jurisdictions. AI handles setup in minutes: upload your formation documents and FreeCapT extracts your cap table, or describe it in plain English. FreeCapT charges $15/month only when you want to share with stakeholders, use AI beyond setup, or generate legal-grade documents.",
+    "factsHeading": "Fast facts",
+    "facts": [
+      { "label": "Product", "value": "FreeCapT - a free, multi-jurisdiction, AI-native cap table" },
+      { "label": "Operated by", "value": "Bifrost Studios, Copenhagen, Denmark" },
+      { "label": "Pricing", "value": "Free for personal cap tables; $15/month to share, use AI, or export legal documents" },
+      { "label": "Jurisdictions", "value": "Denmark, Norway, Sweden, Germany, Switzerland, United Kingdom, United States" },
+      { "label": "Languages", "value": "English, Dansk, Norsk, Svenska, Deutsch" },
+      { "label": "Stage", "value": "Private beta (2026)" }
+    ],
+    "assetsHeading": "Brand assets",
+    "assetsBody": "The FreeCapT wordmark is \"FreeCapT\" with a capital C set in emerald (#059669). Please do not alter the colours or proportions. A full logo pack (SVG/PNG, on light and dark) is available on request.",
+    "requestLogo": "Request the logo pack →",
+    "mediaHeading": "Media contact",
+    "mediaBody": "Email <email>press@freecapt.com</email> for interviews, quotes, or anything you need. You can also <link>reach the wider team</link>."
+  },
+  "statusPage": {
+    "meta": {
+      "title": "Status - FreeCapT",
+      "description": "Current operational status of FreeCapT services: application, API, authentication, database, AI features, and email delivery."
+    },
+    "kicker": "Status",
+    "title": "System status",
+    "allOperational": "All systems operational",
+    "updated": "Updated {date}",
+    "operational": "Operational",
+    "components": [
+      "Web application",
+      "API",
+      "Authentication (magic link)",
+      "Database (EU region)",
+      "Database (US region)",
+      "AI features",
+      "Email delivery"
+    ],
+    "footnote": "Seeing a problem we have not caught? Email <email>hello@freecapt.com</email> and we will look right away."
+  },
+  "changelog": {
+    "meta": {
+      "title": "Changelog - FreeCapT",
+      "description": "What is new in FreeCapT: cap table, stakeholders, country packs, round simulator, AI onboarding, and more."
+    },
+    "kicker": "Changelog",
+    "title": "What's new",
+    "lede": "A running log of what we have shipped. We are in private beta, so expect this to move fast.",
+    "entries": [
+      {
+        "date": "May 2026",
+        "tag": "Marketing",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "New landing page and public site",
+        "items": [
+          "Interactive hero with a live, simplified round simulator.",
+          "Comparison pages versus the bigger cap table platforms.",
+          "Full company and legal pages: about, contact, press, privacy, terms, status.",
+          "Repositioned for founders and small businesses everywhere."
+        ]
+      },
+      {
+        "date": "May 2026",
+        "tag": "AI",
+        "tagColor": "bg-amber-100 text-amber-700",
+        "title": "AI onboarding helper",
+        "items": [
+          "Upload formation documents and FreeCapT extracts your cap table to a draft.",
+          "Describe your cap table in plain English and have it parsed into rows.",
+          "One free AI onboarding per account."
+        ]
+      },
+      {
+        "date": "May 2026",
+        "tag": "Product",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Round simulator",
+        "items": [
+          "Model a single priced round and see before/after ownership and per-stakeholder dilution.",
+          "SAFEs auto-convert in the projection.",
+          "Save scenarios and share a read-only link."
+        ]
+      },
+      {
+        "date": "May 2026",
+        "tag": "Country packs",
+        "tagColor": "bg-brand-50 text-brand-700",
+        "title": "Seven jurisdictions",
+        "items": [
+          "Denmark, Norway, Sweden, Germany, Switzerland, United Kingdom, United States.",
+          "Local instruments, registry-number validation, and tax-favorable schemes (EMI, § 7P, opsjonsskatteordningen, QESO, ISO, profits interests)."
+        ]
+      },
+      {
+        "date": "April 2026",
+        "tag": "Product",
+        "tagColor": "bg-slate-100 text-slate-700",
+        "title": "Cap table and stakeholders",
+        "items": [
+          "Pure-CSS ownership donut, outstanding/fully-diluted toggle, CSV export.",
+          "Bulk add stakeholders by pasting from a spreadsheet.",
+          "Magic-link sign-in - no passwords."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy policy - FreeCapT",
+      "description": "How FreeCapT collects, uses, and protects your data. GDPR-compliant, EU and US regions, no third-party trackers, one-click export and deletion."
+    },
+    "kicker": "Legal",
+    "title": "Privacy policy",
+    "lastUpdated": "Last updated {date}",
+    "lastUpdatedDate": "30 May 2026",
+    "intro": "This policy explains what data FreeCapT collects, why, and what you can do about it. FreeCapT is operated by Bifrost Studios (\"we\"), Copenhagen, Denmark. We are the data controller for your account data, and a data processor for the cap table content you store with us. We write this in plain English on purpose.",
+    "collectHeading": "What we collect",
+    "collectItems": [
+      "<strong>Account data:</strong> your email address (used for magic-link sign-in) and basic profile and workspace settings.",
+      "<strong>Cap table content:</strong> the companies, stakeholders, securities, and transactions you create. You control this; we process it to provide the service.",
+      "<strong>Usage and diagnostics:</strong> minimal, privacy-respecting product analytics and error reports to keep the service working. Account identifiers are hashed in event payloads."
+    ],
+    "collectNote": "We do not use Google Analytics, advertising trackers, or third-party session-replay tools that we do not control. We do not sell your data, ever.",
+    "whereHeading": "Where your data lives",
+    "whereBody": "You choose your data region when you create a company. EU customers' data is hosted in the EU (Frankfurt); US customers in us-east. The region is fixed once a company is created. A small number of carefully chosen sub-processors (hosting, email delivery, AI inference, error tracking) support the service; each is bound by a data processing agreement and selected for EU data handling where applicable.",
+    "aiHeading": "AI features",
+    "aiBody": "When you use AI features (document extraction, plain-English bulk add, ask-your-cap-table), the relevant content is sent to our AI provider to generate a response, in your region where supported. We do not allow your content to be used to train third-party models.",
+    "legalHeading": "Legal basis (GDPR)",
+    "legalBody": "We process account and cap table data to perform our contract with you, usage and security data under our legitimate interest in keeping the service safe and reliable, and any optional communications with your consent. EU/UK data subjects have rights of access, rectification, erasure, restriction, portability, and objection.",
+    "controlsHeading": "Your controls",
+    "controlsItems": [
+      "<strong>Export:</strong> one click exports everything - ledger, documents, and audit log - as a ZIP.",
+      "<strong>Deletion:</strong> deleting your account starts a 30-day grace period, then a full purge.",
+      "<strong>Requests:</strong> data subject access requests are handled within 30 days."
+    ],
+    "securityHeading": "Security",
+    "securityBody": "AES-256 encryption at rest, TLS 1.3 in transit, per-tenant encryption keys, an append-only audit log, and magic-link authentication (no passwords). More detail is on our <link>security overview</link>.",
+    "cookiesHeading": "Cookies",
+    "cookiesBody": "We use only the cookies required to keep you signed in and the service secure. We do not use advertising or cross-site tracking cookies.",
+    "contactHeading": "Contact",
+    "contactBody": "For any privacy request or question, email <email>privacy@freecapt.com</email>. A Data Processing Agreement is available on request.",
+    "disclaimer": "This policy is provided in good faith and in plain language. If anything here conflicts with your rights under applicable law, those rights prevail."
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of service - FreeCapT",
+      "description": "The terms for using FreeCapT, the free cap table for founders and small businesses. Plain-English terms covering accounts, plans, your data, and acceptable use."
+    },
+    "kicker": "Legal",
+    "title": "Terms of service",
+    "lastUpdated": "Last updated {date}",
+    "lastUpdatedDate": "30 May 2026",
+    "intro": "These terms govern your use of FreeCapT, operated by Bifrost Studios (\"we\"), Copenhagen, Denmark. By creating an account you agree to them. We have kept them short and readable.",
+    "s1Heading": "1. The service",
+    "s1Body": "FreeCapT helps you record and model a company's capitalisation. It is a software tool, not a law firm, accountant, or tax adviser. Nothing in the product is legal, financial, or tax advice. For actual fundraises, tax elections, and statutory filings, consult a qualified professional.",
+    "s2Heading": "2. Accounts",
+    "s2Body": "You sign in with a magic link sent to your email - there are no passwords. You are responsible for keeping access to your email secure and for activity in your workspace. You must be old enough to form a binding contract in your jurisdiction.",
+    "s3Heading": "3. Plans and billing",
+    "s3Items": [
+      "<strong>Free plan:</strong> the personal cap table is free, with no time limit and no stakeholder cap.",
+      "<strong>Paid plan ($15/month):</strong> unlocks sharing with stakeholders, AI features beyond initial setup, and legal-grade document generation. Billed in advance; cancel any time and your plan stays active until the end of the period.",
+      "Prices are shown exclusive of any applicable taxes (e.g. VAT), which are added where required."
+    ],
+    "s4Heading": "4. Your data",
+    "s4Body": "You own the content you put into FreeCapT. You grant us the limited rights needed to host and process it to provide the service. You can export everything at any time, and deleting your account purges your data after a 30-day grace period. Our handling of personal data is described in the <link>privacy policy</link>.",
+    "s5Heading": "5. Acceptable use",
+    "s5Intro": "You agree not to:",
+    "s5Items": [
+      "break the law or infringe others' rights using the service;",
+      "attempt to access data that is not yours, or probe our security without authorisation;",
+      "resell or white-label the service without our written agreement;",
+      "upload malware or interfere with the service's operation."
+    ],
+    "s5Outro": "Security researchers acting in good faith are welcome - see our responsible disclosure contact at <email>security@freecapt.com</email>.",
+    "s6Heading": "6. Availability",
+    "s6Body": "We work hard to keep FreeCapT available and accurate, but the service is provided on an \"as is\" and \"as available\" basis without warranties. Planned and unplanned status is published at <link>freecapt.com/status</link>.",
+    "s7Heading": "7. Liability",
+    "s7Body": "To the extent permitted by law, our total liability arising from the service is limited to the amount you paid us in the 12 months before the claim. We are not liable for indirect or consequential losses. Nothing limits liability that cannot be limited by law.",
+    "s8Heading": "8. Changes and termination",
+    "s8Body": "We may update these terms; material changes will be notified by email or in-product. You can stop using and delete your account at any time. We may suspend or end access for serious or repeated breaches of these terms.",
+    "s9Heading": "9. Governing law",
+    "s9Body": "These terms are governed by the laws of Denmark, with the courts of Copenhagen having jurisdiction, except where mandatory local consumer law gives you other rights.",
+    "s10Heading": "10. Contact",
+    "s10Body": "Questions about these terms? Email <email>hello@freecapt.com</email>."
+  }
+}
