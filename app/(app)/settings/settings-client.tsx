@@ -16,7 +16,7 @@ import { updateCompanyJurisdiction } from "./actions";
 export type JurisdictionOption = {
   value: string; // entity type code, e.g. "dk-aps"
   label: string; // "Private limited company (Anpartsselskab (ApS))"
-  packName: string; // "Denmark — ApS / A/S"
+  packName: string; // "Denmark - ApS / A/S"
   currency: string; // "DKK"
 };
 
@@ -93,7 +93,7 @@ export function SettingsClient({
           <Field label="Jurisdiction" value={currentJurisdiction} />
           <Field label="Currency" value={currentCurrency} />
           <Field label="Pack version" value={currentPackVersion} mono />
-          <Field label={registryLabel} value={registryValue ?? "—"} mono />
+          <Field label={registryLabel} value={registryValue ?? "-"} mono />
         </dl>
       </section>
     </main>

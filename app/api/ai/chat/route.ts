@@ -1,4 +1,4 @@
-// POST /api/ai/chat — the conversational AI onboarding helper (right-side
+// POST /api/ai/chat - the conversational AI onboarding helper (right-side
 // drawer). Streams Claude's reply back via the Vercel AI SDK. Server-side only;
 // ANTHROPIC_API_KEY never reaches the client (CLAUDE.md).
 import { anthropic } from "@ai-sdk/anthropic";

@@ -30,8 +30,8 @@ export type BulkAddResult =
   | { ok: false; error: string };
 
 // Create one stakeholder + one security + one issuance transaction per valid
-// row, inside a single DB transaction. Ownership % isn't stored — the cap
-// table derives it at read time — so a successful add just refreshes that view.
+// row, inside a single DB transaction. Ownership % isn't stored - the cap
+// table derives it at read time - so a successful add just refreshes that view.
 export async function createStakeholdersBulk(rows: BulkRow[]): Promise<BulkAddResult> {
   const company = await getActiveCompany();
   if (!company) return { ok: false, error: "No active company found. Seed the demo first." };

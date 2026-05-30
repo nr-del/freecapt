@@ -94,7 +94,7 @@ export default async function CapTablePage() {
           securityLabel: label,
           securitySub: sub,
           color,
-          quantityLabel: "—",
+          quantityLabel: "-",
           outstandingPct: null,
           fullyDilutedPct: null,
         } satisfies CapRow;

@@ -12,7 +12,7 @@ function generateReferralCode() {
 }
 
 // Magic-link callback. Prefers the token_hash + verifyOtp flow (no PKCE
-// code-verifier cookie needed — robust across browsers and mail-scanner
+// code-verifier cookie needed - robust across browsers and mail-scanner
 // prefetching), and falls back to the PKCE ?code= exchange. On success,
 // ensures a domain accounts row exists (§2.1) and lands on the cap table.
 export async function GET(request: NextRequest) {

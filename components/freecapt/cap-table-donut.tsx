@@ -1,11 +1,11 @@
-// Pure-CSS conic-gradient ownership donut (§6.1). No charting lib — renders
+// Pure-CSS conic-gradient ownership donut (§6.1). No charting lib - renders
 // identically in PDF exports. Slice order is the caller's responsibility:
 // founders (deepest emerald) → employees → investors (amber) → pool/unissued (gray).
 export type Slice = { label: string; pct: number; color: string };
 
 export function CapTableDonut({ slices, size = 220 }: { slices: Slice[]; size?: number }) {
   // Build cumulative gradient stops without mutating across the map callback
-  // (keeps the render pure — react-hooks/immutability).
+  // (keeps the render pure - react-hooks/immutability).
   const offsets = slices.reduce<number[]>((acc, { pct }, i) => {
     acc.push((acc[i - 1] ?? 0) + pct);
     return acc;
@@ -30,7 +30,7 @@ export function CapTableDonut({ slices, size = 220 }: { slices: Slice[]; size?: 
   );
 }
 
-// §6.2 — small color square shown next to a stakeholder/legend label.
+// §6.2 - small color square shown next to a stakeholder/legend label.
 export function Swatch({ color }: { color: string }) {
   return (
     <span

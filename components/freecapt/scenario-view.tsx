@@ -6,7 +6,7 @@ import { CapTableDonut, Swatch, type Slice } from "@/components/freecapt/cap-tab
 import { POOL_COLOR, TYPE_LABEL, TYPE_RANK, colorForType, intFmt, moneyFmt } from "@/lib/cap-table/display";
 import type { SimResult, SimRow } from "@/lib/simulate/engine";
 
-const fmtPct = (n: number | null) => (n == null ? "—" : `${n.toFixed(2)}%`);
+const fmtPct = (n: number | null) => (n == null ? "-" : `${n.toFixed(2)}%`);
 
 function groupLabel(r: SimRow): string {
   if (r.kind === "pool") return "Unallocated pool";

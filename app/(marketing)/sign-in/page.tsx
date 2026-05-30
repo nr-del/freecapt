@@ -19,7 +19,7 @@ function friendlyAuthError(message: string, status?: number): string {
   return message || "Something went wrong sending your link. Please try again.";
 }
 
-// Magic-link sign-in — docs/12_design_system.md §6.8 (auth card pattern).
+// Magic-link sign-in - docs/12_design_system.md §6.8 (auth card pattern).
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -47,7 +47,7 @@ export default function SignInPage() {
       setStatus("sent");
     } catch {
       // createBrowserClient throws if the Supabase env vars are missing from
-      // the browser bundle — surface it instead of silently doing nothing.
+      // the browser bundle - surface it instead of silently doing nothing.
       setError("We couldn't reach the sign-in service. Please try again in a moment.");
       setStatus("error");
     }
@@ -72,7 +72,7 @@ export default function SignInPage() {
 
         {status === "sent" ? (
           <p className="text-center text-sm text-slate-600">
-            We sent a one-time link to your inbox. It expires in a few minutes —
+            We sent a one-time link to your inbox. It expires in a few minutes -
             open it on this device to finish signing in.
           </p>
         ) : (

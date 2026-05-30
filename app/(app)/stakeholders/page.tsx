@@ -86,7 +86,7 @@ export default async function StakeholdersPage() {
       typeLabel: TYPE_LABEL[p.type] ?? "Other",
       color: colorForType(p.type),
       email: p.email,
-      holdingsLabel: parts.length > 0 ? parts.join(" · ") : "—",
+      holdingsLabel: parts.length > 0 ? parts.join(" · ") : "-",
       fullyDilutedPct: ownedUnits > 0 && fullyDilutedTotal > 0 ? (ownedUnits / fullyDilutedTotal) * 100 : null,
     } satisfies StakeholderRow;
   });

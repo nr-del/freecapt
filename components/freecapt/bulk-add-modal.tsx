@@ -94,7 +94,7 @@ export function BulkAddModal({
       setAssumptions(data.assumptions);
       setTab("paste");
       toast.success(
-        `Drafted ${data.rows.length} ${data.rows.length === 1 ? "stakeholder" : "stakeholders"} — review and edit below.`,
+        `Drafted ${data.rows.length} ${data.rows.length === 1 ? "stakeholder" : "stakeholders"} - review and edit below.`,
       );
     } catch {
       toast.error("The AI helper isn't available right now. Try Paste instead.");
@@ -115,7 +115,7 @@ export function BulkAddModal({
   const applyPaste = () => {
     const parsed = parsePaste(pasteText);
     if (parsed.length === 0) {
-      toast.error("Nothing to parse — paste some rows first.");
+      toast.error("Nothing to parse - paste some rows first.");
       return;
     }
     setRows(parsed);
@@ -175,7 +175,7 @@ export function BulkAddModal({
           <TabsContent value="paste" className="space-y-4">
             {assumptions.length > 0 && (
               <div className="rounded-lg border border-brand-200 bg-brand-50 p-3 text-xs text-brand-800">
-                <div className="mb-1 font-semibold">What the AI assumed — double-check these:</div>
+                <div className="mb-1 font-semibold">What the AI assumed - double-check these:</div>
                 <ul className="list-disc space-y-0.5 pl-4">
                   {assumptions.map((a, i) => (
                     <li key={i}>{a}</li>
@@ -193,7 +193,7 @@ export function BulkAddModal({
               />
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-400">
-                  Paste columns in any order — we auto-detect name, email, type, security,
+                  Paste columns in any order - we auto-detect name, email, type, security,
                   quantity, date, vesting, strike.
                 </p>
                 <Button type="button" variant="outline" size="sm" onClick={applyPaste}>
@@ -264,7 +264,7 @@ export function BulkAddModal({
                 Describe your cap table in plain words
               </h3>
               <p className="mt-0.5 text-xs text-slate-500">
-                Type it out — “Anna and Ben are cofounders at 30% each, Dana has 200k options” —
+                Type it out - “Anna and Ben are cofounders at 30% each, Dana has 200k options” -
                 and AI turns it into a draft you can review and edit. Free once.
               </p>
               <textarea
@@ -276,7 +276,7 @@ export function BulkAddModal({
               />
               <div className="mt-3 flex items-center justify-between">
                 <p className="text-xs text-slate-400">
-                  Percentages become notes — we won&apos;t invent share counts.
+                  Percentages become notes - we won&apos;t invent share counts.
                 </p>
                 <Button type="button" onClick={extractWithAi} disabled={extracting}>
                   {extracting ? "Reading…" : "Draft with AI →"}
@@ -334,7 +334,7 @@ function PaidStub({
       <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
       <p className="mx-auto mt-1 max-w-sm text-xs text-slate-500">{body}</p>
       <Button type="button" size="sm" className="mt-4" onClick={onUpgrade}>
-        Upgrade — $15/month →
+        Upgrade - $15/month →
       </Button>
     </div>
   );

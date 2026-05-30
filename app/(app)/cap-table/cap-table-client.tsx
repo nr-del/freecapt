@@ -35,12 +35,12 @@ export type CapRow = {
 
 type Basis = "outstanding" | "fd";
 
-const fmtPct = (n: number | null) => (n == null ? "—" : `${n.toFixed(2)}%`);
+const fmtPct = (n: number | null) => (n == null ? "-" : `${n.toFixed(2)}%`);
 
 const PAID_FEATURES = [
   "Rich PDF & Word cap-table exports",
   "Excel workbook with ownership charts",
-  "Ongoing AI chat — “ask your cap table”",
+  "Ongoing AI chat - “ask your cap table”",
   "AI document extraction from uploads",
   "Stakeholder portal access",
 ];
@@ -155,7 +155,7 @@ export function CapTableClient({
         <p className="text-sm text-brand-800">
           You have{" "}
           <span className="font-semibold tabular-nums">{leftToGrantPct.toFixed(1)}% left to grant</span>{" "}
-          — <span className="tabular-nums">{leftToGrantLabel}</span> are unissued.
+          - <span className="tabular-nums">{leftToGrantLabel}</span> are unissued.
         </p>
       </div>
 
@@ -237,7 +237,7 @@ export function CapTableClient({
           </div>
           <DialogTitle className="mb-2 text-2xl font-bold">Upgrade to Paid · $15/mo</DialogTitle>
           <DialogDescription className="mb-6 text-sm text-slate-600">
-            You&apos;re trying to use a Paid feature — {paywall ?? "this feature"}.
+            You&apos;re trying to use a Paid feature - {paywall ?? "this feature"}.
           </DialogDescription>
           <div className="mb-6 rounded-lg bg-slate-50 p-4 text-left text-sm">
             <div className="mb-2 font-semibold">All Paid features:</div>
@@ -251,7 +251,7 @@ export function CapTableClient({
             </ul>
           </div>
           <Button size="lg" className="mb-2 w-full">
-            Upgrade — $15/month →
+            Upgrade - $15/month →
           </Button>
           <Button variant="ghost" size="sm" className="w-full" onClick={() => setPaywall(null)}>
             Not now

@@ -78,7 +78,7 @@ export function SimulateClient({
         const url = `${window.location.origin}${res.path}`;
         setShareUrl(url);
         await navigator.clipboard?.writeText(url).catch(() => {});
-        toast.success("Scenario saved — shareable link copied to clipboard.");
+        toast.success("Scenario saved - shareable link copied to clipboard.");
       } else {
         toast.error(res.error);
       }
@@ -185,7 +185,7 @@ export function SimulateClient({
         <DialogContent className="max-w-md p-6">
           <DialogTitle className="text-lg font-bold">Save this scenario</DialogTitle>
           <DialogDescription className="text-sm text-slate-600">
-            Saving creates a read-only link you can share with your cofounder — no sign-in required
+            Saving creates a read-only link you can share with your cofounder - no sign-in required
             to view.
           </DialogDescription>
           <div className="mt-4">
@@ -194,7 +194,7 @@ export function SimulateClient({
               id="scenario-name"
               className="mt-1"
               value={scenarioName}
-              placeholder={`Seed round — ${new Date().getFullYear()}`}
+              placeholder={`Seed round - ${new Date().getFullYear()}`}
               onChange={(e) => setScenarioName(e.target.value)}
             />
           </div>
@@ -240,7 +240,7 @@ export function SimulateClient({
             </ul>
           </div>
           <Button size="lg" className="mb-2 w-full">
-            Upgrade — $15/month →
+            Upgrade - $15/month →
           </Button>
           <Button variant="ghost" size="sm" className="w-full" onClick={() => setPaywall(false)}>
             Not now

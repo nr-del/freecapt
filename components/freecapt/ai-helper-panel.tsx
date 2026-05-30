@@ -1,6 +1,6 @@
 "use client";
 
-// AI onboarding helper — a 420px right-side drawer (docs/12_design_system.md
+// AI onboarding helper - a 420px right-side drawer (docs/12_design_system.md
 // §6.7). Streams Claude's replies from /api/ai/chat via the Vercel AI SDK.
 // All inference is server-side; no API key is touched here.
 import { DefaultChatTransport } from "ai";
@@ -94,7 +94,7 @@ export function AiHelperPanel({
           {messages.length === 0 && (
             <div className="space-y-4">
               <p className="text-sm text-slate-600">
-                Hi — I can help you set up your cap table or explain anything that&apos;s confusing.
+                Hi - I can help you set up your cap table or explain anything that&apos;s confusing.
                 Nothing you type is shared until you choose to.
               </p>
               <div className="space-y-2">

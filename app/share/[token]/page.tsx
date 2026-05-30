@@ -6,10 +6,10 @@ import { ScenarioView } from "@/components/freecapt/scenario-view";
 import { db, schema } from "@/lib/db";
 import { simulateRound, type SimHolder, type SimInputs, type SimSafe } from "@/lib/simulate/engine";
 
-// Public, read-only scenario share page — deliberately OUTSIDE the (app) auth
+// Public, read-only scenario share page - deliberately OUTSIDE the (app) auth
 // wall (docs/01_mvp_scope.md §5.5: "Shareable read-only link"). The full cap
 // table is frozen into the scenario's `inputs` snapshot at save time, so this
-// renders identically even after the live cap table changes — and needs no
+// renders identically even after the live cap table changes - and needs no
 // sign-in to view.
 
 // The snapshot persisted by saveScenario(). Mirror of ScenarioSnapshot.
@@ -78,7 +78,7 @@ export default async function SharePage({
             <Link href="/" className="font-medium text-brand-600 hover:text-brand-700">
               FreeCapT
             </Link>{" "}
-            — the free cap table for founders and small businesses.
+            - the free cap table for founders and small businesses.
           </p>
           <p className="mt-1">
             This is a what-if projection, not legal or tax advice. Numbers assume a simplified,

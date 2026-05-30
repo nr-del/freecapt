@@ -12,7 +12,7 @@ const NAV = [
   { href: "/settings", label: "Settings" },
 ];
 
-// Server-side auth wall — CLAUDE.md auth rules. No session ⇒ /sign-in.
+// Server-side auth wall - CLAUDE.md auth rules. No session ⇒ /sign-in.
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const supabase = await createServerClient();
   const {

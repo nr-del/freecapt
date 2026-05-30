@@ -1,4 +1,4 @@
-// POST /api/ai/extract — turn a founder's free-text cap-table description into
+// POST /api/ai/extract - turn a founder's free-text cap-table description into
 // structured rows for the bulk-add grid. Claude runs SERVER-SIDE only; the
 // ANTHROPIC_API_KEY never reaches the client (CLAUDE.md).
 //
@@ -33,7 +33,7 @@ export async function POST(req: Request): Promise<NextResponse<ExtractResponse>>
   }
   if (text.length < 3) {
     return NextResponse.json(
-      { ok: false, error: "Describe your cap table first — e.g. “Anna 30%, Ben 30%”." },
+      { ok: false, error: "Describe your cap table first - e.g. “Anna 30%, Ben 30%”." },
       { status: 400 },
     );
   }
