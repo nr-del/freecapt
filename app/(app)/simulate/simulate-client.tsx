@@ -14,17 +14,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScenarioView } from "@/components/freecapt/scenario-view";
+import { RoundModelView } from "@/components/freecapt/round-model-view";
 import { simulateRound, type SimHolder, type SimInputs, type SimSafe } from "@/lib/simulate/engine";
 
 import { saveScenario } from "./actions";
-
-const PAID_FEATURES = [
-  "Chain multiple rounds (Seed → A → B)",
-  "Model option-pool expansions per round",
-  "Exit waterfall & preference stacks",
-  "Convertible-note interest & maturity modeling",
-  "Side-by-side scenario comparison",
-];
 
 export function SimulateClient({
   companyName,
@@ -44,7 +37,6 @@ export function SimulateClient({
   const [poolTopupPct, setPoolTopupPct] = useState(0);
   const [investorName, setInvestorName] = useState("New investor");
 
-  const [paywall, setPaywall] = useState(false);
   const [saveOpen, setSaveOpen] = useState(false);
   const [scenarioName, setScenarioName] = useState("");
   const [shareUrl, setShareUrl] = useState<string | null>(null);
@@ -97,13 +89,7 @@ export function SimulateClient({
       <Tabs defaultValue="basic" className="mt-6">
         <TabsList>
           <TabsTrigger value="basic">Basic round</TabsTrigger>
-          <TabsTrigger
-            value="modeling"
-            onClick={(e) => {
-              e.preventDefault();
-              setPaywall(true);
-            }}
-          >
+          <TabsTrigger value="modeling">
             Round modeling
             <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-amber-700">
               Paid
@@ -178,6 +164,10 @@ export function SimulateClient({
             </div>
           </div>
         </TabsContent>
+
+        <TabsContent value="modeling" className="mt-4">
+          <RoundModelView currency={currency} holders={holders} safes={safes} />
+        </TabsContent>
       </Tabs>
 
       {/* Save dialog */}
@@ -214,37 +204,6 @@ export function SimulateClient({
               {pending ? "Saving…" : shareUrl ? "Save again" : "Save & copy link"}
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Round modeling paywall */}
-      <Dialog open={paywall} onOpenChange={setPaywall}>
-        <DialogContent className="max-w-lg p-6 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-2xl text-brand-700">
-            ✦
-          </div>
-          <DialogTitle className="mb-2 text-2xl font-bold">Round modeling · $15/mo</DialogTitle>
-          <DialogDescription className="mb-6 text-sm text-slate-600">
-            The basic single-round simulator is free forever. Multi-round modeling and exit
-            waterfalls are a Paid feature.
-          </DialogDescription>
-          <div className="mb-6 rounded-lg bg-slate-50 p-4 text-left text-sm">
-            <div className="mb-2 font-semibold">Round modeling includes:</div>
-            <ul className="space-y-1 text-slate-600">
-              {PAID_FEATURES.map((f) => (
-                <li key={f} className="flex gap-2">
-                  <span className="text-brand-600">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Button size="lg" className="mb-2 w-full">
-            Upgrade - $15/month →
-          </Button>
-          <Button variant="ghost" size="sm" className="w-full" onClick={() => setPaywall(false)}>
-            Not now
-          </Button>
         </DialogContent>
       </Dialog>
 
