@@ -196,6 +196,19 @@ export async function renderRegisterPdf(reg: ShareholderRegister): Promise<Uint8
   textRight(money(totalNominal), COL.nominal.right, y, { font: bold, size: 9 });
   y -= 18;
 
+  // Per-class breakdown, only when the company has more than one share class.
+  if (reg.classTotals.length > 0) {
+    y -= 6;
+    const summary = reg.classTotals
+      .map((c) => `${c.shareClass}: ${intFmt.format(c.shares)} (${pctFmt(c.pctIssued)})`)
+      .join("    ·    ");
+    text(truncate(`By class — ${summary}`, CONTENT_W, font, 8), COL.holder.x, y, {
+      size: 8,
+      color: MUTED,
+    });
+    y -= 14;
+  }
+
   const meta: string[] = [];
   if (reg.authorizedUnits != null) {
     meta.push(`Authorized: ${intFmt.format(reg.authorizedUnits)} ${reg.unitNounPlural}`);

@@ -170,6 +170,12 @@ function SlotRow({ slot, onAdd }: { slot: ClientSlot; onAdd: () => void }) {
               <li key={d.id} className="flex items-center gap-2 text-xs text-slate-600">
                 <FileText className="size-3.5 shrink-0 text-slate-400" />
                 <span className="truncate">{d.filename}</span>
+                {d.signed ? (
+                  <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-medium text-brand-700">
+                    <Check className="size-2.5" />
+                    Signed
+                  </span>
+                ) : null}
                 <button
                   type="button"
                   onClick={() => onDownload(d.id)}
