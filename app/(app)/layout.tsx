@@ -11,6 +11,7 @@ const NAV = [
   { href: "/cap-table", label: "Cap table" },
   { href: "/stakeholders", label: "Stakeholders" },
   { href: "/simulate", label: "Simulate" },
+  { href: "/data-room", label: "Data room" },
   { href: "/settings", label: "Settings" },
 ];
 
