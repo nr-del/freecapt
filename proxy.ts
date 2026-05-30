@@ -9,15 +9,16 @@ import { routing } from "./i18n/routing";
 //      locales: /, /da, /no, /sv, /de).
 //   2. Supabase session refresh on every request so Server Components see a
 //      current session. Per @supabase/ssr Next.js guidance.
-// The authenticated product (/cap-table, /stakeholders, /simulate, /settings),
-// the share links, and the API are NOT localized, so locale routing is skipped
-// for them and the original Supabase-only flow runs unchanged.
+// The authenticated product (/cap-table, /stakeholders, /simulate, /data-room,
+// /settings), the share links, and the API are NOT localized, so locale routing
+// is skipped for them and the original Supabase-only flow runs unchanged.
 const intlMiddleware = createIntlMiddleware(routing);
 
 const NON_LOCALIZED_PREFIXES = [
   "/cap-table",
   "/stakeholders",
   "/simulate",
+  "/data-room",
   "/settings",
   "/share",
   "/api",
