@@ -6,6 +6,8 @@
 // (manually or via the greedy "Suggest" solver), and sees the resulting cap
 // table (reusing ScenarioView), an allocation table, and a validation banner.
 import { useMemo, useState } from "react";
+import { Download } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -124,6 +126,34 @@ export function RoundModelView({
     const alloc = suggestAllocation(terms, investors);
     setRows((prev) => prev.map((r) => ({ ...r, allocated: Math.round(alloc[r.id] ?? 0) })));
   };
+
+  const [downloading, setDownloading] = useState(false);
+  const downloadTermSheet = async () => {
+    setDownloading(true);
+    try {
+      const res = await fetch("/simulate/term-sheet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ terms, investors, allocations }),
+      });
+      if (!res.ok) throw new Error("Failed to generate term sheet");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "term-sheet.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      toast.error("Couldn't generate the term sheet. Try again.");
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const anyAllocated = result.validation.totalAllocated > 0;
 
   const v = result.validation;
   const bannerCls =
@@ -300,6 +330,25 @@ export function RoundModelView({
           </tbody>
         </table>
       </section>
+
+      {/* Term-sheet draft */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3">
+        <div>
+          <p className="flex items-center gap-2 text-sm font-medium text-slate-900">
+            Term sheet draft
+            <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-amber-700">
+              Paid
+            </span>
+          </p>
+          <p className="text-xs text-slate-500">
+            A non-binding PDF summarizing terms, allocation, and key clauses — for your counsel to review.
+          </p>
+        </div>
+        <Button variant="outline" size="sm" onClick={downloadTermSheet} disabled={downloading || !anyAllocated}>
+          <Download className="mr-1.5 h-4 w-4" />
+          {downloading ? "Generating…" : "Download PDF"}
+        </Button>
+      </div>
 
       {/* Resulting cap table */}
       <ScenarioView result={result.scenario} currency={currency} />
