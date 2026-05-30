@@ -7,6 +7,17 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createBrowserClient } from "@/lib/auth/supabase-browser";
 
+// Turn Supabase's terse GoTrue errors into something a founder can act on.
+function friendlyAuthError(message: string, status?: number): string {
+  if (status === 429 || /rate limit/i.test(message)) {
+    return "Too many sign-in emails were requested recently. Please wait a few minutes and try again.";
+  }
+  if (/redirect/i.test(message) && /not allowed|invalid/i.test(message)) {
+    return "This site isn't authorised for sign-in yet. Please contact support.";
+  }
+  return message || "Something went wrong sending your link. Please try again.";
+}
+
 // Magic-link sign-in — docs/12_design_system.md §6.8 (auth card pattern).
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -18,20 +29,27 @@ export default function SignInPage() {
     setStatus("sending");
     setError(null);
 
-    const supabase = createBrowserClient();
-    const { error: otpError } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/api/auth/callback`,
-      },
-    });
+    try {
+      const supabase = createBrowserClient();
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+        },
+      });
 
-    if (otpError) {
-      setError(otpError.message);
+      if (otpError) {
+        setError(friendlyAuthError(otpError.message, otpError.status));
+        setStatus("error");
+        return;
+      }
+      setStatus("sent");
+    } catch {
+      // createBrowserClient throws if the Supabase env vars are missing from
+      // the browser bundle — surface it instead of silently doing nothing.
+      setError("We couldn't reach the sign-in service. Please try again in a moment.");
       setStatus("error");
-      return;
     }
-    setStatus("sent");
   }
 
   return (
@@ -68,7 +86,14 @@ export default function SignInPage() {
             <Button type="submit" size="lg" className="w-full" disabled={status === "sending"}>
               {status === "sending" ? "Sending…" : "Send magic link →"}
             </Button>
-            {error ? <p className="text-sm text-red-600">{error}</p> : null}
+            {error ? (
+              <p
+                role="alert"
+                className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+              >
+                {error}
+              </p>
+            ) : null}
           </form>
         )}
 
