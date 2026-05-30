@@ -492,7 +492,11 @@ export default function LandingPage() {
               No credit card. No sales call. No lawyer. Paste your existing spreadsheet, type it in
               plain English, or upload your formation docs.
             </p>
-            <form action="/sign-in" method="get" className="mx-auto mb-4 flex max-w-md gap-3">
+            <form
+              action="/sign-in"
+              method="get"
+              className="mx-auto mb-4 flex max-w-md flex-col gap-3 sm:flex-row"
+            >
               <input
                 type="email"
                 name="email"

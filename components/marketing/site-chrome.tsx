@@ -5,6 +5,8 @@
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
+import { MobileNav } from "@/components/marketing/mobile-nav";
+
 // Wordmark - the C is brand-600 (docs/07_brand_package.md §1).
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
@@ -37,10 +39,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          {/* Decorative language switcher - next-intl wiring lands later.
-              appearance:none + forced webkit/moz removes the native arrow so
-              only our single chevron shows. */}
-          <div className="relative hidden sm:block">
+          {/* Desktop actions. Decorative language switcher - next-intl wiring
+              lands later. appearance:none + forced webkit/moz removes the native
+              arrow so only our single chevron shows. */}
+          <div className="relative hidden md:block">
             <select
               aria-label="Language"
               defaultValue="EN"
@@ -54,15 +56,20 @@ export function SiteHeader() {
             </select>
             <ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-slate-400" />
           </div>
-          <Link href="/sign-in" className="text-sm font-medium text-slate-700 hover:text-slate-900">
+          <Link
+            href="/sign-in"
+            className="hidden text-sm font-medium text-slate-700 hover:text-slate-900 md:inline-block"
+          >
             Sign in
           </Link>
           <Link
             href="/sign-in"
-            className="hidden rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 sm:inline-block"
+            className="hidden rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 md:inline-block"
           >
             Get started - free
           </Link>
+          {/* Mobile: hamburger -> full-screen menu. */}
+          <MobileNav items={NAV} />
         </div>
       </div>
     </header>

@@ -67,9 +67,10 @@ export function ComparisonPage({ data }: { data: ComparisonData }) {
           </div>
         </div>
 
-        {/* Feature table */}
-        <div className="overflow-hidden rounded-xl border border-slate-200">
-          <table className="w-full border-collapse">
+        {/* Feature table - scrolls horizontally on narrow screens so the three
+            columns stay readable instead of crushing. */}
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[36rem] border-collapse">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
                 <th className="px-4 py-3">Feature</th>

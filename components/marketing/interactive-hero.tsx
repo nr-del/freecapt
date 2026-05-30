@@ -72,11 +72,11 @@ export function InteractiveHero() {
           </div>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center gap-6 sm:flex-row">
           <div className="shrink-0">
             <CapTableDonut slices={slices} size={160} />
           </div>
-          <div className="flex-1 space-y-1.5 text-sm">
+          <div className="w-full flex-1 space-y-1.5 text-sm">
             {rows.map((h) => (
               <div
                 key={h.label}
