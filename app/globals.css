@@ -143,6 +143,16 @@
   --ring: var(--color-brand-500);
 }
 
+@layer components {
+  /* Landing-page hero backdrop — faint 48px grid (docs/08_landing_page.html). */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
